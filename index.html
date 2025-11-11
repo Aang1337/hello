@@ -1,13 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>After Effects Powerplay — Final (Drive autosave)</title>
+    <title>After Effects Powerplay — Final (leave fixes)</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css"
+    />
 
     <style>
       :root {
@@ -21,1054 +30,2130 @@
         --danger: #ef4444;
         --card-radius: 14px;
       }
-      html, body { height:100%; margin:0; background:linear-gradient(270deg,#04121a 0%,#02221a 40%,#031014 70%); background-size:600% 600%; animation: bgShift 22s ease-in-out infinite; font-family:"Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial; color:var(--text); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
-      @keyframes bgShift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        background: linear-gradient(
+          270deg,
+          #04121a 0%,
+          #02221a 40%,
+          #031014 70%
+        );
+        background-size: 600% 600%;
+        animation: bgShift 22s ease-in-out infinite;
+        font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
+          Arial;
+        color: var(--text);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      @keyframes bgShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
 
-      header { position: sticky; top: 0; height: 72px; z-index:60; background: rgba(2,6,6,0.6); border-bottom:1px solid rgba(255,255,255,0.03); backdrop-filter: blur(6px) saturate(120%); padding:6px 0; }
-      .container-main { max-width:1200px; margin:20px auto; padding:0 18px 80px; }
-      .brand { display:flex; gap:10px; align-items:center; }
-      .brand-dot { width:10px; height:10px; border-radius:50%; background:linear-gradient(90deg,var(--accent), var(--accent-2)); box-shadow:0 0 6px rgba(34,197,94,0.45); }
-      .brand-title { font-weight:700; font-size:13px; line-height:1; }
-      .subtitle { color:var(--muted); font-size:11px; margin-top:2px; }
+      /* compact header */
+      header {
+        position: sticky;
+        top: 0;
+        height: 70px;
+        z-index: 60;
+        background: rgba(2, 6, 6, 0.6);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(6px) saturate(120%);
+        padding: 6px 0;
+      }
+      .container-main {
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 0 18px 80px;
+      }
+      .brand {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .brand-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        box-shadow: 0 0 6px rgba(34, 197, 94, 0.45);
+      }
+      .brand-title {
+        font-weight: 700;
+        font-size: 13px;
+        line-height: 1;
+      }
+      .subtitle {
+        color: var(--muted);
+        font-size: 11px;
+        margin-top: 2px;
+      }
 
-      .header-icons { display:flex; align-items:center; gap:8px; }
-      .icon-btn { width:34px; height:34px; border-radius:8px; display:grid; place-items:center; background:rgba(7,12,12,0.55); border:1px solid rgba(255,255,255,0.08); color:var(--text); cursor:pointer; transition:all 0.14s ease; font-size:15px; padding:0; }
-      .icon-btn:hover { transform:translateY(-2px); background:rgba(34,197,94,0.06); border-color:rgba(34,197,94,0.18); }
+      .header-icons {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .icon-btn {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        display: grid;
+        place-items: center;
+        background: rgba(7, 12, 12, 0.55);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        color: var(--text);
+        cursor: pointer;
+        transition: all 0.14s ease;
+        font-size: 15px;
+        padding: 0;
+      }
+      .icon-btn:hover {
+        transform: translateY(-2px);
+        background: rgba(34, 197, 94, 0.06);
+        border-color: rgba(34, 197, 94, 0.18);
+      }
 
-      .icon-btn.leave { display:inline-flex; align-items:center; justify-content:center; padding:0 .4rem; min-width:44px; height:30px; border-radius:8px; font-size:13px; font-weight:700; }
-      .icon-btn.leave .leave-count { display:inline-grid; place-items:center; width:28px; height:22px; border-radius:8px; font-weight:800; font-size:12px; background:rgba(0,0,0,0.18); border:1px solid rgba(255,255,255,0.03); color:#ffd7d7; }
+      .icon-btn.leave {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 0.4rem;
+        min-width: 44px;
+        height: 30px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 700;
+      }
+      .icon-btn.leave .leave-count {
+        display: inline-grid;
+        place-items: center;
+        width: 28px;
+        height: 22px;
+        border-radius: 8px;
+        font-weight: 800;
+        font-size: 12px;
+        background: rgba(0, 0, 0, 0.18);
+        border: 1px solid rgba(255, 255, 255, 0.03);
+        color: #ffd7d7;
+      }
+      .icon-btn.leave.disabled,
+      .icon-btn.leave:disabled {
+        opacity: 0.55;
+        cursor: default;
+        pointer-events: none;
+        filter: saturate(0.6);
+      }
+      .icon-btn.leave:hover {
+        background: rgba(239, 68, 68, 0.08);
+        border-color: rgba(239, 68, 68, 0.18);
+      }
 
-      .title-row { display:flex; align-items:center; gap:14px; margin-bottom:16px; margin-top:36px; }
-      .range-pill { background: linear-gradient(90deg, rgba(117,92,255,0.12), rgba(139,92,246,0.08)); padding:6px 12px; border-radius:999px; font-weight:700; font-size:12px; color:#e9e6ff; }
+      .title-row {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 16px;
+        margin-top: 36px;
+      }
+      .range-pill {
+        background: linear-gradient(
+          90deg,
+          rgba(117, 92, 255, 0.12),
+          rgba(139, 92, 246, 0.08)
+        );
+        padding: 6px 12px;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 12px;
+        color: #e9e6ff;
+      }
+      .progress-card {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 14px;
+        border: 1px solid var(--glass);
+        box-shadow: 0 12px 40px rgba(2, 6, 8, 0.6);
+        margin-bottom: 24px;
+        color: var(--muted);
+      }
 
-      .progress-card { background:var(--card-bg); border-radius:12px; padding:14px; border:1px solid var(--glass); box-shadow:0 12px 40px rgba(2,6,8,0.6); margin-bottom:24px; color:var(--muted); }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+      @media (max-width: 1100px) {
+        .grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 680px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
 
-      .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
-      @media (max-width:1100px) { .grid { grid-template-columns:repeat(2,1fr); } }
-      @media (max-width:680px) { .grid { grid-template-columns:1fr; } }
+      .day-card {
+        background: linear-gradient(
+          180deg,
+          rgba(10, 18, 16, 0.45),
+          rgba(3, 8, 7, 0.6)
+        );
+        border-radius: var(--card-radius);
+        padding: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        min-height: 260px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6),
+          inset 0 1px 0 rgba(255, 255, 255, 0.02);
+        transition: transform 0.16s ease, box-shadow 0.16s ease;
+      }
+      .day-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+      }
+      .day-card.today {
+        box-shadow: 0 18px 40px rgba(16, 185, 129, 0.06),
+          0 6px 30px rgba(0, 0, 0, 0.6);
+        border: 1px solid rgba(34, 197, 94, 0.18);
+        outline: 4px solid rgba(34, 197, 94, 0.03);
+      }
 
-      .day-card { background: linear-gradient(180deg, rgba(10,18,16,0.45), rgba(3,8,7,0.6)); border-radius:var(--card-radius); padding:18px; border: 1px solid rgba(255,255,255,0.04); min-height:260px; display:flex; flex-direction:column; gap:12px; box-shadow:0 10px 30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02); transition:transform 0.16s ease, box-shadow 0.16s ease; }
-      .day-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.7); }
-      .day-card.today { box-shadow: 0 18px 40px rgba(16,185,129,0.06), 0 6px 30px rgba(0,0,0,0.6); border:1px solid rgba(34,197,94,0.18); outline:4px solid rgba(34,197,94,0.03); }
+      .card-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .card-head-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .cal {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(180deg, var(--accent-2), var(--accent));
+        color: #041510;
+        box-shadow: 0 6px 18px rgba(34, 197, 94, 0.06);
+        font-size: 20px;
+      }
+      .day-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
+      .day-title {
+        font-weight: 800;
+        font-size: 16px;
+        color: #eafdf0;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .date-text {
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .badge-completed {
+        background: linear-gradient(90deg, #2bffb0, #16a34a);
+        color: #042018;
+        font-weight: 800;
+        padding: 6px 10px;
+        border-radius: 999px;
+        box-shadow: 0 6px 24px rgba(22, 163, 74, 0.12);
+        border: 1px solid rgba(34, 197, 94, 0.12);
+        font-size: 12px;
+      }
+      .card-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .learn-title {
+        font-size: 13px;
+        color: #dfffe9;
+        font-weight: 800;
+        margin-bottom: 6px;
+      }
+      .learn-note {
+        color: #d7f9e6;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.01),
+          rgba(255, 255, 255, 0.008)
+        );
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.02);
+        box-shadow: inset 0 -4px 12px rgba(0, 0, 0, 0.35);
+        font-size: 14px;
+        line-height: 1.45;
+        white-space: pre-wrap;
+      }
+      .card-actions {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .btn-outline-card {
+        background: transparent;
+        color: var(--text);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        padding: 8px 10px;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 13px;
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+        text-decoration: none;
+      }
+      .form-control,
+      textarea {
+        background: rgba(4, 10, 10, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        color: #fff;
+        border-radius: 8px;
+        transition: all 0.18s ease-in-out;
+      }
 
-      .card-head { display:flex; align-items:center; justify-content:space-between; gap:12px; }
-      .card-head-left { display:flex; align-items:center; gap:12px; }
-      .cal { width:44px; height:44px; border-radius:10px; display:grid; place-items:center; background:linear-gradient(180deg,var(--accent-2),var(--accent)); color:#041510; box-shadow:0 6px 18px rgba(34,197,94,0.06); font-size:20px; }
-      .day-meta { display:flex; flex-direction:column; gap:3px; }
-      .day-title { font-weight:800; font-size:16px; color:#eafdf0; display:flex; gap:8px; align-items:center; }
-      .date-text { color:var(--muted); font-size:12px; }
-      .badge-completed { background: linear-gradient(90deg,#2bffb0,#16a34a); color:#042018; font-weight:800; padding:6px 10px; border-radius:999px; box-shadow:0 6px 24px rgba(22,163,74,0.12); border:1px solid rgba(34,197,94,0.12); font-size:12px; }
+      .form-control::placeholder,
+      textarea::placeholder {
+        color: rgba(255, 255, 255, 0.36);
+      }
+      .form-control:focus,
+      textarea:focus {
+        background: rgba(3, 10, 10, 0.95);
+        border-color: rgba(34, 197, 94, 0.5);
+        box-shadow: 0 0 10px rgba(34, 197, 94, 0.18);
+        color: #fff;
+        outline: none;
+      }
 
-      .card-content { flex:1; display:flex; flex-direction:column; gap:10px; }
-      .learn-title { font-size:13px; color:#dfffe9; font-weight:800; margin-bottom:6px; }
-      .learn-note { color:#d7f9e6; background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.008)); padding:12px; border-radius:10px; border:1px solid rgba(255,255,255,0.02); box-shadow: inset 0 -4px 12px rgba(0,0,0,0.35); font-size:14px; line-height:1.45; white-space:pre-wrap; }
-
-      .card-actions { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
-      .btn-outline-card { background:transparent; color:var(--text); border:1px solid rgba(255,255,255,0.06); padding:8px 10px; border-radius:10px; font-weight:700; font-size:13px; display:inline-flex; gap:8px; align-items:center; text-decoration:none; }
-
-      .form-control, textarea { background:rgba(4,10,10,0.85); border:1px solid rgba(255,255,255,0.08); color:#fff; border-radius:8px; transition:all 0.18s ease-in-out; }
-      .form-control::placeholder, textarea::placeholder { color:rgba(255,255,255,0.36); }
-      .form-control:focus, textarea:focus { background:rgba(3,10,10,0.95); border-color:rgba(34,197,94,0.5); box-shadow:0 0 10px rgba(34,197,94,0.18); color:#fff; outline:none; }
-
-      .submit-btn { background: linear-gradient(180deg, var(--accent-2), var(--accent)); color:#07120d; border:none; font-weight:800; padding:0.6rem 1rem; border-radius:8px; }
-
-      .card-footer { font-size:12px; color:var(--muted); display:flex; justify-content:space-between; align-items:center; gap:10px; }
-      .small-muted { color:var(--muted); font-size:13px; }
-
-      .day-card.leave { border:1px solid rgba(239,68,68,0.12); background: linear-gradient(180deg, rgba(30,6,6,0.35), rgba(12,6,6,0.6)); box-shadow:0 10px 28px rgba(160,40,40,0.06); }
-      .leave-badge { background: linear-gradient(90deg,#ffb4b4,#ef4444); color:#2b0202; font-weight:800; padding:6px 10px; border-radius:999px; font-size:12px; border:1px solid rgba(239,68,68,0.18); box-shadow:0 8px 24px rgba(239,68,68,0.06); }
-      .leave-illustration { width:84px; height:84px; border-radius:10px; overflow:hidden; display:inline-grid; place-items:center; background: linear-gradient(180deg,#2c1a18,#2a1b19); border:1px solid rgba(255,255,255,0.02); box-shadow: inset 0 -6px 12px rgba(0,0,0,0.5); }
-
-      .autosave-indicator { display:inline-flex; align-items:center; gap:8px; }
-      .light { width:12px; height:12px; border-radius:50%; display:inline-block; background:#8b0000; border:1px solid rgba(0,0,0,0.35); box-shadow:0 0 6px rgba(0,0,0,0.6); }
-      .light.green { background: linear-gradient(180deg,#32d583,#16a34a); box-shadow:0 0 8px rgba(34,197,94,0.25), inset 0 -2px 6px rgba(0,0,0,0.2); border:1px solid rgba(34,197,94,0.14); }
-      .light.red { background: linear-gradient(180deg,#ff6b6b,#ef4444); box-shadow:0 0 8px rgba(239,68,68,0.12); border:1px solid rgba(239,68,68,0.12); }
-
-      .gif-wrapper { display:block; margin:14px auto; width:320px; max-width:calc(100% - 40px); border-radius:12px; overflow:hidden; border:1px solid rgba(255,255,255,0.04); background:linear-gradient(180deg,#061219,#041018); box-shadow:0 8px 30px rgba(34,197,94,0.06), inset 0 -4px 12px rgba(0,0,0,0.4); padding:6px; }
-      .gif-wrapper img { display:block; width:100%; height:auto; border-radius:8px; }
-
-      .quote-block { margin-top:10px; padding:12px; border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border:1px solid rgba(255,255,255,0.02); color:var(--text); }
-      .quote-text { font-size:15px; font-weight:600; color:#e9f8ee; margin-bottom:8px; }
-      .quote-author { font-size:13px; color:var(--muted); text-align:right; }
-
-      .flatpickr-calendar { position:absolute !important; z-index:99999 !important; background:linear-gradient(180deg,#071219,#041017) !important; color:var(--text) !important; border:1px solid rgba(255,255,255,0.03) !important; box-shadow:0 12px 36px rgba(2,6,8,0.65) !important; border-radius:10px !important; will-change: transform, opacity; }
-      .flatpickr-day { color:var(--muted) !important; }
-      .flatpickr-day.selected, .flatpickr-day.today { background: linear-gradient(180deg,var(--accent),var(--accent-2)) !important; color:#041510 !important; }
-      .flatpickr-day:hover { background: rgba(34,197,94,0.12) !important; color:var(--text) !important; }
-
-      .modal-content { background: linear-gradient(180deg,#071219,#041017) !important; color:var(--text) !important; border:1px solid rgba(255,255,255,0.03) !important; box-shadow:0 18px 60px rgba(0,0,0,0.6) !important; }
-      .btn-close-white { filter: invert(1) !important; opacity:0.9; }
-
-      @media (max-width:420px) { .gif-wrapper { width:260px; } }
+      .form-control:disabled {
+        background-color: #e9ecef00;
+        opacity: 1;
+      }
+      .submit-btn {
+        background: linear-gradient(180deg, var(--accent-2), var(--accent));
+        color: #07120d;
+        border: none;
+        font-weight: 800;
+        padding: 0.6rem 1rem;
+        border-radius: 8px;
+      }
+      .card-footer {
+        font-size: 12px;
+        color: var(--muted);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+      }
+      .small-muted {
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .day-card.leave {
+        border: 1px solid rgba(239, 68, 68, 0.12);
+        background: linear-gradient(
+          180deg,
+          rgba(30, 6, 6, 0.35),
+          rgba(12, 6, 6, 0.6)
+        );
+        box-shadow: 0 10px 28px rgba(160, 40, 40, 0.06);
+      }
+      .leave-badge {
+        background: linear-gradient(90deg, #ffb4b4, #ef4444);
+        color: #2b0202;
+        font-weight: 800;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        border: 1px solid rgba(239, 68, 68, 0.18);
+        box-shadow: 0 8px 24px rgba(239, 68, 68, 0.06);
+      }
+      .leave-illustration {
+        width: 84px;
+        height: 84px;
+        border-radius: 10px;
+        overflow: hidden;
+        display: inline-grid;
+        place-items: center;
+        background: linear-gradient(180deg, #2c1a18, #2a1b19);
+        border: 1px solid rgba(255, 255, 255, 0.02);
+        box-shadow: inset 0 -6px 12px rgba(0, 0, 0, 0.5);
+      }
+      .autosave-indicator {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .light {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        display: inline-block;
+        background: #8b0000;
+        border: 1px solid rgba(0, 0, 0, 0.35);
+        box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+      }
+      .light.green {
+        background: linear-gradient(180deg, #32d583, #16a34a);
+        box-shadow: 0 0 8px rgba(34, 197, 94, 0.25),
+          inset 0 -2px 6px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(34, 197, 94, 0.14);
+      }
+      .light.red {
+        background: linear-gradient(180deg, #ff6b6b, #ef4444);
+        box-shadow: 0 0 8px rgba(239, 68, 68, 0.12);
+        border: 1px solid rgba(239, 68, 68, 0.12);
+      }
+      .success-card {
+        background: linear-gradient(
+          180deg,
+          rgba(11, 18, 14, 0.7),
+          rgba(4, 8, 6, 0.85)
+        );
+        border-radius: 12px;
+        padding: 18px;
+        border: 1px solid rgba(34, 197, 94, 0.08);
+        box-shadow: 0 18px 50px rgba(6, 12, 10, 0.6);
+        color: var(--text);
+      }
+      .gif-wrapper {
+        display: block;
+        margin: 14px auto;
+        width: 320px;
+        max-width: calc(100% - 40px);
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        background: linear-gradient(180deg, #061219, #041018);
+        box-shadow: 0 8px 30px rgba(34, 197, 94, 0.06),
+          inset 0 -4px 12px rgba(0, 0, 0, 0.4);
+        padding: 6px;
+      }
+      .gif-wrapper img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+      }
+      .quote-block {
+        margin-top: 10px;
+        padding: 12px;
+        border-radius: 10px;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.02),
+          rgba(255, 255, 255, 0.01)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.02);
+        color: var(--text);
+      }
+      .quote-text {
+        font-size: 15px;
+        font-weight: 600;
+        color: #e9f8ee;
+        margin-bottom: 8px;
+      }
+      .quote-author {
+        font-size: 13px;
+        color: var(--muted);
+        text-align: right;
+      }
+      .native-hidden {
+        position: absolute !important;
+        width: 1px !important;
+        height: 1px !important;
+        margin: -1px !important;
+        padding: 0 !important;
+        border: 0 !important;
+        overflow: hidden !important;
+        clip: rect(0 0 0 0) !important;
+        clip-path: inset(50%) !important;
+        white-space: nowrap !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+      }
+      .flatpickr-calendar {
+        position: absolute !important;
+        z-index: 99999 !important;
+        background: linear-gradient(180deg, #071219, #041017) !important;
+        color: var(--text) !important;
+        border: 1px solid rgba(255, 255, 255, 0.03) !important;
+        box-shadow: 0 12px 36px rgba(2, 6, 8, 0.65) !important;
+        border-radius: 10px !important;
+        will-change: transform, opacity;
+      }
+      .flatpickr-day {
+        color: var(--muted) !important;
+      }
+      .flatpickr-day.selected,
+      .flatpickr-day.today {
+        background: linear-gradient(
+          180deg,
+          var(--accent),
+          var(--accent-2)
+        ) !important;
+        color: #041510 !important;
+      }
+      .flatpickr-day:hover {
+        background: rgba(34, 197, 94, 0.12) !important;
+        color: var(--text) !important;
+      }
+      .modal-content {
+        background: linear-gradient(180deg, #071219, #041017) !important;
+        color: var(--text) !important;
+        border: 1px solid rgba(255, 255, 255, 0.03) !important;
+        box-shadow: 0 18px 60px rgba(0, 0, 0, 0.6) !important;
+      }
+      .btn-close-white {
+        filter: invert(1) !important;
+        opacity: 0.9;
+      }
+      @media (max-width: 420px) {
+        .gif-wrapper {
+          width: 260px;
+        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header id="section-header">
-        <div class="container container-main d-flex justify-content-between align-items-center">
-            <div class="brand">
-                <span class="brand-dot" aria-hidden="true"></span>
-                <div>
-                    <div class="brand-title">After Effects Powerplay — Vol 2.0</div>
-                    <div class="subtitle">45 Days Editing Challenge</div>
-                </div>
-            </div>
-
-            <div class="d-flex align-items-center gap-2 header-icons">
-                <button id="dateBtn" class="icon-btn" title="Set start date" aria-label="Set start date">📅</button>
-                <input id="startDate" type="date" class="native-hidden" />
-
-                <!-- Drive connect button (replaces folder picker) -->
-                <button id="pickFolderBtn" class="icon-btn" title="Connect Drive" aria-label="Connect Drive">💾</button>
-
-                <div class="autosave-indicator small-muted" title="Autosave status" aria-hidden="true" id="autosaveIndicator" style="display:flex; align-items:center; gap:8px">
-                    <span id="autosaveLight" class="light red" aria-hidden="true"></span>
-                    <span id="autosaveLabel" style="font-size:13px; color:var(--muted)">Not saved</span>
-                </div>
-
-                <button id="galleryBtn" class="icon-btn" title="Video Gallery" aria-label="Video Gallery" disabled>🎞️</button>
-
-                <button id="leaveBtn" class="icon-btn leave" title="Take Leave" aria-label="Take leave" type="button"><span class="leave-count">3</span></button>
-            </div>
+      <div
+        class="container container-main d-flex justify-content-between align-items-center"
+      >
+        <div class="brand">
+          <span class="brand-dot" aria-hidden="true"></span>
+          <div>
+            <div class="brand-title">After Effects Powerplay — Vol 2.0</div>
+            <div class="subtitle">45 Days Editing Challenge</div>
+          </div>
         </div>
+
+        <div class="d-flex align-items-center gap-2 header-icons">
+          <button
+            id="dateBtn"
+            class="icon-btn"
+            title="Set start date"
+            aria-label="Set start date"
+          >
+            📅
+          </button>
+          <input id="startDate" type="date" class="native-hidden" />
+          <button
+            id="pickFolderBtn"
+            class="icon-btn"
+            title="Choose folder"
+            aria-label="Choose folder"
+          >
+            💾
+          </button>
+
+          <div
+            class="autosave-indicator small-muted"
+            title="Autosave status"
+            aria-hidden="true"
+            id="autosaveIndicator"
+            style="display: flex; align-items: center; gap: 8px"
+          >
+            <span
+              id="autosaveLight"
+              class="light red"
+              aria-hidden="true"
+            ></span>
+            <span
+              id="autosaveLabel"
+              style="font-size: 13px; color: var(--muted)"
+              >Not saved</span
+            >
+          </div>
+
+          <button
+            id="galleryBtn"
+            class="icon-btn"
+            title="Video Gallery"
+            aria-label="Video Gallery"
+            disabled
+          >
+            🎞️
+          </button>
+
+          <button
+            id="leaveBtn"
+            class="icon-btn leave"
+            title="Take Leave"
+            aria-label="Take leave"
+            type="button"
+          >
+            <span class="leave-count">3</span>
+          </button>
+        </div>
+      </div>
     </header>
 
     <main class="container-main">
-        <div id="section-progress">
-            <div class="title-row">
-                <div id="rangePill" class="range-pill">SHOWING 1 TO 9 OF 45</div>
-            </div>
-
-            <div class="progress-card" id="progress-card">
-                <div style="display:flex; justify-content:space-between; align-items:center; gap:12px;">
-                    <div class="small-muted">Only today's card is writable. Past and future cards stay locked. You can take up to 3 leave days without affecting progress.</div>
-                    <div style="display:flex; gap:8px; align-items:center">
-                        <div class="badge bg-transparent text-muted" id="progressBadge" style="border:1px solid rgba(255,255,255,0.03); padding:.35rem .6rem; border-radius:8px;">0 of 45</div>
-                        <div class="small-muted">Last saved: <span id="lastAutoSaveTime">—</span></div>
-                    </div>
-                </div>
-
-                <div style="margin-top:12px;">
-                    <div class="progress" style="height:10px;">
-                        <div id="progressFill" class="progress-bar" style="width:0%; background:linear-gradient(90deg,var(--accent),var(--accent-2));"></div>
-                    </div>
-                </div>
-
-                <div class="mt-2 small-muted" id="progressText">0% complete</div>
-            </div>
+      <div id="section-progress">
+        <div class="title-row">
+          <div id="rangePill" class="range-pill">SHOWING 1 TO 9 OF 45</div>
         </div>
 
-        <div id="section-grid">
-            <div id="grid" class="grid" aria-live="polite"></div>
-            <div id="pager" class="pager mt-4 d-flex justify-content-center gap-2"></div>
+        <div class="progress-card" id="progress-card">
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              gap: 12px;
+            "
+          >
+            <div class="small-muted">
+              Only today's card is writable. Past and future cards stay locked.
+              You can take up to 3 leave days without affecting progress.
+            </div>
+            <div style="display: flex; gap: 8px; align-items: center">
+              <div
+                class="badge bg-transparent text-muted"
+                id="progressBadge"
+                style="
+                  border: 1px solid rgba(255, 255, 255, 0.03);
+                  padding: 0.35rem 0.6rem;
+                  border-radius: 8px;
+                "
+              >
+                0 of 45
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 12px">
+            <div class="progress" style="height: 10px">
+              <div
+                id="progressFill"
+                class="progress-bar"
+                style="
+                  width: 0%;
+                  background: linear-gradient(
+                    90deg,
+                    var(--accent),
+                    var(--accent-2)
+                  );
+                "
+              ></div>
+            </div>
+          </div>
+
+          <div class="mt-2 small-muted" id="progressText">0% complete</div>
+          <div
+            style="
+              margin-top: 10px;
+              display: flex;
+              gap: 8px;
+              align-items: center;
+            "
+          >
+            <div id="lastAutoSave" class="small-muted">
+              Last saved: <span id="lastAutoSaveTime">—</span>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <div id="section-grid">
+        <div id="grid" class="grid" aria-live="polite"></div>
+        <div
+          id="pager"
+          class="pager mt-4 d-flex justify-content-center gap-2"
+        ></div>
+      </div>
     </main>
 
     <template id="day-card-raw">
-        <article class="day-card">
-            <div class="card-head">
-                <div class="card-head-left">
-                    <div class="cal" aria-hidden="true">📅</div>
-                    <div class="day-meta">
-                        <div class="day-title">Day X</div>
-                        <div class="date-text">Set start date</div>
-                    </div>
-                </div>
-                <div><div class="status-chip" style="display:none"></div></div>
+      <article class="day-card">
+        <div class="card-head">
+          <div class="card-head-left">
+            <div class="cal" aria-hidden="true">📅</div>
+            <div class="day-meta">
+              <div class="day-title">Day X</div>
+              <div class="date-text">Set start date</div>
             </div>
+          </div>
+          <div><div class="status-chip" style="display: none"></div></div>
+        </div>
 
-            <form class="form d-flex flex-column mt-2" novalidate>
-                <label class="form-label small">Video URL</label>
-                <input name="video" class="form-control mb-2" placeholder="YouTube link" type="text" />
-                <label class="form-label small">Project File URL</label>
-                <input name="project" class="form-control mb-2" placeholder="Drive link" type="text" />
-                <label class="form-label small">Something you learned new!</label>
-                <textarea name="note" class="form-control mb-3" placeholder="Share what you learned today..." rows="4"></textarea>
+        <form class="form d-flex flex-column mt-2" novalidate>
+          <label class="form-label small">Video URL</label>
+          <input
+            name="video"
+            class="form-control mb-2"
+            placeholder="YouTube link"
+            type="text"
+          />
+          <label class="form-label small">Project File URL</label>
+          <input
+            name="project"
+            class="form-control mb-2"
+            placeholder="Drive link"
+            type="text"
+          />
+          <label class="form-label small">Something you learned new!</label>
+          <textarea
+            name="note"
+            class="form-control mb-3"
+            placeholder="Share what you learned today..."
+            rows="4"
+          ></textarea>
 
-                <div style="margin-top:auto;">
-                    <button class="submit-btn w-100" type="submit">Submit</button>
-                </div>
-            </form>
+          <div style="margin-top: auto">
+            <button class="submit-btn w-100" type="submit">Submit</button>
+          </div>
+        </form>
 
-            <div class="card-footer-note small-muted"></div>
-        </article>
+        <div class="card-footer-note small-muted"></div>
+      </article>
     </template>
 
     <!-- Confirm Start -->
     <div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header border-0">
-                    <h5 class="modal-title">Confirm start date</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-muted">
-                    Is this your challenge start date: <span id="confirmDateText" class="fw-bold text-white"></span>? Once confirmed, you cannot change it.
-                </div>
-                <div class="modal-footer border-0">
-                    <button id="cancelConfirm" type="button" class="btn btn-outline-light btn-sm" data-bs-dismiss="modal">Cancel</button>
-                    <button id="okConfirm" type="button" class="btn btn-success btn-sm">OK, lock it</button>
-                </div>
-            </div>
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header border-0">
+            <h5 class="modal-title">Confirm start date</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body text-muted">
+            Is this your challenge start date:
+            <span id="confirmDateText" class="fw-bold text-white"></span>? Once
+            confirmed, you cannot change it.
+          </div>
+          <div class="modal-footer border-0">
+            <button
+              id="cancelConfirm"
+              type="button"
+              class="btn btn-outline-light btn-sm"
+              data-bs-dismiss="modal"
+            >
+              Cancel</button
+            ><button
+              id="okConfirm"
+              type="button"
+              class="btn btn-success btn-sm"
+            >
+              OK, lock it
+            </button>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Leave confirm -->
     <div class="modal fade" id="leaveModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header border-0">
-                    <h5 class="modal-title text-success">Take leave today</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-muted">
-                    Mark <span id="leaveDayText" class="fw-bold text-white"></span> as a leave day? You can take up to 3 leave days without affecting progress.
-                </div>
-                <div class="modal-footer border-0">
-                    <button id="cancelLeave" type="button" class="btn btn-outline-light btn-sm" data-bs-dismiss="modal">Cancel</button>
-                    <button id="okLeave" type="button" class="btn btn-warning btn-sm">Yes, take leave</button>
-                </div>
-            </div>
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header border-0">
+            <h5 class="modal-title text-success">Take leave today</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body text-muted">
+            Mark <span id="leaveDayText" class="fw-bold text-white"></span> as a
+            leave day? You can take up to 3 leave days without affecting
+            progress.
+          </div>
+          <div class="modal-footer border-0">
+            <button
+              id="cancelLeave"
+              type="button"
+              class="btn btn-outline-light btn-sm"
+              data-bs-dismiss="modal"
+            >
+              Cancel</button
+            ><button id="okLeave" type="button" class="btn btn-warning btn-sm">
+              Yes, take leave
+            </button>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Leave success -->
-    <div class="modal fade" id="leaveSuccessModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content text-center">
-                <div class="modal-header border-0 justify-content-center">
-                    <h5 class="modal-title">Take a breath — you got this</h5>
-                </div>
-                <div class="modal-body text-muted">
-                    <img id="leaveGif" src="" alt="Motivation" style="max-width:100%;border-radius:.6rem" />
-                    <p id="leaveMsg" class="mt-3 small-muted">Keep going — small steps win challenges.</p>
-                </div>
-                <div class="modal-footer border-0 justify-content-center">
-                    <button id="leaveOk" type="button" class="btn btn-success btn-sm" data-bs-dismiss="modal">Back to cards</button>
-                </div>
-            </div>
+    <div
+      class="modal fade"
+      id="leaveSuccessModal"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center">
+          <div class="modal-header border-0 justify-content-center">
+            <h5 class="modal-title">Take a breath — you got this</h5>
+          </div>
+          <div class="modal-body text-muted">
+            <img
+              id="leaveGif"
+              src=""
+              alt="Motivation"
+              style="max-width: 100%; border-radius: 0.6rem"
+            />
+            <p id="leaveMsg" class="mt-3 small-muted">
+              Keep going — small steps win challenges.
+            </p>
+          </div>
+          <div class="modal-footer border-0 justify-content-center">
+            <button
+              id="leaveOk"
+              type="button"
+              class="btn btn-success btn-sm"
+              data-bs-dismiss="modal"
+            >
+              Back to cards
+            </button>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Success modal -->
-    <div class="modal fade success-modal" id="successModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content success-card text-center">
-                <div class="success-header">
-                    <div class="success-badge" aria-hidden="true">Nice work!</div>
-                </div>
-                <div class="success-title" id="successTitle">You submitted today's entry</div>
-                <div class="gif-wrapper">
-                    <img id="successGif" src="" alt="celebration GIF" />
-                </div>
-                <div class="quote-block" aria-live="polite">
-                    <div class="quote-text" id="successQuote">Small steps make big progress.</div>
-                    <div class="quote-author" id="successAuthor">— Keep going</div>
-                </div>
-                <div class="success-sub" id="successSub">Entry saved for today.</div>
-                <div class="modal-footer border-0 justify-content-center" style="margin-top:10px">
-                    <button id="successOk" type="button" class="btn btn-success btn-sm" data-bs-dismiss="modal">Back to cards</button>
-                </div>
+    <div
+      class="modal fade success-modal"
+      id="successModal"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content success-card text-center">
+          <div class="success-header">
+            <div class="success-badge" aria-hidden="true">Nice work!</div>
+          </div>
+          <div class="success-title" id="successTitle">
+            You submitted today's entry
+          </div>
+          <div class="gif-wrapper">
+            <img id="successGif" src="" alt="celebration GIF" />
+          </div>
+          <div class="quote-block" aria-live="polite">
+            <div class="quote-text" id="successQuote">
+              Small steps make big progress.
             </div>
+            <div class="quote-author" id="successAuthor">— Keep going</div>
+          </div>
+          <div class="success-sub" id="successSub">Entry saved for today.</div>
+          <div
+            class="modal-footer border-0 justify-content-center"
+            style="margin-top: 10px"
+          >
+            <button
+              id="successOk"
+              type="button"
+              class="btn btn-success btn-sm"
+              data-bs-dismiss="modal"
+            >
+              Back to cards
+            </button>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Gallery modal -->
     <div class="modal fade" id="galleryModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-xl modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header border-0">
-                    <h5 class="modal-title">Video Gallery</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-muted">
-                    <div id="galleryEmpty" class="small-muted" style="display:none;">No videos were found.</div>
-                    <div id="galleryGrid" class="gallery-grid"></div>
-                </div>
-                <div class="modal-footer border-0">
-                    <button id="closeGallery" type="button" class="btn btn-outline-light btn-sm" data-bs-dismiss="modal">Close</button>
-                </div>
+      <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header border-0">
+            <h5 class="modal-title">Video Gallery</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body text-muted">
+            <div id="galleryEmpty" class="small-muted" style="display: none">
+              No videos were found.
             </div>
+            <div id="galleryGrid" class="gallery-grid"></div>
+          </div>
+          <div class="modal-footer border-0">
+            <button
+              id="closeGallery"
+              type="button"
+              class="btn btn-outline-light btn-sm"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Player modal -->
     <div class="modal fade" id="playerModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header border-0">
-                    <h5 class="modal-title" id="playerTitle">Play video</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-muted" style="min-height:240px;">
-                    <div style="position:relative;padding-top:56.25%;">
-                        <iframe id="playerIframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="position:absolute;left:0;top:0;width:100%;height:100%;border-radius:.5rem;"></iframe>
-                    </div>
-                </div>
-                <div class="modal-footer border-0">
-                    <button id="closePlayer" type="button" class="btn btn-outline-light btn-sm" data-bs-dismiss="modal">Close</button>
-                </div>
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header border-0">
+            <h5 class="modal-title" id="playerTitle">Play video</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body text-muted" style="min-height: 240px">
+            <div style="position: relative; padding-top: 56.25%">
+              <iframe
+                id="playerIframe"
+                src=""
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                style="
+                  position: absolute;
+                  left: 0;
+                  top: 0;
+                  width: 100%;
+                  height: 100%;
+                  border-radius: 0.5rem;
+                "
+              ></iframe>
             </div>
+          </div>
+          <div class="modal-footer border-0">
+            <button
+              id="closePlayer"
+              type="button"
+              class="btn btn-outline-light btn-sm"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
         </div>
+      </div>
     </div>
 
-    <div id="toast" role="status" aria-live="polite" style="position:fixed; right:1rem; bottom:1rem; background:rgba(8,10,12,0.85); padding:.6rem .9rem; border-radius:.5rem; display:none; color:var(--text); border:1px solid rgba(255,255,255,0.04); z-index:2000">Saved</div>
+    <div
+      id="toast"
+      role="status"
+      aria-live="polite"
+      style="
+        position: fixed;
+        right: 1rem;
+        bottom: 1rem;
+        background: rgba(8, 10, 12, 0.85);
+        padding: 0.6rem 0.9rem;
+        border-radius: 0.5rem;
+        display: none;
+        color: var(--text);
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        z-index: 2000;
+      "
+    >
+      Saved
+    </div>
 
-    <footer class="site-footer" style="position:fixed; left:0; right:0; bottom:0; width:100%; z-index:80; padding:8px 0; color:var(--muted); text-align:center; font-size:13px; border-top:1px solid rgba(255,255,255,0.03); background:linear-gradient(180deg, rgba(4,6,6,0.35), rgba(4,6,6,0.18)); backdrop-filter: blur(6px) saturate(120%);">
-        <div class="container container-main">
-            <div>After Effects Powerplay — <span class="small-muted">Built for 45 day editing challenges</span></div>
-            <div style="margin-top:8px;">Made with ❤️ <a href="https://www.facebook.com/prodip.karmokar.975243/" target="_blank" rel="noopener noreferrer">Prodip Karmokar</a></div>
-        </div>
+    <footer
+      class="site-footer"
+      style="
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        z-index: 80;
+        padding: 8px 0;
+        color: var(--muted);
+        text-align: center;
+        font-size: 13px;
+        border-top: 1px solid rgba(255, 255, 255, 0.03);
+        background: linear-gradient(
+          180deg,
+          rgba(4, 6, 6, 0.35),
+          rgba(4, 6, 6, 0.18)
+        );
+        backdrop-filter: blur(6px) saturate(120%);
+      "
+    >
+      After Effects Powerplay —
+      <span class="small-muted">Built for 45 day editing challenges</span>
     </footer>
 
-    <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-    <!-- Google API client -->
-    <script src="https://apis.google.com/js/api.js"></script>
-
     <script>
-    (function(){
-        // CONFIG - your keys
-        const CLIENT_ID = '201197324319-9u9od0ftndc346qvst2e9nt7mkab2hs4.apps.googleusercontent.com';
-        const API_KEY = 'AIzaSyAJjLEVWptMgUl5r6ogGDP9tUeoJgvqSRs';
-        const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
-        const SCOPES = 'https://www.googleapis.com/auth/drive.appdata';
-        const DRIVE_FILENAME = 'aepp-data.json';
-
-        // App constants
+      /* Integrated app script (single-file)
+           - Footer fixed to bottom (CSS above)
+           - Export / Import, Gallery, Leave and inline player included
+           - Removed import/export buttons per request
+           - Leave buttons only show count
+           - Header height reduced
+        */
+      (() => {
+        // Config
         const TOTAL_DAYS = 45;
-        const STORAGE_KEY = 'aepp-entries-v4';
-        const START_KEY = 'aepp-start-date-v1';
-        const LEAVE_KEY = 'aepp-leaves-v1';
-        const LAST_AUTOSAVE_KEY = 'aepp-last-autosave-ts';
+        const STORAGE_KEY = "aepp-entries-v4";
+        const START_KEY = "aepp-start-date-v1";
+        const LEAVE_KEY = "aepp-leaves-v1";
         const LEAVE_CAP = 3;
         const pageSize = 9;
 
-        // state
-        let entries = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-        let startDateStr = localStorage.getItem(START_KEY) || '';
-        let leaves = JSON.parse(localStorage.getItem(LEAVE_KEY) || '[]');
+        // State
+        let entries = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+        let startDateStr = localStorage.getItem(START_KEY) || "";
+        let leaves = JSON.parse(localStorage.getItem(LEAVE_KEY) || "[]");
         leaves = Array.from(new Set(leaves));
         let currentPage = 1;
 
-        // elements
-        const grid = document.getElementById('grid');
-        const tplRaw = document.getElementById('day-card-raw');
-        const rangePill = document.getElementById('rangePill');
-        const pager = document.getElementById('pager');
-        const startDateInput = document.getElementById('startDate');
-        const leaveBtn = document.getElementById('leaveBtn');
-        const toast = document.getElementById('toast');
+        // Elements
+        const grid = document.getElementById("grid");
+        const tpl = document.getElementById("day-card");
+        const rangePill = document.getElementById("rangePill");
+        const pager = document.getElementById("pager");
+        const startDateInput = document.getElementById("startDate");
+        const leaveBtn = document.getElementById("leaveBtn");
+        const toast = document.getElementById("toast");
 
-        const progressFill = document.getElementById('progressFill');
-        const progressText = document.getElementById('progressText');
-        const progressBadge = document.getElementById('progressBadge');
-
-        const galleryBtn = document.getElementById('galleryBtn');
-
-        const playerModalEl = document.getElementById('playerModal');
-        const playerModal = new bootstrap.Modal(playerModalEl);
-        const playerIframe = document.getElementById('playerIframe');
-        const playerTitle = document.getElementById('playerTitle');
-
-        const confirmModalEl = document.getElementById('confirmModal');
-        const confirmModal = new bootstrap.Modal(confirmModalEl);
-        const okConfirm = document.getElementById('okConfirm');
-        const cancelConfirm = document.getElementById('cancelConfirm');
-        const confirmDateText = document.getElementById('confirmDateText');
-
-        const leaveModalEl = document.getElementById('leaveModal');
-        const leaveModal = new bootstrap.Modal(leaveModalEl);
-        const okLeave = document.getElementById('okLeave');
-        const cancelLeave = document.getElementById('cancelLeave');
-        const leaveDayText = document.getElementById('leaveDayText');
-
-        const leaveSuccessModalEl = document.getElementById('leaveSuccessModal');
-        const leaveSuccessModal = new bootstrap.Modal(leaveSuccessModalEl);
-        const leaveGif = document.getElementById('leaveGif');
-        const leaveMsg = document.getElementById('leaveMsg');
-        const leaveOk = document.getElementById('leaveOk');
-
-        const successModalEl = document.getElementById('successModal');
-        const successModal = new bootstrap.Modal(successModalEl);
-        const successGif = document.getElementById('successGif');
-        const successQuoteEl = document.getElementById('successQuote');
-        const successAuthorEl = document.getElementById('successAuthor');
-        const successTitle = document.getElementById('successTitle');
-        const successSub = document.getElementById('successSub');
-
-        const autosaveLight = document.getElementById('autosaveLight');
-        const autosaveLabel = document.getElementById('autosaveLabel');
-        const pickFolderBtn = document.getElementById('pickFolderBtn');
-        const lastAutoSaveTime = document.getElementById('lastAutoSaveTime');
-
-        // gifs & quotes
-        const GIFS = [
-            "https://media.giphy.com/media/YRuFixSNWFVcXaxpmX/giphy.gif",
-            "https://media.giphy.com/media/vcKEsYOdjoCeJRpn95/giphy.gif",
-            "https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif"
-        ];
-        const LEAVE_GIFS = [
-            { url: "https://media.giphy.com/media/3o6Zt6ML6BklcajjsA/giphy.gif", msg: "Don't give up — you're closer than you think!" },
-            { url: "https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif", msg: "Take a breath — small steps still count." }
-        ];
-        const QUOTES = [
-            { q:"Don’t watch the clock; do what it does — keep going.", a:"Sam Levenson" },
-            { q:"Small progress each day adds up to big results.", a:"Unknown" },
-            { q:"What you do today can improve all your tomorrows.", a:"Ralph Marston" },
-            { q:"Consistency is what transforms average into excellence.", a:"Unknown" },
-            { q:"Focus on progress, not perfection.", a:"Unknown" }
-        ];
-
-        let lastGif = -1;
-        function pickGif(){ if(GIFS.length===1) return GIFS[0]; let i; do { i = Math.floor(Math.random()*GIFS.length); } while(i===lastGif && GIFS.length>1); lastGif=i; return GIFS[i]; }
-        function pickLeaveMotivation(){ return LEAVE_GIFS[Math.floor(Math.random()*LEAVE_GIFS.length)]; }
-        function pickQuote(){ return QUOTES[Math.floor(Math.random()*QUOTES.length)]; }
-
-        // helpers
-        const fmt = d => new Intl.DateTimeFormat(undefined, { day:'2-digit', month:'short', year:'numeric' }).format(d);
-        function toISODate(d){ const y=d.getFullYear(), m=String(d.getMonth()+1).padStart(2,'0'), da=String(d.getDate()).padStart(2,'0'); return `${y}-${m}-${da}`; }
-        function parseStart(){ return startDateStr ? new Date(startDateStr + 'T00:00:00') : null; }
-        function dayToDate(day){ const s=parseStart(); if(!s) return ''; const d=new Date(s); d.setDate(s.getDate() + (day-1)); return fmt(d); }
-        function todayIndex(){ const s=parseStart(); if(!s) return null; const now=new Date(); const midnight=new Date(now.getFullYear(), now.getMonth(), now.getDate()); const diff=Math.floor((midnight - s)/86400000); return diff+1; }
-
-        function showToast(msg){ toast.textContent = msg; toast.style.display = 'block'; setTimeout(()=>{ toast.style.display = 'none'; }, 1800); }
-
-        function normalizeUrl(u){ if(!u) return null; let s=u.trim(); if(!/^https?:\/\//i.test(s)) s='https://'+s; try{ return new URL(s).href; } catch { return null; } }
-        function isYouTubeUrl(u){ const n=normalizeUrl(u); if(!n) return false; try { const host=new URL(n).hostname.toLowerCase(); return host==='youtu.be' || host.endsWith('youtube.com'); } catch { return false; } }
-        function isGoogleDriveUrl(u){ const n=normalizeUrl(u); if(!n) return false; try { const url=new URL(n); const h=url.hostname.toLowerCase(); if(h!=='drive.google.com' && h!=='docs.google.com') return false; const p=url.pathname.toLowerCase(); return p.startsWith('/drive/folders') || p.startsWith('/file') || p.startsWith('/document') || p.startsWith('/spreadsheets') || p.startsWith('/presentation') || (p==='/open' && url.searchParams.has('id')); } catch { return false; } }
-
-        function saveEntries(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(entries)); }
-        function saveStart(){ if(startDateStr) localStorage.setItem(START_KEY, startDateStr); else localStorage.removeItem(START_KEY); }
-        function saveLeaves(){ leaves = Array.from(new Set(leaves)); localStorage.setItem(LEAVE_KEY, JSON.stringify(leaves)); }
-
-        function leavesUsed(){ return Math.min(leaves.length, LEAVE_CAP); }
-        function leavesLeft(){ return Math.max(0, LEAVE_CAP - leavesUsed()); }
-
-        function updateLeaveBtn(){
-            const left = leavesLeft();
-            leaveBtn.innerHTML = `<span class="leave-count">${left}</span>`;
-            leaveBtn.title = `Take Leave (${left} left)`;
-            const isDisabled = (left <= 0);
-            leaveBtn.disabled = isDisabled;
-            leaveBtn.setAttribute('aria-disabled', isDisabled ? 'true' : 'false');
-            if(isDisabled) leaveBtn.classList.add('disabled'); else leaveBtn.classList.remove('disabled');
-        }
-
-        function updateProgress(){
-            const completed = Object.keys(entries).length;
-            const credited = leavesUsed();
-            const pct = Math.min(100, Math.round(((completed + credited)/TOTAL_DAYS)*100));
-            progressFill.style.width = pct + '%';
-            progressText.textContent = pct + '% complete';
-            progressBadge.textContent = `${completed + credited} of ${TOTAL_DAYS}`;
-            updateGalleryBtn(pct);
-        }
-
-        function updateGalleryBtn(progressPct){
-            const ready = (typeof progressPct === 'number' ? progressPct : (Math.round(((Object.keys(entries).length + leavesUsed()) / TOTAL_DAYS) * 100)));
-            if(ready >= 100 && hasAnyVideo()){
-                galleryBtn.disabled = false;
-                galleryBtn.removeAttribute('aria-disabled');
-                galleryBtn.title = 'Open Video Gallery';
-            } else {
-                galleryBtn.disabled = true;
-                galleryBtn.setAttribute('aria-disabled','true');
-                if(!hasAnyVideo()) galleryBtn.title = 'No videos available yet';
-                else galleryBtn.title = 'Gallery unlocks after completion';
-            }
-        }
-
-        function extractYouTubeId(url){
-            if(!url) return null;
-            try {
-                const u = new URL(normalizeUrl(url));
-                const host = u.hostname.toLowerCase();
-                if(host === 'youtu.be') { const id = u.pathname.slice(1).split(/[/?#]/)[0]; return id || null; }
-                if(host.endsWith('youtube.com')) {
-                    if(u.searchParams.get('v')) return u.searchParams.get('v');
-                    const parts = u.pathname.split('/');
-                    const embedIdx = parts.indexOf('embed'); if(embedIdx !== -1 && parts[embedIdx+1]) return parts[embedIdx+1];
-                    const vIdx = parts.indexOf('v'); if(vIdx !== -1 && parts[vIdx+1]) return parts[vIdx+1];
-                }
-                return null;
-            } catch(e){ return null; }
-        }
-        function ytThumbnailUrl(id){ if(!id) return ''; return `https://img.youtube.com/vi/${id}/hqdefault.jpg`; }
-        function hasAnyVideo(){ return Object.values(entries).some(e => e && e.video && extractYouTubeId(e.video)); }
+        const progressFill = document.getElementById("progressFill");
+        const progressText = document.getElementById("progressText");
+        const progressBadge = document.getElementById("progressBadge");
 
         // Gallery
-        function buildGallery(){
-            const galleryGrid = document.getElementById('galleryGrid');
-            const galleryEmpty = document.getElementById('galleryEmpty');
-            galleryGrid.innerHTML = '';
-            const items = [];
-            for(const dayKey of Object.keys(entries).sort((a,b)=>Number(a)-Number(b))){
-                const day = Number(dayKey);
-                const e = entries[day];
-                if(!e || !e.video) continue;
-                const id = extractYouTubeId(e.video);
-                if(!id) continue;
-                items.push({ day, id, url: e.video, savedAt: e.savedAt || null });
-            }
-            if(items.length === 0){ galleryEmpty.style.display = 'block'; return; }
-            galleryEmpty.style.display = 'none';
-            items.forEach(it => {
-                const thumb = document.createElement('div');
-                thumb.className = 'gallery-thumb';
-                thumb.tabIndex = 0;
-                thumb.setAttribute('role','button');
-                thumb.setAttribute('aria-label', `Play Day ${it.day} video`);
-                thumb.innerHTML = `
-                    <img loading="lazy" alt="Day ${it.day} thumbnail" src="${ytThumbnailUrl(it.id)}" />
-                    <div class="gallery-meta"><div>Day ${it.day}</div><div class="small-muted">${it.savedAt ? fmt(new Date(it.savedAt)) : ''}</div></div>
-                `;
-                thumb.addEventListener('click', () => openPlayer(it));
-                thumb.addEventListener('keydown', (ev) => { if(ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); openPlayer(it); } });
-                galleryGrid.appendChild(thumb);
-            });
+        const galleryBtn = document.getElementById("galleryBtn");
+        const galleryModalEl = document.getElementById("galleryModal");
+        const galleryModal = new bootstrap.Modal(galleryModalEl);
+        const galleryGrid = document.getElementById("galleryGrid");
+        const galleryEmpty = document.getElementById("galleryEmpty");
+
+        // Player
+        const playerModalEl = document.getElementById("playerModal");
+        const playerModal = new bootstrap.Modal(playerModalEl);
+        const playerIframe = document.getElementById("playerIframe");
+        const playerTitle = document.getElementById("playerTitle");
+
+        // Modals (others)
+        const confirmModalEl = document.getElementById("confirmModal");
+        const leaveModalEl = document.getElementById("leaveModal");
+        const leaveSuccessModalEl =
+          document.getElementById("leaveSuccessModal");
+        const successModalEl = document.getElementById("successModal");
+        const confirmModal = new bootstrap.Modal(confirmModalEl);
+        const leaveModal = new bootstrap.Modal(leaveModalEl);
+        const leaveSuccessModal = new bootstrap.Modal(leaveSuccessModalEl);
+        const successModal = new bootstrap.Modal(successModalEl);
+
+        const confirmDateText = document.getElementById("confirmDateText");
+        const okConfirm = document.getElementById("okConfirm");
+        const cancelConfirm = document.getElementById("cancelConfirm");
+
+        const leaveDayText = document.getElementById("leaveDayText");
+        const okLeave = document.getElementById("okLeave");
+        const cancelLeave = document.getElementById("cancelLeave");
+
+        const leaveGif = document.getElementById("leaveGif");
+        const leaveMsg = document.getElementById("leaveMsg");
+        const leaveOk = document.getElementById("leaveOk");
+
+        const successGif = document.getElementById("successGif");
+        const successOk = document.getElementById("successOk");
+
+        // Assets
+        const LEAVE_GIFS = [
+          {
+            url: "https://media.giphy.com/media/3o6Zt6ML6BklcajjsA/giphy.gif",
+            msg: "Don't give up — you're closer than you think!",
+          },
+          {
+            url: "https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif",
+            msg: "Work harder — small steps every day!",
+          },
+        ];
+        const GIFS = [
+          "https://media.giphy.com/media/YRuFixSNWFVcXaxpmX/giphy.gif",
+          "https://media.giphy.com/media/vcKEsYOdjoCeJRpn95/giphy.gif",
+        ];
+        let lastGif = -1;
+        function pickGif() {
+          if (GIFS.length === 1) return GIFS[0];
+          let i;
+          do {
+            i = Math.floor(Math.random() * GIFS.length);
+          } while (i === lastGif);
+          lastGif = i;
+          return GIFS[i];
+        }
+        function pickLeaveMotivation() {
+          const i = Math.floor(Math.random() * LEAVE_GIFS.length);
+          return LEAVE_GIFS[i];
         }
 
-        function openPlayer(item){
-            if(!item || !item.id) return;
-            const src = `https://www.youtube.com/embed/${encodeURIComponent(item.id)}?rel=0&modestbranding=1&autoplay=1`;
-            playerIframe.src = src;
-            playerTitle.textContent = `Day ${item.day} — Video`;
-            playerModal.show();
+        // Helpers
+        const fmt = (d) =>
+          new Intl.DateTimeFormat(undefined, {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+          }).format(d);
+        function toISODate(d) {
+          const y = d.getFullYear(),
+            m = String(d.getMonth() + 1).padStart(2, "0"),
+            da = String(d.getDate()).padStart(2, "0");
+          return `${y}-${m}-${da}`;
         }
-        playerModalEl.addEventListener('hidden.bs.modal', () => { playerIframe.src = ''; playerTitle.textContent = 'Play video'; });
+        function parseStart() {
+          return startDateStr ? new Date(startDateStr + "T00:00:00") : null;
+        }
+        function dayToDate(day) {
+          const s = parseStart();
+          if (!s) return "";
+          const d = new Date(s);
+          d.setDate(s.getDate() + (day - 1));
+          return fmt(d);
+        }
+        function todayIndex() {
+          const s = parseStart();
+          if (!s) return null;
+          const now = new Date();
+          const midnight = new Date(
+            now.getFullYear(),
+            now.getMonth(),
+            now.getDate()
+          );
+          const diff = Math.floor((midnight - s) / 86400000);
+          return diff + 1;
+        }
 
-        document.getElementById('galleryBtn').addEventListener('click', (e) => {
-            e.preventDefault();
-            if(document.getElementById('galleryBtn').disabled){ showToast('Gallery is not available yet'); return; }
-            buildGallery();
-            new bootstrap.Modal(document.getElementById('galleryModal')).show();
-        });
+        function showToast(msg) {
+          toast.textContent = msg;
+          toast.classList.add("show");
+          toast.style.display = "block";
+          setTimeout(() => {
+            toast.classList.remove("show");
+            toast.style.display = "none";
+          }, 1400);
+        }
+
+        function normalizeUrl(u) {
+          if (!u) return null;
+          let s = u.trim();
+          if (!/^https?:\/\//i.test(s)) s = "https://" + s;
+          try {
+            return new URL(s).href;
+          } catch {
+            return null;
+          }
+        }
+        function isYouTubeUrl(u) {
+          const n = normalizeUrl(u);
+          if (!n) return false;
+          try {
+            const host = new URL(n).hostname.toLowerCase();
+            return host === "youtu.be" || host.endsWith("youtube.com");
+          } catch {
+            return false;
+          }
+        }
+        function isGoogleDriveUrl(u) {
+          const n = normalizeUrl(u);
+          if (!n) return false;
+          try {
+            const url = new URL(n);
+            const h = url.hostname.toLowerCase();
+            if (h !== "drive.google.com" && h !== "docs.google.com")
+              return false;
+            const p = url.pathname.toLowerCase();
+            return (
+              p.startsWith("/drive/folders") ||
+              p.startsWith("/file") ||
+              p.startsWith("/document") ||
+              p.startsWith("/spreadsheets") ||
+              p.startsWith("/presentation") ||
+              (p === "/open" && url.searchParams.has("id"))
+            );
+          } catch {
+            return false;
+          }
+        }
+
+        function saveEntries() {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+        }
+        function saveStart() {
+          if (startDateStr) localStorage.setItem(START_KEY, startDateStr);
+          else localStorage.removeItem(START_KEY);
+        }
+        function saveLeaves() {
+          leaves = Array.from(new Set(leaves));
+          localStorage.setItem(LEAVE_KEY, JSON.stringify(leaves));
+        }
+
+        function leavesUsed() {
+          return Math.min(leaves.length, LEAVE_CAP);
+        }
+        function leavesLeft() {
+          return Math.max(0, LEAVE_CAP - leavesUsed());
+        }
+
+        function updateLeaveBtn() {
+          const left = leavesLeft();
+          leaveBtn.innerHTML = `<span class="leave-count">${left}</span>`;
+          leaveBtn.title = `Take Leave (${left} left)`;
+          const isDisabled = left <= 0;
+          leaveBtn.disabled = isDisabled;
+          leaveBtn.setAttribute("aria-disabled", isDisabled ? "true" : "false");
+          if (isDisabled) leaveBtn.classList.add("disabled");
+          else leaveBtn.classList.remove("disabled");
+        }
+
+        function updateProgress() {
+          const completed = Object.keys(entries).length;
+          const credited = leavesUsed();
+          const pct = Math.min(
+            100,
+            Math.round(((completed + credited) / TOTAL_DAYS) * 100)
+          );
+          progressFill.style.width = pct + "%";
+          progressText.textContent = pct + "% complete";
+          progressBadge.textContent = `${
+            completed + credited
+          } of ${TOTAL_DAYS}`;
+          updateGalleryBtn(pct);
+        }
+
+        function updateGalleryBtn(progressPct) {
+          const ready =
+            typeof progressPct === "number"
+              ? progressPct
+              : Math.round(
+                  ((Object.keys(entries).length + leavesUsed()) / TOTAL_DAYS) *
+                    100
+                );
+          if (ready >= 100 && hasAnyVideo()) {
+            galleryBtn.disabled = false;
+            galleryBtn.removeAttribute("aria-disabled");
+            galleryBtn.title = "Open Video Gallery";
+          } else {
+            galleryBtn.disabled = true;
+            galleryBtn.setAttribute("aria-disabled", "true");
+            if (!hasAnyVideo()) galleryBtn.title = "No videos available yet";
+            else galleryBtn.title = "Gallery unlocks after completion";
+          }
+        }
 
         // build card
-        function buildCard(day){
-            const saved = entries[day] || {};
-            const tIdx = todayIndex();
-            const isToday = tIdx === day;
-            const alreadySaved = !!entries[day];
-            const isLeave = leaves.includes(day);
-            const canWrite = startDateStr && isToday && !alreadySaved && !isLeave;
+        function buildCard(day) {
+          const node = tpl.content.firstElementChild.cloneNode(true);
+          node.querySelector(".day-text").textContent = `Day ${day}`;
+          node.querySelector(".date-text").textContent =
+            dayToDate(day) || "Set start date";
 
-            const wrap = document.createElement('article');
-            wrap.className = 'day-card';
-            if(isLeave) wrap.classList.add('leave');
-            if(isToday && !alreadySaved && !isLeave) wrap.classList.add('today');
+          const statusChip = node.querySelector(".status-chip");
+          statusChip.style.display = "none";
 
-            const head = document.createElement('div'); head.className = 'card-head';
-            const left = document.createElement('div'); left.className = 'card-head-left';
-            const cal = document.createElement('div'); cal.className = 'cal'; cal.textContent = '📅';
-            const meta = document.createElement('div'); meta.className = 'day-meta';
-            const title = document.createElement('div'); title.className = 'day-title'; title.textContent = `Day ${day}`;
-            const dateEl = document.createElement('div'); dateEl.className = 'date-text'; dateEl.textContent = dayToDate(day) || 'Set start date';
-            meta.appendChild(title); meta.appendChild(dateEl);
-            left.appendChild(cal); left.appendChild(meta);
-            head.appendChild(left);
+          const form = node.querySelector(".form");
+          const saved = entries[day] || {};
+          form.querySelector('[name="video"]').value = saved.video || "";
+          form.querySelector('[name="project"]').value = saved.project || "";
+          form.querySelector('[name="note"]').value = saved.note || "";
 
-            const right = document.createElement('div');
-            if(isLeave){
-                const lb = document.createElement('div'); lb.className = 'leave-badge'; lb.textContent = 'LEAVE'; right.appendChild(lb);
-            } else if(alreadySaved){
-                const b = document.createElement('div'); b.className = 'badge-completed'; b.textContent = 'Completed'; right.appendChild(b);
-            } else {
-                const ph = document.createElement('div'); ph.style.width='80px'; right.appendChild(ph);
+          const tIdx = todayIndex();
+          const isToday = tIdx === day;
+          const alreadySaved = !!entries[day];
+          const isLeave = leaves.includes(day);
+          const canWrite = startDateStr && isToday && !alreadySaved && !isLeave;
+
+          if (alreadySaved) {
+            node.classList.remove("locked");
+            form.innerHTML = "";
+            if (saved.note) {
+              const h = document.createElement("div");
+              h.className = "fw-bold mb-1";
+              h.textContent = "Something you learned";
+              const p = document.createElement("p");
+              p.className = "mb-0";
+              p.textContent = saved.note;
+              form.appendChild(h);
+              form.appendChild(p);
             }
-            head.appendChild(right);
-            wrap.appendChild(head);
-
-            const content = document.createElement('div'); content.className='card-content';
-
-            if(alreadySaved){
-                const learnTitle = document.createElement('div'); learnTitle.className='learn-title'; learnTitle.textContent='Something you learned';
-                const note = document.createElement('div'); note.className='learn-note'; note.textContent = saved.note || '';
-                content.appendChild(learnTitle); content.appendChild(note);
-
-                const actions = document.createElement('div'); actions.className='card-actions';
-                if(saved.video){
-                    const a = document.createElement('a'); a.className='btn-outline-card'; a.href=saved.video; a.target='_blank'; a.rel='noopener noreferrer'; a.innerHTML = '<span>▶</span><span> View Video</span>'; actions.appendChild(a);
-                }
-                if(saved.project){
-                    const b = document.createElement('a'); b.className='btn-outline-card'; b.href=saved.project; b.target='_blank'; b.rel='noopener noreferrer'; b.innerHTML = '<span>🗂️</span><span> View Project</span>'; actions.appendChild(b);
-                }
-                content.appendChild(actions);
-
-                const footer = document.createElement('div'); footer.className='card-footer';
-                footer.innerHTML = `<div class="small-muted">${ saved.savedAt ? 'Submitted on ' + fmt(new Date(saved.savedAt)) : 'Submitted' }</div>`;
-                content.appendChild(footer);
-            } else if(isLeave){
-                const row = document.createElement('div'); row.style.display='flex'; row.style.gap='12px'; row.style.alignItems='center';
-                const ill = document.createElement('div'); ill.className='leave-illustration'; ill.innerHTML = '⏸️';
-                const msgWrap = document.createElement('div'); msgWrap.style.flex = '1';
-                const t = document.createElement('div'); t.style.fontWeight='800'; t.style.color='#ffdede'; t.textContent='Leave recorded';
-                const p = document.createElement('div'); p.className='small-muted'; p.textContent = 'You took a leave for this day. This will be credited up to allowed leaves.';
-                msgWrap.appendChild(t); msgWrap.appendChild(p);
-                row.appendChild(ill); row.appendChild(msgWrap);
-                content.appendChild(row);
-                const footer = document.createElement('div'); footer.className='card-footer'; footer.innerHTML = `<div class="small-muted">Leave recorded</div>`; content.appendChild(footer);
-            } else {
-                const form = document.createElement('form'); form.className='form d-flex flex-column mt-2'; form.noValidate = true;
-                const labelVideo = document.createElement('label'); labelVideo.className='form-label small'; labelVideo.textContent='Video URL';
-                const inputVideo = document.createElement('input'); inputVideo.name='video'; inputVideo.className='form-control mb-2'; inputVideo.placeholder='YouTube link';
-                const labelProject = document.createElement('label'); labelProject.className='form-label small'; labelProject.textContent='Project File URL';
-                const inputProject = document.createElement('input'); inputProject.name='project'; inputProject.className='form-control mb-2'; inputProject.placeholder='Drive link';
-                const labelNote = document.createElement('label'); labelNote.className='form-label small'; labelNote.textContent='Something you learned new!';
-                const textarea = document.createElement('textarea'); textarea.name='note'; textarea.className='form-control mb-3'; textarea.placeholder='Share what you learned today...'; textarea.rows=4;
-                const submitWrap = document.createElement('div'); submitWrap.style.marginTop='auto';
-                const submitBtn = document.createElement('button'); submitBtn.className='submit-btn w-100'; submitBtn.type='submit'; submitBtn.textContent='Submit';
-                submitWrap.appendChild(submitBtn);
-                form.appendChild(labelVideo); form.appendChild(inputVideo); form.appendChild(labelProject); form.appendChild(inputProject); form.appendChild(labelNote); form.appendChild(textarea); form.appendChild(submitWrap);
-
-                if(!canWrite){
-                    Array.from([inputVideo, inputProject, textarea]).forEach(el => el.disabled = true);
-                    const locked = document.createElement('div'); locked.className='small-muted'; locked.textContent = canWrite ? '' : 'This day is locked — only the active day is writable.';
-                    content.appendChild(locked);
-                } else {
-                    form.addEventListener('submit', async (e) => {
-                        e.preventDefault();
-                        if(!canWrite) return;
-                        const rawVideo = inputVideo.value.trim();
-                        const rawProject = inputProject.value.trim();
-                        const note = textarea.value.trim();
-
-                        if(rawVideo && !isYouTubeUrl(rawVideo)){ showToast('Video must be a valid YouTube link'); return; }
-                        if(rawProject && !isGoogleDriveUrl(rawProject)){ showToast('Project must be a valid Google Drive link'); return; }
-
-                        const video = rawVideo ? normalizeUrl(rawVideo) : null;
-                        const project = rawProject ? normalizeUrl(rawProject) : null;
-
-                        if((video && !project) || (!video && project)){
-                            if(!note){ showToast('Provide both YouTube + Drive links or a note'); return; }
-                        }
-                        if(!video && !project && !note){ showToast('Add a note or links before submitting'); return; }
-
-                        const payload = { savedAt: Date.now() };
-                        if(video) payload.video = video;
-                        if(project) payload.project = project;
-                        if(note) payload.note = note;
-
-                        entries[day] = payload;
-                        saveEntries();
-
-                        successGif.src = pickGif();
-                        const q = pickQuote(); successQuoteEl.textContent = q.q; successAuthorEl.textContent = `— ${q.a}`;
-                        successTitle.textContent = "Nice work!"; successSub.textContent = "Entry saved for today. Keep the momentum going.";
-
-                        // autosave to Drive
-                        autoSaveToDrive().then(()=>{}).catch(()=>{});
-
-                        successModal.show();
-                        render();
-                    });
-                }
-                content.appendChild(form);
+            const actions = document.createElement("div");
+            actions.className = "mt-3";
+            if (saved.video) {
+              const a = document.createElement("a");
+              a.href = saved.video;
+              a.target = "_blank";
+              a.rel = "noopener noreferrer";
+              a.className = "btn btn-sm btn-outline-light me-2";
+              a.textContent = "View Video";
+              actions.appendChild(a);
             }
-
-            wrap.appendChild(content);
-            return wrap;
-        }
-
-        function btn(text, onClick, disabled){
-            const b = document.createElement('button');
-            b.textContent = text;
-            b.className = 'btn btn-sm btn-outline-light';
-            b.disabled = !!disabled;
-            b.addEventListener('click', onClick);
-            return b;
-        }
-
-        function renderPager(totalPages){
-            pager.innerHTML = '';
-            const prev = btn('Prev', () => { currentPage--; render(); }, currentPage <= 1);
-            const next = btn('Next', () => { currentPage++; render(); }, currentPage >= totalPages);
-            const meta = document.createElement('span'); meta.className='badge bg-transparent text-muted'; meta.textContent = `Page ${currentPage} of ${totalPages}`;
-            pager.append(prev, meta, next);
-        }
-
-        function render(){
-            if(!grid) return;
-            const allDays = Array.from({ length: TOTAL_DAYS }, (_, i) => i+1);
-            const total = allDays.length;
-            const totalPages = Math.max(1, Math.ceil(total/pageSize));
-            if(currentPage > totalPages) currentPage = totalPages;
-            if(currentPage < 1) currentPage = 1;
-            const start = (currentPage - 1) * pageSize;
-            const page = allDays.slice(start, start + pageSize);
-
-            grid.innerHTML = '';
-            page.forEach(day => {
-                const node = buildCard(day);
-                grid.appendChild(node);
-            });
-
-            const from = total ? start + 1 : 0;
-            const to = start + page.length;
-            rangePill.textContent = `SHOWING ${from} TO ${to} OF ${total}`;
-
-            renderPager(totalPages);
-            updateProgress();
-            updateLeaveBtn();
-            updateLastSavedDisplay();
-        }
-
-        // DRIVE integration using gapi + REST (appDataFolder)
-        // load gapi client
-        let gapiInitialized = false;
-
-        function setAutosaveLight(status, label){
-            autosaveLight.classList.remove('green','red');
-            if(status === 'ok'){ autosaveLight.classList.add('green'); autosaveLabel.textContent = label || 'Saved'; }
-            else if(status === 'no'){ autosaveLight.classList.add('red'); autosaveLabel.textContent = label || 'Not saved'; }
-            else { autosaveLight.classList.add('red'); autosaveLabel.textContent = label || 'Unsupported'; }
-        }
-
-        function updateLastSavedDisplay(){
-            const ts = localStorage.getItem(LAST_AUTOSAVE_KEY);
-            if(ts){
-                try { const d = new Date(Number(ts)); lastAutoSaveTime.textContent = d.toLocaleString(); } catch(e){ lastAutoSaveTime.textContent = '—'; }
-            } else lastAutoSaveTime.textContent = '—';
-        }
-
-        function gapiLoadAndInit(){
-            return new Promise((resolve, reject) => {
-                if(gapiInitialized) return resolve();
-                if(!window.gapi) return reject(new Error('gapi_not_loaded'));
-                gapi.load('client:auth2', async () => {
-                    try {
-                        await gapi.client.init({ apiKey: API_KEY, clientId: CLIENT_ID, discoveryDocs: DISCOVERY_DOCS, scope: SCOPES });
-                        gapiInitialized = true;
-                        updateDriveSignState();
-                        resolve();
-                    } catch(err){
-                        console.error('gapi init error', err);
-                        reject(err);
-                    }
-                });
-            });
-        }
-
-        function isSignedIn(){
-            try { return gapi && gapi.auth2 && gapi.auth2.getAuthInstance() && gapi.auth2.getAuthInstance().isSignedIn.get(); } catch(e){ return false; }
-        }
-
-        function updateDriveSignState(){
-            const btn = pickFolderBtn;
-            try {
-                const signed = isSignedIn();
-                btn.textContent = signed ? '🟢' : '💾';
-                btn.title = signed ? 'Drive connected (click to sign out)' : 'Connect Drive';
-                if(signed) setAutosaveLight('ok','Connected'); else setAutosaveLight('no','Not connected');
-            } catch(e){}
-        }
-
-        // find file(s) with name in appDataFolder
-        async function findFileByName(name){
-            await gapiLoadAndInit();
-            if(!isSignedIn()) throw new Error('not_signed_in');
-            const res = await gapi.client.drive.files.list({
-                spaces: 'appDataFolder',
-                q: `name='${name.replace(/'/g,"\\'")}' and trashed = false`,
-                fields: 'files(id,name,modifiedTime,size)',
-                pageSize: 10
-            });
-            return res.result.files || [];
-        }
-
-        // read file content
-        async function readFileContent(fileId){
-            if(!isSignedIn()) throw new Error('not_signed_in');
-            const token = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true).access_token;
-            const r = await fetch(`https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`, { headers: { Authorization: 'Bearer ' + token }});
-            if(!r.ok) throw new Error('read_failed');
-            return await r.text();
-        }
-
-        // create file
-        async function createFileInAppData(name, text){
-            if(!isSignedIn()) throw new Error('not_signed_in');
-            const token = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true).access_token;
-            const metadata = { name, parents: ['appDataFolder'] };
-            const boundary = '-------314159265358979323846';
-            const delimiter = "\r\n--" + boundary + "\r\n";
-            const closeDelim = "\r\n--" + boundary + "--";
-            const contentType = 'application/json';
-            const body = delimiter +
-                'Content-Type: application/json; charset=UTF-8\r\n\r\n' +
-                JSON.stringify(metadata) +
-                delimiter +
-                'Content-Type: ' + contentType + '\r\n\r\n' +
-                text + closeDelim;
-            const res = await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart', {
-                method: 'POST',
-                headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'multipart/related; boundary=' + boundary },
-                body
-            });
-            if(!res.ok) throw new Error('create_failed:' + await res.text());
-            return await res.json();
-        }
-
-        // update file
-        async function updateFileInAppData(fileId, text){
-            if(!isSignedIn()) throw new Error('not_signed_in');
-            const token = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse(true).access_token;
-            const boundary = '-------314159265358979323846';
-            const delimiter = "\r\n--" + boundary + "\r\n";
-            const closeDelim = "\r\n--" + boundary + "--";
-            const metadata = {};
-            const contentType = 'application/json';
-            const body = delimiter +
-                'Content-Type: application/json; charset=UTF-8\r\n\r\n' +
-                JSON.stringify(metadata) +
-                delimiter +
-                'Content-Type: ' + contentType + '\r\n\r\n' +
-                text + closeDelim;
-            const res = await fetch(`https://www.googleapis.com/upload/drive/v3/files/${fileId}?uploadType=multipart`, {
-                method: 'PATCH',
-                headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'multipart/related; boundary=' + boundary },
-                body
-            });
-            if(!res.ok) throw new Error('update_failed:' + await res.text());
-            return await res.json();
-        }
-
-        // public autosave: save entries/leaves/startDateStr to Drive (create or update)
-        async function autoSaveToDrive(){
-            try {
-                await gapiLoadAndInit();
-            } catch(e){ setAutosaveLight('no','gapi init fail'); throw e; }
-            if(!isSignedIn()){ setAutosaveLight('no','Not signed'); throw new Error('not_signed_in'); }
-
-            const payload = { entries, leaves: Array.from(new Set(leaves.map(Number))), startDateStr };
-            const text = JSON.stringify(payload, null, 2);
-
-            try {
-                const files = await findFileByName(DRIVE_FILENAME);
-                if(!files || files.length === 0){
-                    await createFileInAppData(DRIVE_FILENAME, text);
-                } else {
-                    await updateFileInAppData(files[0].id, text);
-                }
-                const ts = Date.now();
-                localStorage.setItem(LAST_AUTOSAVE_KEY, String(ts));
-                setAutosaveLight('ok','Saved');
-                updateLastSavedDisplay();
-                return true;
-            } catch(err){
-                console.warn('autosave drive failed', err);
-                setAutosaveLight('no','Save failed');
-                throw err;
+            if (saved.project) {
+              const b = document.createElement("a");
+              b.href = saved.project;
+              b.target = "_blank";
+              b.rel = "noopener noreferrer";
+              b.className = "btn btn-sm btn-outline-light";
+              b.textContent = "View Project";
+              actions.appendChild(b);
             }
-        }
+            form.appendChild(actions);
+            const footer = node.querySelector(".card-footer-note");
+            footer.textContent = saved.savedAt
+              ? "Submitted on " + fmt(new Date(saved.savedAt))
+              : "Submitted";
+            statusChip.textContent = "Completed";
+            statusChip.style.display = "inline-block";
+            return node;
+          }
 
-        async function loadFromDrive(){
-            try {
-                await gapiLoadAndInit();
-            } catch(e){ setAutosaveLight('no','gapi init fail'); throw e; }
-            if(!isSignedIn()){ setAutosaveLight('no','Not signed'); throw new Error('not_signed_in'); }
+          if (isLeave) {
+            node.classList.add("leave");
+            form.innerHTML = `<div class="leave-msg">Leave taken for this day.</div>`;
+            statusChip.textContent = "LEAVE";
+            statusChip.classList.add("leave");
+            statusChip.style.display = "inline-block";
+            return node;
+          }
 
-            try {
-                const files = await findFileByName(DRIVE_FILENAME);
-                if(!files || files.length === 0) { showToast('No saved Drive file found'); setAutosaveLight('ok','Connected'); return false; }
-                const content = await readFileContent(files[0].id);
-                const parsed = JSON.parse(content);
-                const newEntries = {};
-                for(const k of Object.keys(parsed.entries || {})) newEntries[Number(k)] = parsed.entries[k];
-                entries = newEntries;
-                leaves = Array.from(new Set((parsed.leaves || []).map(Number)));
-                startDateStr = parsed.startDateStr || startDateStr || '';
-                saveEntries(); saveLeaves(); saveStart();
-                localStorage.setItem(LAST_AUTOSAVE_KEY, String(Date.now()));
-                setAutosaveLight('ok','Loaded');
-                updateLastSavedDisplay();
-                render();
-                showToast('Loaded data from Drive');
-                return true;
-            } catch(err){
-                console.error('load from drive failed', err);
-                setAutosaveLight('no','Load failed');
-                throw err;
-            }
-        }
+          if (!canWrite) {
+            node.classList.add("locked");
+            Array.from(form.elements).forEach((el) => (el.disabled = true));
+          } else {
+            node.classList.add("today");
+          }
 
-        // Drive connect button behavior: sign-in sign-out
-        pickFolderBtn.addEventListener('click', async (e) => {
+          form.addEventListener("submit", (e) => {
             e.preventDefault();
-            try {
-                await gapiLoadAndInit();
-            } catch(err){
-                console.error('gapi not ready', err);
-                showToast('Google API init failed — check console');
+            if (!canWrite) return;
+
+            const rawVideo = form.video.value.trim();
+            const rawProject = form.project.value.trim();
+            const note = form.note.value.trim();
+
+            if (rawVideo && !isYouTubeUrl(rawVideo)) {
+              showToast("Video must be a valid YouTube link");
+              return;
+            }
+            if (rawProject && !isGoogleDriveUrl(rawProject)) {
+              showToast("Project must be a valid Google Drive link");
+              return;
+            }
+
+            const video = rawVideo ? normalizeUrl(rawVideo) : null;
+            const project = rawProject ? normalizeUrl(rawProject) : null;
+
+            if ((video && !project) || (!video && project)) {
+              if (!note) {
+                showToast("Provide both YouTube + Drive links or a note");
                 return;
+              }
             }
-            const auth = gapi.auth2.getAuthInstance();
-            if(!auth) { showToast('Auth not ready'); return; }
-            if(!auth.isSignedIn.get()){
-                try {
-                    await auth.signIn();
-                    updateDriveSignState();
-                    // on sign in, try loading existing file
-                    try { await loadFromDrive(); } catch(e){ console.warn('load after sign in failed', e); }
-                } catch(err){
-                    console.warn('sign in cancelled or failed', err);
-                    showToast('Sign in failed');
-                    updateDriveSignState();
-                }
-            } else {
-                try {
-                    await auth.signOut();
-                    setAutosaveLight('no','Not saved');
-                    updateDriveSignState();
-                    showToast('Signed out');
-                } catch(e){
-                    console.warn('signout failed', e);
-                    showToast('Sign out failed');
-                }
+            if (!video && !project && !note) {
+              showToast("Add a note or links before submitting");
+              return;
             }
+
+            const payload = { savedAt: Date.now() };
+            if (video) payload.video = video;
+            if (project) payload.project = project;
+            if (note) payload.note = note;
+
+            entries[day] = payload;
+            saveEntries();
+            successGif.src = pickGif();
+            successModal.show();
+
+            // trigger Drive autosave if integration is available
+            if (window.autoSaveToDrive)
+              try {
+                window.autoSaveToDrive();
+              } catch (e) {
+                /*ignore*/
+              }
+
+            render();
+          });
+
+          return node;
+        }
+
+        // pager helpers
+        function btn(text, onClick, disabled) {
+          const b = document.createElement("button");
+          b.textContent = text;
+          b.className = "btn btn-sm btn-outline-light";
+          b.disabled = !!disabled;
+          b.addEventListener("click", onClick);
+          return b;
+        }
+
+        function renderPager(totalPages) {
+          pager.innerHTML = "";
+          const prev = btn(
+            "Prev",
+            () => {
+              currentPage--;
+              render();
+            },
+            currentPage <= 1
+          );
+          const next = btn(
+            "Next",
+            () => {
+              currentPage++;
+              render();
+            },
+            currentPage >= totalPages
+          );
+          const meta = document.createElement("span");
+          meta.className = "badge bg-transparent text-muted";
+          meta.textContent = `Page ${currentPage} of ${totalPages}`;
+          pager.append(prev, meta, next);
+        }
+
+        function render() {
+          if (!grid || !tpl) return;
+
+          const allDays = Array.from({ length: TOTAL_DAYS }, (_, i) => i + 1);
+          const total = allDays.length;
+          const totalPages = Math.max(1, Math.ceil(total / pageSize));
+          if (currentPage > totalPages) currentPage = totalPages;
+          if (currentPage < 1) currentPage = 1;
+          const start = (currentPage - 1) * pageSize;
+          const page = allDays.slice(start, start + pageSize);
+
+          grid.innerHTML = "";
+          page.forEach((day) => {
+            const node = buildCard(day);
+            grid.appendChild(node);
+          });
+
+          const from = total ? start + 1 : 0;
+          const to = start + page.length;
+          rangePill.textContent = `SHOWING ${from} TO ${to} OF ${total}`;
+
+          renderPager(totalPages);
+          updateProgress();
+          updateLeaveBtn();
+        }
+
+        // YouTube helpers for gallery
+        function extractYouTubeId(url) {
+          if (!url) return null;
+          try {
+            const u = new URL(normalizeUrl(url));
+            const host = u.hostname.toLowerCase();
+            if (host === "youtu.be") {
+              const id = u.pathname.slice(1).split(/[/?#]/)[0];
+              return id || null;
+            }
+            if (host.endsWith("youtube.com")) {
+              if (u.searchParams.get("v")) return u.searchParams.get("v");
+              const parts = u.pathname.split("/");
+              const embedIdx = parts.indexOf("embed");
+              if (embedIdx !== -1 && parts[embedIdx + 1])
+                return parts[embedIdx + 1];
+              const vIdx = parts.indexOf("v");
+              if (vIdx !== -1 && parts[vIdx + 1]) return parts[vIdx + 1];
+            }
+            return null;
+          } catch (e) {
+            return null;
+          }
+        }
+        function ytThumbnailUrl(id) {
+          if (!id) return "";
+          return `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+        }
+        function hasAnyVideo() {
+          return Object.values(entries).some(
+            (e) => e && e.video && extractYouTubeId(e.video)
+          );
+        }
+
+        function buildGallery() {
+          galleryGrid.innerHTML = "";
+          const items = [];
+          for (const dayKey of Object.keys(entries).sort(
+            (a, b) => Number(a) - Number(b)
+          )) {
+            const day = Number(dayKey);
+            const e = entries[day];
+            if (!e || !e.video) continue;
+            const id = extractYouTubeId(e.video);
+            if (!id) continue;
+            items.push({ day, id, url: e.video, savedAt: e.savedAt || null });
+          }
+
+          if (items.length === 0) {
+            galleryEmpty.style.display = "block";
+            return;
+          }
+          galleryEmpty.style.display = "none";
+
+          items.forEach((it) => {
+            const thumb = document.createElement("div");
+            thumb.className = "gallery-thumb";
+            thumb.tabIndex = 0;
+            thumb.setAttribute("role", "button");
+            thumb.setAttribute("aria-label", `Play Day ${it.day} video`);
+            thumb.innerHTML = `
+                        <img loading="lazy" alt="Day ${
+                          it.day
+                        } thumbnail" src="${ytThumbnailUrl(it.id)}" />
+                        <div class="gallery-meta"><div>Day ${
+                          it.day
+                        }</div><div class="small-muted">${
+              it.savedAt ? fmt(new Date(it.savedAt)) : ""
+            }</div></div>
+                    `;
+            thumb.addEventListener("click", () => openPlayer(it));
+            thumb.addEventListener("keydown", (ev) => {
+              if (ev.key === "Enter" || ev.key === " ") {
+                ev.preventDefault();
+                openPlayer(it);
+              }
+            });
+            galleryGrid.appendChild(thumb);
+          });
+        }
+
+        function openPlayer(item) {
+          if (!item || !item.id) return;
+          const src = `https://www.youtube.com/embed/${encodeURIComponent(
+            item.id
+          )}?rel=0&modestbranding=1&autoplay=1`;
+          playerIframe.src = src;
+          playerTitle.textContent = `Day ${item.day} — Video`;
+          playerModal.show();
+        }
+        playerModalEl.addEventListener("hidden.bs.modal", () => {
+          playerIframe.src = "";
+          playerTitle.textContent = "Play video";
         });
 
-        // init gapi if available (load script might take time)
-        (function bootGapi(){
-            // try to initialize quietly if gapi already loaded
-            if(window.gapi){
-                gapiLoadAndInit().then(()=>{ updateDriveSignState(); }).catch(()=>{ setAutosaveLight('no','Not connected'); });
-            } else {
-                // attach onload fallback if needed
-                const timer = setInterval(()=> { if(window.gapi){ clearInterval(timer); gapiLoadAndInit().then(()=>{ updateDriveSignState(); }).catch(()=>{ setAutosaveLight('no','Not connected'); }); } }, 500);
-            }
-        })();
-
-        // start-date flatpickr wiring
-        document.addEventListener('DOMContentLoaded', () => {
-            if(startDateStr){ startDateInput.value = startDateStr; startDateInput.disabled = true; } else startDateInput.disabled = false;
-
-            const fpInput = document.createElement('input'); fpInput.type = 'text'; fpInput.style.position='absolute'; fpInput.style.left='-9999px'; document.body.appendChild(fpInput);
-
-            const dateBtnEl = document.getElementById('dateBtn');
-            const fp = flatpickr(fpInput, {
-                dateFormat: 'Y-m-d',
-                appendTo: document.body,
-                allowInput: false,
-                onOpen: function(selectedDates, dateStr, instance){
-                    const cal = instance.calendarContainer; if(!cal) return; cal.style.display = 'block'; cal.style.zIndex='99999'; cal.style.opacity='0'; cal.style.transition = 'opacity 120ms ease';
-                    requestAnimationFrame(()=>{ void cal.offsetHeight; try { const rect = dateBtnEl.getBoundingClientRect(); const left = Math.min(Math.max(8, rect.left + window.scrollX), document.documentElement.clientWidth - cal.offsetWidth - 8); const preferBelow = (window.innerHeight - rect.bottom) > (cal.offsetHeight + 12); const top = preferBelow ? (window.scrollY + rect.bottom + 8) : (window.scrollY + rect.top - cal.offsetHeight - 8); cal.style.left = left + 'px'; cal.style.top = top + 'px'; } catch(e){}; cal.style.opacity = '1'; });
-                },
-                onChange: function(selectedDates, dateStr){
-                    if(!dateStr) return;
-                    confirmDateText.textContent = dateStr;
-                    const cm = new bootstrap.Modal(document.getElementById('confirmModal'));
-                    cm.show();
-                    document.getElementById('okConfirm').onclick = () => {
-                        startDateStr = dateStr; startDateInput.value = dateStr; startDateInput.disabled = true; saveStart(); cm.hide(); showToast('Start date set'); render();
-                    };
-                    document.getElementById('cancelConfirm').onclick = () => { cm.hide(); fp.clear(); };
-                }
-            });
-
-            dateBtnEl.addEventListener('click', (e) => {
-                e.preventDefault();
-                if(startDateStr || startDateInput.disabled){ showToast('Start date locked'); return; }
-                fp.open();
-                requestAnimationFrame(()=>{ const cal = fp.calendarContainer; if(cal){ void cal.offsetHeight; cal.style.opacity='1'; cal.style.display='block'; } });
-            });
+        galleryBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          if (galleryBtn.disabled) {
+            showToast("Gallery is not available yet");
+            return;
+          }
+          buildGallery();
+          galleryModal.show();
         });
 
-        startDateInput.addEventListener('change', () => {
-            if(!startDateInput.value) return;
-            confirmDateText.textContent = startDateInput.value;
-            const cm = new bootstrap.Modal(document.getElementById('confirmModal'));
-            cm.show();
-            document.getElementById('okConfirm').onclick = () => {
-                startDateStr = startDateInput.value; saveStart(); startDateInput.disabled = true; cm.hide(); showToast('Start date set'); render();
-            };
-            document.getElementById('cancelConfirm').onclick = () => { startDateInput.value = startDateStr || ''; cm.hide(); };
+        // Start-date input wiring & Flatpickr bridge (dateBtn only)
+        document.addEventListener("DOMContentLoaded", () => {
+          if (startDateStr) {
+            startDateInput.value = startDateStr;
+            startDateInput.disabled = true;
+          } else {
+            startDateInput.disabled = false;
+          }
+
+          const fpInput = document.createElement("input");
+          fpInput.type = "text";
+          fpInput.style.position = "absolute";
+          fpInput.style.left = "-9999px";
+          document.body.appendChild(fpInput);
+
+          const dateBtnEl = document.getElementById("dateBtn");
+          const fp = flatpickr(fpInput, {
+            dateFormat: "Y-m-d",
+            appendTo: document.body,
+            allowInput: false,
+            onReady: function (selectedDates, dateStr, instance) {
+              const cal = instance.calendarContainer;
+              if (!cal) return;
+              cal.style.display = "block";
+              cal.style.opacity = "0";
+              cal.style.transition = "";
+            },
+            onOpen: function (selectedDates, dateStr, instance) {
+              const cal = instance.calendarContainer;
+              if (!cal) return;
+              cal.style.display = "block";
+              cal.style.zIndex = "99999";
+              cal.style.opacity = "0";
+              cal.style.transition = "opacity 120ms ease";
+              requestAnimationFrame(() => {
+                void cal.offsetHeight;
+                try {
+                  const rect = dateBtnEl.getBoundingClientRect();
+                  const left = Math.min(
+                    Math.max(8, rect.left + window.scrollX),
+                    document.documentElement.clientWidth - cal.offsetWidth - 8
+                  );
+                  const preferBelow =
+                    window.innerHeight - rect.bottom > cal.offsetHeight + 12;
+                  const top = preferBelow
+                    ? window.scrollY + rect.bottom + 8
+                    : window.scrollY + rect.top - cal.offsetHeight - 8;
+                  cal.style.left = left + "px";
+                  cal.style.top = top + "px";
+                } catch (e) {}
+                cal.style.opacity = "1";
+              });
+              setTimeout(() => {
+                if (!cal) return;
+                if (getComputedStyle(cal).opacity === "0") {
+                  cal.style.opacity = "1";
+                  cal.style.display = "block";
+                }
+              }, 20);
+            },
+            onChange: function (selectedDates, dateStr) {
+              if (!dateStr) return;
+              confirmDateText.textContent = dateStr;
+              confirmModal.show();
+
+              okConfirm.onclick = () => {
+                startDateStr = dateStr;
+                startDateInput.value = dateStr;
+                startDateInput.disabled = true;
+                saveStart();
+                confirmModal.hide();
+                showToast("Start date set");
+                render();
+              };
+              cancelConfirm.onclick = () => {
+                confirmModal.hide();
+                fp.clear();
+              };
+            },
+          });
+
+          dateBtnEl.addEventListener("click", (e) => {
+            e.preventDefault();
+            if (startDateStr || startDateInput.disabled) {
+              showToast("Start date locked");
+              return;
+            }
+            fp.open();
+            requestAnimationFrame(() => {
+              const cal = fp.calendarContainer;
+              if (!cal) return;
+              void cal.offsetHeight;
+              cal.style.opacity = "1";
+              cal.style.display = "block";
+            });
+          });
+
+          let raf = 0;
+          window.addEventListener(
+            "scroll",
+            () => {
+              if (fp && fp.isOpen) {
+                if (raf) cancelAnimationFrame(raf);
+                raf = requestAnimationFrame(() => {
+                  const cal = fp.calendarContainer;
+                  if (!cal) return;
+                  try {
+                    const rect = dateBtnEl.getBoundingClientRect();
+                    const left = Math.min(
+                      Math.max(8, rect.left + window.scrollX),
+                      document.documentElement.clientWidth - cal.offsetWidth - 8
+                    );
+                    const preferBelow =
+                      window.innerHeight - rect.bottom > cal.offsetHeight + 12;
+                    const top = preferBelow
+                      ? window.scrollY + rect.bottom + 8
+                      : window.scrollY + rect.top - cal.offsetHeight - 8;
+                    cal.style.left = left + "px";
+                    cal.style.top = top + "px";
+                  } catch (e) {}
+                });
+              }
+            },
+            { passive: true }
+          );
+
+          window.addEventListener("resize", () => {
+            if (fp && fp.isOpen) {
+              if (raf) cancelAnimationFrame(raf);
+              raf = requestAnimationFrame(() => {
+                const cal = fp.calendarContainer;
+                if (!cal) return;
+                try {
+                  const rect = dateBtnEl.getBoundingClientRect();
+                  const left = Math.min(
+                    Math.max(8, rect.left + window.scrollX),
+                    document.documentElement.clientWidth - cal.offsetWidth - 8
+                  );
+                  const preferBelow =
+                    window.innerHeight - rect.bottom > cal.offsetHeight + 12;
+                  const top = preferBelow
+                    ? window.scrollY + rect.bottom + 8
+                    : window.scrollY + rect.top - cal.offsetHeight - 8;
+                  cal.style.left = left + "px";
+                  cal.style.top = top + "px";
+                } catch (e) {}
+              });
+            }
+          });
+        });
+
+        // startDate native change fallback (visually hidden)
+        startDateInput.addEventListener("change", () => {
+          if (!startDateInput.value) return;
+          confirmDateText.textContent = startDateInput.value;
+          confirmModal.show();
+
+          okConfirm.onclick = () => {
+            startDateStr = startDateInput.value;
+            saveStart();
+            startDateInput.disabled = true;
+            confirmModal.hide();
+            showToast("Start date set");
+            render();
+          };
+          cancelConfirm.onclick = () => {
+            startDateInput.value = startDateStr || "";
+            confirmModal.hide();
+          };
         });
 
         // Leave flow
-        leaveBtn.addEventListener('click', () => {
-            if(!startDateStr){ showToast('Set start date first'); return; }
-            const day = todayIndex();
-            if(day == null || day < 1 || day > TOTAL_DAYS){ showToast('Out of challenge window'); return; }
-            if(leaves.length >= LEAVE_CAP){ showToast('Leave limit reached'); return; }
-            if(entries[day]){ showToast('Already submitted today'); return; }
-            if(leaves.includes(day)){ showToast('Leave already recorded for today'); return; }
-            leaveDayText.textContent = dayToDate(day) || `Day ${day}`;
-            new bootstrap.Modal(document.getElementById('leaveModal')).show();
+        leaveBtn.addEventListener("click", () => {
+          if (!startDateStr) {
+            showToast("Set start date first");
+            return;
+          }
+          const day = todayIndex();
+          if (day == null || day < 1 || day > TOTAL_DAYS) {
+            showToast("Out of challenge window");
+            return;
+          }
+          if (leaves.length >= LEAVE_CAP) {
+            showToast("Leave limit reached");
+            return;
+          }
+          if (entries[day]) {
+            showToast("Already submitted today");
+            return;
+          }
+          if (leaves.includes(day)) {
+            showToast("Leave already recorded for today");
+            return;
+          }
+          leaveDayText.textContent = dayToDate(day) || `Day ${day}`;
+          leaveModal.show();
         });
 
-        okLeave.addEventListener('click', () => {
-            okLeave.disabled = true;
-            setTimeout(()=>{ okLeave.disabled = false; }, 800);
-            const day = todayIndex();
-            if(day == null){ leaveModal.hide(); return; }
-            if(leaves.includes(day)){ showToast('Leave already recorded'); leaveModal.hide(); return; }
-            leaves.push(day); saveLeaves();
-            // hide confirm and show success
-            const pick = pickLeaveMotivation(); leaveGif.src = pick.url; leaveMsg.textContent = pick.msg;
+        okLeave.addEventListener("click", () => {
+          okLeave.disabled = true;
+          setTimeout(() => {
+            okLeave.disabled = false;
+          }, 800);
+
+          const day = todayIndex();
+          if (day == null) {
             leaveModal.hide();
-            leaveSuccessModal.show();
-            // autosave to Drive
-            autoSaveToDrive().then(()=>{}).catch(()=>{});
-            render();
+            return;
+          }
+
+          if (leaves.includes(day)) {
+            showToast("Leave already recorded");
+            leaveModal.hide();
+            return;
+          }
+
+          leaves.push(day);
+          saveLeaves();
+
+          // hide confirm modal, then show success modal
+          leaveModal.hide();
+
+          const pick = pickLeaveMotivation();
+          leaveGif.src = pick.url;
+          leaveMsg.textContent = pick.msg;
+          leaveSuccessModal.show();
+
+          // autosave to Drive if integrated, otherwise use local FS save if present
+          if (window.autoSaveToDrive)
+            try {
+              window.autoSaveToDrive();
+            } catch (e) {}
+          else if (window.autoSaveToFolder)
+            try {
+              window.autoSaveToFolder();
+            } catch (e) {}
+
+          render();
         });
 
-        cancelLeave.addEventListener('click', () => { new bootstrap.Modal(document.getElementById('leaveModal')).hide(); });
-        leaveOk.addEventListener('click', () => { leaveSuccessModal.hide(); render(); });
+        cancelLeave.addEventListener("click", () => {
+          leaveModal.hide();
+        });
 
-        document.getElementById('successOk').addEventListener('click', () => { successModal.hide(); });
+        leaveOk.addEventListener("click", () => {
+          leaveSuccessModal.hide();
+          render();
+        });
 
-        // Drive remove (sign out) - keep simple: sign out and set indicator
-        window.clearDriveConnection = async function(){
-            try {
-                if(window.gapi && gapi.auth2 && gapi.auth2.getAuthInstance()){
-                    const auth = gapi.auth2.getAuthInstance();
-                    if(auth.isSignedIn.get()) await auth.signOut();
-                }
-            } catch(e){}
-            setAutosaveLight('no','Not saved');
-            localStorage.removeItem(LAST_AUTOSAVE_KEY);
-            updateLastSavedDisplay();
-            showToast('Drive disconnected');
-        };
+        successOk.addEventListener("click", () => {
+          successModal.hide();
+        });
 
         // init & render
-        (function init(){
-            const missingElements = ['grid','day-card-raw','progressFill'].filter(id => !document.getElementById(id));
-            if(missingElements.length){ console.warn('Missing DOM elements:', missingElements); return; }
-            render();
-            updateLeaveBtn();
-            updateGalleryBtn();
-            updateLastSavedDisplay();
-            // attempt to init gapi silently (if loaded)
-            if(window.gapi){
-                gapiLoadAndInit().then(()=>{ updateDriveSignState(); }).catch(()=>{ setAutosaveLight('no','Not connected'); });
-            } else {
-                // wait for gapi
-                const timer = setInterval(()=>{ if(window.gapi){ clearInterval(timer); gapiLoadAndInit().then(()=>{ updateDriveSignState(); }).catch(()=>{ setAutosaveLight('no','Not connected'); }); } }, 600);
-            }
+        (function init() {
+          const missingElements = ["grid", "day-card", "progressFill"].filter(
+            (id) => !document.getElementById(id)
+          );
+          if (missingElements.length) {
+            console.warn("Missing DOM elements:", missingElements);
+            return;
+          }
+          render();
+          updateLeaveBtn();
+          updateGalleryBtn();
         })();
 
         // public API
         window.ui = {
-            updateSection: (id, html) => { const el = document.getElementById(id); if(!el) return false; el.innerHTML = html; return true; },
-            refreshGrid: () => { render(); },
-            refreshProgress: () => { updateProgress(); updateLeaveBtn(); },
-            getState: () => ({ entries: JSON.parse(JSON.stringify(entries)), startDateStr, leaves: [...leaves] }),
-            setStartDate: (isoDate) => { if(!isoDate) return false; startDateStr = isoDate; startDateInput.value = isoDate; startDateInput.disabled = true; saveStart(); render(); return true; },
-            resetAll: (confirm) => { if(!confirm) return false; entries = {}; leaves = []; startDateStr = ''; localStorage.removeItem(STORAGE_KEY); localStorage.removeItem(START_KEY); localStorage.removeItem(LEAVE_KEY); startDateInput.value = ''; startDateInput.disabled = false; render(); return true; },
-            exportData: () => { /* not used - removed per request */ },
-            importFromObject: (obj, mode = 'merge') => { const err = (function validateImportedShape(obj){ if(!obj || typeof obj !== 'object') return 'Invalid JSON root'; if(!('entries' in obj) || !('leaves' in obj)) return 'Missing required keys (entries, leaves)'; if(obj.entries && typeof obj.entries !== 'object') return 'entries must be an object'; if(!Array.isArray(obj.leaves)) return 'leaves must be an array'; for(const k of Object.keys(obj.entries)){ const n = Number(k); if(!Number.isInteger(n) || n<1 || n>TOTAL_DAYS) return `Invalid entry day key: ${k}`; } for(const v of obj.leaves){ const n = Number(v); if(!Number.isInteger(n) || n<1 || n>TOTAL_DAYS) return `Invalid leave day: ${v}`; } if('startDateStr' in obj && obj.startDateStr){ const s = obj.startDateStr; if(!/^\d{4}-\d{2}-\d{2}$/.test(s)) return 'startDateStr must be YYYY-MM-DD'; } return null; })(obj); if(err) throw new Error('Invalid import: ' + err); if(mode === 'replace'){ entries = {}; for(const k of Object.keys(obj.entries)){ const n = Number(k); entries[n] = obj.entries[k]; } leaves = Array.from(new Set(obj.leaves.map(Number))); startDateStr = obj.startDateStr || ''; } else { for(const k of Object.keys(obj.entries)){ const n = Number(k); entries[n] = obj.entries[k]; } leaves = Array.from(new Set([...leaves.map(Number), ...obj.leaves.map(Number)])); if(!startDateStr && obj.startDateStr) startDateStr = obj.startDateStr; } saveEntries(); saveLeaves(); saveStart(); render(); return true; },
-            openGallery: () => { if(document.getElementById('galleryBtn').disabled) return false; buildGallery(); new bootstrap.Modal(document.getElementById('galleryModal')).show(); return true; },
-            connectDrive: async () => { await gapiLoadAndInit(); if(!gapi.auth2.getAuthInstance().isSignedIn.get()) await gapi.auth2.getAuthInstance().signIn(); updateDriveSignState(); return isSignedIn(); },
-            autoSaveToDrive: async () => { return autoSaveToDrive(); },
-            loadFromDrive: async () => { return loadFromDrive(); },
-            clearDriveConnection: async () => { return window.clearDriveConnection(); }
+          updateSection: (id, html) => {
+            const el = document.getElementById(id);
+            if (!el) return false;
+            el.innerHTML = html;
+            return true;
+          },
+          refreshGrid: () => {
+            render();
+          },
+          refreshProgress: () => {
+            updateProgress();
+            updateLeaveBtn();
+          },
+          getState: () => ({
+            entries: JSON.parse(JSON.stringify(entries)),
+            startDateStr,
+            leaves: [...leaves],
+          }),
+          setStartDate: (isoDate) => {
+            if (!isoDate) return false;
+            startDateStr = isoDate;
+            startDateInput.value = isoDate;
+            startDateInput.disabled = true;
+            saveStart();
+            render();
+            return true;
+          },
+          resetAll: (confirm) => {
+            if (!confirm) return false;
+            entries = {};
+            leaves = [];
+            startDateStr = "";
+            localStorage.removeItem(STORAGE_KEY);
+            localStorage.removeItem(START_KEY);
+            localStorage.removeItem(LEAVE_KEY);
+            startDateInput.value = "";
+            startDateInput.disabled = false;
+            render();
+            return true;
+          },
+          exportData: () => {
+            /* removed per request */
+          },
+          importFromObject: (obj, mode = "merge") => {
+            const err = validateImportedShape(obj);
+            if (err) throw new Error("Invalid import: " + err);
+            applyImportedData(obj, mode);
+            return true;
+          },
+          openGallery: () => {
+            if (galleryBtn.disabled) return false;
+            buildGallery();
+            galleryModal.show();
+            return true;
+          },
         };
-
-    })();
+      })();
     </script>
-</body>
+
+    <!-- Drive & gapi integration (optional). This adds "Connect Drive" behavior to the 💾 button.
+         If you prefer not to use Google Drive, everything still works locally (local folder autosave also available). -->
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script>
+      (function () {
+        // Replace with your credentials (you shared earlier)
+        const CLIENT_ID =
+          "201197324319-9u9od0ftndc346qvst2e9nt7mkab2hs4.apps.googleusercontent.com";
+        const API_KEY = "AIzaSyAJjLEVWptMgUl5r6ogGDP9tUeoJgvqSRs";
+        const SCOPES = "https://www.googleapis.com/auth/drive.appdata";
+
+        // UI refs
+        const pickFolderBtn = document.getElementById("pickFolderBtn");
+        const autosaveLight = document.getElementById("autosaveLight");
+        const autosaveLabel = document.getElementById("autosaveLabel");
+        const lastAutoSaveTime = document.getElementById("lastAutoSaveTime");
+
+        function debug(...args) {
+          console.log("[Drive]", ...args);
+        }
+        function debugErr(...args) {
+          console.error("[Drive]", ...args);
+        }
+
+        function setAutosaveLight(status, label) {
+          autosaveLight.classList.remove("green", "red");
+          if (status === "ok") {
+            autosaveLight.classList.add("green");
+            autosaveLabel.textContent = label || "Saved";
+          } else if (status === "no") {
+            autosaveLight.classList.add("red");
+            autosaveLabel.textContent = label || "Not saved";
+          } else {
+            autosaveLight.classList.add("red");
+            autosaveLabel.textContent = label || "Unsupported";
+          }
+        }
+        function updateLastSavedDisplay(ts) {
+          if (ts) {
+            lastAutoSaveTime.textContent = new Date(ts).toLocaleString();
+            localStorage.setItem("aepp-lastautosave", String(ts));
+          } else {
+            const stored = localStorage.getItem("aepp-lastautosave");
+            lastAutoSaveTime.textContent = stored
+              ? new Date(Number(stored)).toLocaleString()
+              : "—";
+          }
+        }
+
+        function whenGapiLoaded(cb, timeout = 8000) {
+          if (window.gapi && typeof gapi.load === "function") return cb();
+          let t = 0;
+          const id = setInterval(() => {
+            t += 200;
+            if (window.gapi && typeof gapi.load === "function") {
+              clearInterval(id);
+              cb();
+            } else if (t >= timeout) {
+              clearInterval(id);
+              cb(new Error("gapi not loaded"));
+            }
+          }, 200);
+        }
+
+        async function gapiInit() {
+          return new Promise((resolve, reject) => {
+            whenGapiLoaded(async (errLoad) => {
+              if (errLoad) {
+                debugErr("gapi script failed to load");
+                return reject(errLoad);
+              }
+              try {
+                debug("gapi loaded -> init client");
+                await gapi.client.init({
+                  apiKey: API_KEY,
+                  clientId: CLIENT_ID,
+                  discoveryDocs: [
+                    "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest",
+                  ],
+                  scope: SCOPES,
+                });
+                debug("gapi.client.init succeeded");
+                resolve();
+              } catch (e) {
+                debugErr("gapi.client.init failed", e);
+                reject(e);
+              }
+            });
+          });
+        }
+
+        async function ensureSignedIn() {
+          await gapiInit();
+          if (!gapi.auth2) {
+            await new Promise((res, rej) =>
+              gapi.load("auth2", { callback: res, onerror: rej })
+            );
+          }
+          if (!gapi.auth2.getAuthInstance()) {
+            await gapi.auth2.init({ client_id: CLIENT_ID, scope: SCOPES });
+          }
+          const ai = gapi.auth2.getAuthInstance();
+          if (!ai.isSignedIn.get()) {
+            await ai.signIn();
+          }
+          return ai.currentUser.get();
+        }
+
+        async function findAppFile(filename) {
+          const res = await gapi.client.drive.files.list({
+            spaces: "appDataFolder",
+            q: `name='${filename.replace(/'/g, "\\'")}' and trashed=false`,
+            fields: "files(id,name,modifiedTime)",
+          });
+          return (res.result.files || [])[0] || null;
+        }
+
+        async function readAppFile(filename) {
+          const file = await findAppFile(filename);
+          if (!file) return null;
+          const resp = await gapi.client.drive.files.get({
+            fileId: file.id,
+            alt: "media",
+          });
+          // returned in resp.body or resp.result
+          if (resp.body) return resp.body;
+          return resp.result || null;
+        }
+
+        async function writeAppFile(filename, obj) {
+          const existing = await findAppFile(filename);
+          const jsonText = JSON.stringify(obj, null, 2);
+          if (existing) {
+            const resp = await gapi.client.request({
+              path: `/upload/drive/v3/files/${existing.id}?uploadType=media`,
+              method: "PATCH",
+              body: jsonText,
+              headers: { "Content-Type": "application/json" },
+            });
+            return resp;
+          } else {
+            const createResp = await gapi.client.request({
+              path: `/upload/drive/v3/files?uploadType=media&fields=id,name,modifiedTime`,
+              method: "POST",
+              body: jsonText,
+              headers: { "Content-Type": "application/json" },
+            });
+            const fileId = createResp.result && createResp.result.id;
+            if (fileId) {
+              try {
+                await gapi.client.drive.files.update({
+                  fileId,
+                  addParents: "appDataFolder",
+                  name: filename,
+                });
+              } catch (e) {}
+            }
+            return createResp;
+          }
+        }
+
+        async function loadFromDrive() {
+          try {
+            await ensureSignedIn();
+            const parsed = await readAppFile("aepp-data.json");
+            if (parsed) {
+              const obj =
+                typeof parsed === "string" ? JSON.parse(parsed) : parsed;
+              // merge/overwrite local storage
+              localStorage.setItem(
+                "aepp-entries-v4",
+                JSON.stringify(obj.entries || {})
+              );
+              localStorage.setItem(
+                "aepp-leaves-v1",
+                JSON.stringify(obj.leaves || [])
+              );
+              if (obj.startDateStr)
+                localStorage.setItem("aepp-start-date-v1", obj.startDateStr);
+              updateLastSavedDisplay(Date.now());
+              setAutosaveLight("ok", "Loaded");
+              showToast("Drive data loaded");
+              if (window.ui && window.ui.refreshGrid) window.ui.refreshGrid();
+              if (window.ui && window.ui.refreshProgress)
+                window.ui.refreshProgress();
+              return true;
+            } else {
+              showToast("No file in Drive");
+              return false;
+            }
+          } catch (e) {
+            debugErr("loadFromDrive failed", e);
+            setAutosaveLight("no", "Drive read failed");
+            showToast("Drive read failed — see console");
+            return false;
+          }
+        }
+
+        async function saveToDrive() {
+          try {
+            await ensureSignedIn();
+            const entries = JSON.parse(
+              localStorage.getItem("aepp-entries-v4") || "{}"
+            );
+            const leaves = JSON.parse(
+              localStorage.getItem("aepp-leaves-v1") || "[]"
+            );
+            const startDateStr =
+              localStorage.getItem("aepp-start-date-v1") || "";
+            const payload = { entries, leaves, startDateStr };
+            await writeAppFile("aepp-data.json", payload);
+            const ts = Date.now();
+            updateLastSavedDisplay(ts);
+            setAutosaveLight("ok", "Saved");
+            showToast("Saved to Drive");
+            return true;
+          } catch (e) {
+            debugErr("saveToDrive failed", e);
+            setAutosaveLight("no", "Save failed");
+            showToast("Drive save failed — see console");
+            return false;
+          }
+        }
+
+        // expose for app to call after submit/leave
+        window.autoSaveToDrive = saveToDrive;
+
+        document
+          .getElementById("pickFolderBtn")
+          .addEventListener("click", async (e) => {
+            e.preventDefault();
+            try {
+              await gapiInit();
+              await ensureSignedIn();
+              setAutosaveLight("ok", "Drive connected");
+              showToast("Drive connected");
+              await loadFromDrive();
+              // attempt initial save to ensure file exists
+              await saveToDrive().catch(() => {});
+            } catch (err) {
+              debugErr("Drive connect failed", err);
+              setAutosaveLight("no", "Drive failed");
+              showToast("Drive connect failed — check console");
+            }
+          });
+
+        // show stored last save if any
+        (function initDriveUI() {
+          const stored = localStorage.getItem("aepp-lastautosave");
+          if (stored) updateLastSavedDisplay(Number(stored));
+          else updateLastSavedDisplay();
+        })();
+      })();
+    </script>
+  </body>
 </html>
