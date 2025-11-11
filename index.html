@@ -1,1253 +1,2017 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>After Effects Powerplay - Vol 2.0</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>After Effects Powerplay — Final (leave fixes)</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css"
+    />
+
     <style>
-        :root {
-            --bg: #0b0d12;
-            --panel: #121622;
-            --panel-2: #0f1320;
-            --muted: #8a93a5;
-            --text: #e7ecf3;
-            --accent: #8b5cf6;
-            --accent-2: #22d3ee;
-            --ok: #22c55e;
-            --danger: #ef4444;
-            --warn: #f59e0b;
-            --ring: rgba(139, 92, 246, .35);
-            --shadow: 0 10px 30px rgba(0, 0, 0, .35), 0 2px 6px rgba(0, 0, 0, .25);
-            --radius: 18px;
-            --card-pad: 14px;
+      :root {
+        --bg: #041014;
+        --card-bg: linear-gradient(180deg, #061219 0%, #051017 100%);
+        --muted: #9aa5a0;
+        --text: #dff7ea;
+        --accent: #16a34a;
+        --accent-2: #22c55e;
+        --glass: rgba(255, 255, 255, 0.03);
+        --danger: #ef4444;
+        --card-radius: 14px;
+      }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        background: linear-gradient(
+          270deg,
+          #04121a 0%,
+          #02221a 40%,
+          #031014 70%
+        );
+        background-size: 600% 600%;
+        animation: bgShift 22s ease-in-out infinite;
+        font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
+          Arial;
+        color: var(--text);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      @keyframes bgShift {
+        0% {
+          background-position: 0% 50%;
         }
-
-        * {
-            box-sizing: border-box
+        50% {
+          background-position: 100% 50%;
         }
-
-        html,
-        body {
-            height: 100%
+        100% {
+          background-position: 0% 50%;
         }
+      }
 
-        body {
-            margin: 0;
-            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-            color: var(--text);
-            background: #0b0d12;
-            overflow-x: hidden;
-            position: relative;
-            isolation: isolate
-        }
+      /* compact header */
+      header {
+        position: sticky;
+        top: 0;
+        height: 90px;
+        z-index: 60;
+        background: rgba(2, 6, 6, 0.6);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(6px) saturate(120%);
+        padding: 6px 0;
+      }
+      .container-main {
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 0 18px 80px;
+      }
+      .brand {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .brand-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        box-shadow: 0 0 6px rgba(34, 197, 94, 0.45);
+      }
+      .brand-title {
+        font-weight: 700;
+        font-size: 13px;
+        line-height: 1;
+      }
+      .subtitle {
+        color: var(--muted);
+        font-size: 11px;
+        margin-top: 2px;
+      }
 
-        body::before {
-            content: "";
-            position: fixed;
-            inset: -10% -10%;
-            background: linear-gradient(120deg, #0b0d12, #121622, #0f1320);
-            background-size: 400% 400%;
-            animation: moveGradient 18s ease-in-out infinite;
-            filter: blur(22px) saturate(120%);
-            opacity: .9;
-            z-index: -2;
-            pointer-events: none
-        }
+      .header-icons {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .icon-btn {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        display: grid;
+        place-items: center;
+        background: rgba(7, 12, 12, 0.55);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        color: var(--text);
+        cursor: pointer;
+        transition: all 0.14s ease;
+        font-size: 15px;
+        padding: 0;
+      }
+      .icon-btn:hover {
+        transform: translateY(-2px);
+        background: rgba(34, 197, 94, 0.06);
+        border-color: rgba(34, 197, 94, 0.18);
+      }
 
-        body::after {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background:
-                radial-gradient(60% 40% at 15% 0%, rgba(139, 92, 246, .22), transparent 60%),
-                radial-gradient(50% 35% at 85% 100%, rgba(34, 211, 238, .18), transparent 60%),
-                radial-gradient(35% 30% at 70% 20%, rgba(16, 185, 129, .14), transparent 60%);
-            mix-blend-mode: overlay;
-            opacity: .9;
-            z-index: -1;
-            pointer-events: none
-        }
+      .icon-btn.leave {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 0.4rem;
+        min-width: 44px;
+        height: 30px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 700;
+      }
+      .icon-btn.leave .leave-count {
+        display: inline-grid;
+        place-items: center;
+        width: 28px;
+        height: 22px;
+        border-radius: 8px;
+        font-weight: 800;
+        font-size: 12px;
+        background: rgba(0, 0, 0, 0.18);
+        border: 1px solid rgba(255, 255, 255, 0.03);
+        color: #ffd7d7;
+      }
+      .icon-btn.leave.disabled,
+      .icon-btn.leave:disabled {
+        opacity: 0.55;
+        cursor: default;
+        pointer-events: none;
+        filter: saturate(0.6);
+      }
+      .icon-btn.leave:hover {
+        background: rgba(239, 68, 68, 0.08);
+        border-color: rgba(239, 68, 68, 0.18);
+      }
 
-        @keyframes moveGradient {
-            0% {
-                background-position: 0% 50%
-            }
+      .title-row {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 16px;
+        margin-top: 36px;
+      }
+      .range-pill {
+        background: linear-gradient(
+          90deg,
+          rgba(117, 92, 255, 0.12),
+          rgba(139, 92, 246, 0.08)
+        );
+        padding: 6px 12px;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 12px;
+        color: #e9e6ff;
+      }
+      .progress-card {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 14px;
+        border: 1px solid var(--glass);
+        box-shadow: 0 12px 40px rgba(2, 6, 8, 0.6);
+        margin-bottom: 24px;
+        color: var(--muted);
+      }
 
-            50% {
-                background-position: 100% 50%
-            }
-
-            100% {
-                background-position: 0% 50%
-            }
-        }
-
-        header {
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            backdrop-filter: saturate(140%) blur(8px);
-            -webkit-backdrop-filter: saturate(140%) blur(8px);
-            background: linear-gradient(180deg, rgba(11, 13, 18, .78), rgba(11, 13, 18, .48));
-            border-bottom: 1px solid rgba(255, 255, 255, .06)
-        }
-
-        .wrap {
-            max-width: 1240px;
-            margin: 0 auto;
-            padding: 20px
-        }
-
-        .header-inner {
-            max-width: 1240px;
-            margin: 0 auto;
-            padding: 14px 20px;
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 16px;
-            align-items: center
-        }
-
-        .brand {
-            display: flex;
-            gap: 12px;
-            align-items: center
-        }
-
-        .brand .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent), var(--accent-2));
-            box-shadow: 0 0 0 6px rgba(139, 92, 246, .12)
-        }
-
-        h1 {
-            margin: 0;
-            font-size: clamp(18px, 3vw, 24px);
-            font-weight: 800
-        }
-
-        .subtitle {
-            color: var(--muted)
-        }
-
-        .controls {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            align-items: center
-        }
-
-        .chip-btn,
-        .input,
-        .select {
-            appearance: none;
-            border: 1px solid rgba(255, 255, 255, .08);
-            background: var(--panel);
-            color: var(--text);
-            padding: 10px 12px;
-            border-radius: 12px;
-            cursor: pointer
-        }
-
-        .input {
-            cursor: text
-        }
-
-        .badge {
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: .5px;
-            color: #dcd7fe;
-            background: rgba(139, 92, 246, .18);
-            border: 1px solid rgba(139, 92, 246, .35);
-            padding: 6px 10px;
-            border-radius: 999px;
-            text-transform: uppercase
-        }
-
-        .titlebar {
-            display: flex;
-            gap: 10px;
-            align-items: baseline;
-            margin: 24px 0 12px
-        }
-
-        .titlebar h2 {
-            margin: 0;
-            font-size: clamp(26px, 4vw, 36px)
-        }
-
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+      @media (max-width: 1100px) {
         .grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px
-        }
-
-        @media (max-width:1000px) {
-            .grid {
-                grid-template-columns: repeat(2, 1fr)
-            }
-        }
-
-        @media (max-width:640px) {
-            .grid {
-                grid-template-columns: 1fr
-            }
-        }
-
-        .card {
-            background: linear-gradient(180deg, var(--panel-2), var(--panel));
-            border: 1px solid rgba(255, 255, 255, .06);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            min-height: 320px
-        }
-
-        .card-head {
-            display: grid;
-            grid-template-columns: 1fr auto auto;
-            gap: 10px;
-            align-items: center;
-            padding: 12px 14px;
-            border-bottom: 1px solid rgba(255, 255, 255, .06)
-        }
-
-        .card .day {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            font-weight: 800
-        }
-
-        .card .cal {
-            width: 18px;
-            height: 18px;
-            border-radius: 6px;
-            display: inline-grid;
-            place-items: center;
-            background: linear-gradient(180deg, var(--accent), #6d28d9)
-        }
-
-        .card .cal svg {
-            width: 12px;
-            height: 12px
-        }
-
-        .meta {
-            color: var(--muted);
-            font-size: 13px
-        }
-
-        .card .form {
-            padding: 0 var(--card-pad) var(--card-pad);
-            display: flex;
-            flex-direction: column;
-            flex: 1
-        }
-
-        .field {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            margin: 8px 0
-        }
-
-        .field label {
-            font-weight: 600;
-            font-size: 13px
-        }
-
-        .field input,
-        .field textarea {
-            background: var(--panel);
-            border: 1px solid rgba(255, 255, 255, .08);
-            border-radius: 10px;
-            padding: 10px;
-            color: var(--text);
-            font-size: 14px
-        }
-
-        .field textarea {
-            min-height: 72px;
-            resize: vertical
-        }
-
-        .field input:focus,
-        .field textarea:focus {
-            border-color: transparent;
-            box-shadow: 0 0 0 3px var(--ring);
-            outline: none
-        }
-
-        .submit-btn {
-            width: 100%;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            background: #166534;
-            border: 1px solid rgba(34, 197, 94, .45);
-            padding: 10px 12px;
-            border-radius: 10px;
-            color: #d1fae5;
-            font-weight: 800;
-            cursor: pointer;
-            margin: 8px 0 10px
-        }
-
-        .submit-btn:hover {
-            filter: brightness(1.06)
-        }
-
-        .toast {
-            position: fixed;
-            right: 18px;
-            bottom: 18px;
-            background: rgba(17, 24, 39, .95);
-            border: 1px solid rgba(255, 255, 255, .08);
-            padding: 12px 14px;
-            border-radius: 12px;
-            display: none
-        }
-
-        .toast.show {
-            display: block
-        }
-
-        .pager {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin: 18px 0
-        }
-
-        .pager button {
-            background: #1f2536;
-            border: 1px solid rgba(255, 255, 255, .12);
-            padding: 8px 12px;
-            border-radius: 10px;
-            color: var(--text);
-            cursor: pointer
-        }
-
-        .pager button[disabled] {
-            opacity: .6;
-            cursor: not-allowed
-        }
-
-        .pager .meta {
-            color: var(--muted)
-        }
-
-        .locked {
-            opacity: .45
-        }
-
-        .locked input,
-        .locked textarea,
-        .locked button {
-            pointer-events: none
-        }
-
-        footer {
-            margin-top: 28px
-        }
-
-        .progress-card {
-            background: linear-gradient(180deg, var(--panel-2), var(--panel));
-            border: 1px solid rgba(139, 92, 246, .35);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            padding: 16px
-        }
-
-        .progress-head {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px
-        }
-
-        .progress-wrap {
-            position: relative;
-            background: rgba(255, 255, 255, .06);
-            border: 1px solid rgba(255, 255, 255, .08);
-            border-radius: 999px;
-            height: 14px;
-            overflow: hidden
-        }
-
-        .progress-fill {
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, var(--accent), var(--accent-2));
-            transition: width .4s ease
-        }
-
-        .progress-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 10px;
-            color: #cbd5e1;
-            font-size: 14px
-        }
-
-        .progress-badge {
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: .4px;
-            color: #22d3ee;
-            background: rgba(34, 211, 238, .15);
-            border: 1px solid rgba(34, 211, 238, .35);
-            padding: 6px 10px;
-            border-radius: 999px;
-            text-transform: uppercase
-        }
-
-        .card.completed {
-            border-color: rgba(34, 197, 94, .25);
-            box-shadow: 0 0 0 1px rgba(34, 197, 94, .18) inset, 0 0 0 3px rgba(34, 197, 94, .14), var(--shadow);
-            background: radial-gradient(900px 180px at 18% -10%, rgba(34, 197, 94, .08), transparent 60%), linear-gradient(180deg, var(--panel-2), var(--panel))
-        }
-
-        .status-chip {
-            display: inline-flex;
-            gap: 6px;
-            align-items: center;
-            font-size: 12px;
-            font-weight: 800;
-            letter-spacing: .4px;
-            color: #bbf7d0;
-            background: rgba(34, 197, 94, .14);
-            border: 1px solid rgba(34, 197, 94, .3);
-            padding: 6px 10px;
-            border-radius: 999px;
-            text-transform: uppercase
-        }
-
-        .status-chip svg {
-            width: 14px;
-            height: 14px;
-            opacity: .95
-        }
-
-        .card.leave {
-            border-color: rgba(239, 68, 68, .35);
-            box-shadow: 0 0 0 1px rgba(239, 68, 68, .22) inset, 0 0 0 3px rgba(239, 68, 68, .28), 0 10px 30px rgba(0, 0, 0, .35), 0 0 32px rgba(239, 68, 68, .35);
-            background: radial-gradient(900px 180px at 18% -10%, rgba(239, 68, 68, .10), transparent 60%), linear-gradient(180deg, var(--panel-2), var(--panel))
-        }
-
-        .status-chip.leave {
-            color: #fee2e2;
-            background: rgba(239, 68, 68, .16);
-            border-color: rgba(239, 68, 68, .35)
-        }
-
-        .card.leave .form {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 180px;
-            padding: 24px 0
-        }
-
-        .leave-message {
-            color: var(--danger);
-            font-weight: 800;
-            text-align: center;
-            font-size: 14px
-        }
-
-        .action-row {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin: 20px 29px 0px;
-            padding: 0 var(--card-pad)
-        }
-
-        .link-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: linear-gradient(180deg, #171c2b, #121826);
-            border: 1px solid rgba(255, 255, 255, .12);
-            color: #fff;
-            padding: 8px 12px;
-            border-radius: 10px;
-            cursor: pointer;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 14px;
-            transition: transform .08s ease, filter .15s ease, box-shadow .15s ease
-        }
-
-        .link-btn svg {
-            width: 16px;
-            height: 16px;
-            opacity: .9
-        }
-
-        .link-btn:hover {
-            filter: brightness(1.08)
-        }
-
-        .link-btn:active {
-            transform: translateY(1px)
-        }
-
-        .link-btn:focus-visible {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(139, 92, 246, .35)
-        }
-
-        .subtle {
-            color: #9aa5b4;
-            font-size: 12px;
-            margin: 0 0 12px;
-            padding: 0 var(--card-pad)
-        }
-
-        .modal-backdrop {
-            position: fixed;
-            inset: 0;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0, 0, 0, .55);
-            z-index: 60;
-            backdrop-filter: blur(4px) saturate(120%)
-        }
-
-        .modal-backdrop.show {
-            display: flex
-        }
-
-        .modal {
-            width: min(520px, 92vw);
-            background: linear-gradient(180deg, var(--panel-2), var(--panel));
-            border: 1px solid rgba(139, 92, 246, .35);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            padding: 18px
-        }
-
-        .modal-head {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 8px
-        }
-
-        .modal-head .cal {
-            width: 28px;
-            height: 28px;
-            border-radius: 8px;
-            display: inline-grid;
-            place-items: center;
-            background: linear-gradient(180deg, var(--accent), #6d28d9)
-        }
-
-        .modal-title {
-            font-size: clamp(18px, 3vw, 20px);
-            font-weight: 800;
-            margin: 0
-        }
-
-        .modal-body {
-            color: var(--muted);
-            margin: 8px 0 14px;
-            line-height: 1.5
-        }
-
-        .modal-date {
-            color: var(--text);
-            font-weight: 700
-        }
-
-        .modal-actions {
-            display: flex;
-            gap: 10px;
-            justify-content: flex-end
-        }
-
-        .btn {
-            appearance: none;
-            background: #1f2536;
-            border: 1px solid rgba(255, 255, 255, .12);
-            color: #fff;
-            padding: 10px 14px;
-            border-radius: 12px;
-            cursor: pointer;
-            font: inherit
-        }
-
-        .btn.ok {
-            background: #166534;
-            border-color: rgba(34, 197, 94, .45);
-            color: #d1fae5;
-            font-weight: 800
-        }
-
-        .btn.warn {
-            background: #7c3e06;
-            border-color: rgba(245, 158, 11, .55);
-            color: #fde68a;
-            font-weight: 800
-        }
-
-        .btn:hover {
-            filter: brightness(1.06)
-        }
-
-        .dp-wrap {
-            position: relative
-        }
-
-        .dp-input {
-            cursor: pointer
-        }
-
-        .dp-panel {
-            position: absolute;
-            top: 110%;
-            left: 0;
-            z-index: 70;
-            width: 280px;
-            background: linear-gradient(180deg, var(--panel-2), var(--panel));
-            border: 1px solid rgba(255, 255, 255, .12);
-            border-radius: 14px;
-            box-shadow: var(--shadow);
-            padding: 10px;
-            display: none
-        }
-
-        .dp-panel.show {
-            display: block
-        }
-
-        .dp-head {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 6px 6px 10px
-        }
-
-        .dp-title {
-            font-weight: 800;
-            letter-spacing: .2px
-        }
-
-        .dp-nav {
-            display: flex;
-            gap: 6px
-        }
-
-        .dp-nav button,
-        .dp-link {
-            appearance: none;
-            background: #1f2536;
-            border: 1px solid rgba(255, 255, 255, .12);
-            color: #fff;
-            padding: 6px 10px;
-            border-radius: 8px;
-            cursor: pointer;
-            font: inherit
-        }
-
-        .dp-nav button:hover,
-        .dp-link:hover {
-            filter: brightness(1.06)
-        }
-
-        .dp-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 6px
-        }
-
-        .dp-cell {
-            text-align: center;
-            padding: 8px 0;
-            border-radius: 8px
-        }
-
-        .dp-dow {
-            color: #8a93a5;
-            font-size: 12px;
-            font-weight: 700
-        }
-
-        .dp-day {
-            cursor: pointer;
-            background: #111627;
-            border: 1px solid rgba(255, 255, 255, .06)
-        }
-
-        .dp-day:hover {
-            filter: brightness(1.06)
-        }
-
-        .dp-day.out {
-            opacity: .45
-        }
-
-        .dp-day.today {
-            outline: 2px solid rgba(139, 92, 246, .45)
-        }
-
-        .dp-day.selected {
-            background: linear-gradient(90deg, var(--accent), var(--accent-2));
-            color: #07111a;
-            font-weight: 800;
-            border-color: transparent
-        }
-
-        .note-block {
-            padding: 6px var(--card-pad) 12px
-        }
-
-        .note-title {
-            font-weight: 800;
-            letter-spacing: .2px;
-            margin: 10px 0 6px;
-            color: #d1d7e2;
-            font-size: 13px
-        }
-
-        .note-text {
-            margin: 0;
-            color: #cbd5e1;
-            font-size: 14px;
-            line-height: 1.6;
-            white-space: pre-wrap;
-            text-align: justify
-        }
-
-        .footer-bar {
-            margin-top: auto;
-            border-top: 1px solid rgba(255, 255, 255, .08);
-            padding: 10px 12px;
-            text-align: center;
-            color: #9aa5b4;
-            font-size: 13px
-        }
-
-        /* Account chip */
-        .account {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(180deg, #171c2b, #121826);
-            border: 1px solid rgba(255, 255, 255, .12);
-            padding: 8px 12px;
-            border-radius: 999px
-        }
-
-        .account .avatar {
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent), var(--accent-2));
-            display: grid;
-            place-items: center;
-            color: #0b0d12;
-            font-weight: 800;
-            font-size: 11px;
-            line-height: 1
-        }
-
-        .account .avatar.has-image {
-            background-size: cover;
-            background-position: center;
-            color: transparent
-        }
-
-        .account-name {
-            font-size: 13px;
-            color: #d1d7e2
-        }
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 680px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .day-card {
+        background: linear-gradient(
+          180deg,
+          rgba(10, 18, 16, 0.45),
+          rgba(3, 8, 7, 0.6)
+        );
+        border-radius: var(--card-radius);
+        padding: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        min-height: 260px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6),
+          inset 0 1px 0 rgba(255, 255, 255, 0.02);
+        transition: transform 0.16s ease, box-shadow 0.16s ease;
+      }
+      .day-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+      }
+      .day-card.today {
+        box-shadow: 0 18px 40px rgba(16, 185, 129, 0.06),
+          0 6px 30px rgba(0, 0, 0, 0.6);
+        border: 1px solid rgba(34, 197, 94, 0.18);
+        outline: 4px solid rgba(34, 197, 94, 0.03);
+      }
+
+      .card-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .card-head-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .cal {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(180deg, var(--accent-2), var(--accent));
+        color: #041510;
+        box-shadow: 0 6px 18px rgba(34, 197, 94, 0.06);
+        font-size: 20px;
+      }
+      .day-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
+      .day-title {
+        font-weight: 800;
+        font-size: 16px;
+        color: #eafdf0;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .date-text {
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .badge-completed {
+        background: linear-gradient(90deg, #2bffb0, #16a34a);
+        color: #042018;
+        font-weight: 800;
+        padding: 6px 10px;
+        border-radius: 999px;
+        box-shadow: 0 6px 24px rgba(22, 163, 74, 0.12);
+        border: 1px solid rgba(34, 197, 94, 0.12);
+        font-size: 12px;
+      }
+      .card-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .learn-title {
+        font-size: 13px;
+        color: #dfffe9;
+        font-weight: 800;
+        margin-bottom: 6px;
+      }
+      .learn-note {
+        color: #d7f9e6;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.01),
+          rgba(255, 255, 255, 0.008)
+        );
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.02);
+        box-shadow: inset 0 -4px 12px rgba(0, 0, 0, 0.35);
+        font-size: 14px;
+        line-height: 1.45;
+        white-space: pre-wrap;
+      }
+      .card-actions {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .btn-outline-card {
+        background: transparent;
+        color: var(--text);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        padding: 8px 10px;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 13px;
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+        text-decoration: none;
+      }
+      .form-control,
+      textarea {
+        background: rgba(4, 10, 10, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        color: #fff;
+        border-radius: 8px;
+        transition: all 0.18s ease-in-out;
+      }
+
+      .form-control::placeholder,
+      textarea::placeholder {
+        color: rgba(255, 255, 255, 0.36);
+      }
+      .form-control:focus,
+      textarea:focus {
+        background: rgba(3, 10, 10, 0.95);
+        border-color: rgba(34, 197, 94, 0.5);
+        box-shadow: 0 0 10px rgba(34, 197, 94, 0.18);
+        color: #fff;
+        outline: none;
+      }
+
+      .form-control:disabled {
+        background-color: #e9ecef00;
+        opacity: 1;
+      }
+      .submit-btn {
+        background: linear-gradient(180deg, var(--accent-2), var(--accent));
+        color: #07120d;
+        border: none;
+        font-weight: 800;
+        padding: 0.6rem 1rem;
+        border-radius: 8px;
+      }
+      .card-footer {
+        font-size: 12px;
+        color: var(--muted);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+      }
+      .small-muted {
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .day-card.leave {
+        border: 1px solid rgba(239, 68, 68, 0.12);
+        background: linear-gradient(
+          180deg,
+          rgba(30, 6, 6, 0.35),
+          rgba(12, 6, 6, 0.6)
+        );
+        box-shadow: 0 10px 28px rgba(160, 40, 40, 0.06);
+      }
+      .leave-badge {
+        background: linear-gradient(90deg, #ffb4b4, #ef4444);
+        color: #2b0202;
+        font-weight: 800;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        border: 1px solid rgba(239, 68, 68, 0.18);
+        box-shadow: 0 8px 24px rgba(239, 68, 68, 0.06);
+      }
+      .leave-illustration {
+        width: 84px;
+        height: 84px;
+        border-radius: 10px;
+        overflow: hidden;
+        display: inline-grid;
+        place-items: center;
+        background: linear-gradient(180deg, #2c1a18, #2a1b19);
+        border: 1px solid rgba(255, 255, 255, 0.02);
+        box-shadow: inset 0 -6px 12px rgba(0, 0, 0, 0.5);
+      }
+      .autosave-indicator {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .light {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        display: inline-block;
+        background: #8b0000;
+        border: 1px solid rgba(0, 0, 0, 0.35);
+        box-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+      }
+      .light.green {
+        background: linear-gradient(180deg, #32d583, #16a34a);
+        box-shadow: 0 0 8px rgba(34, 197, 94, 0.25),
+          inset 0 -2px 6px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(34, 197, 94, 0.14);
+      }
+      .light.red {
+        background: linear-gradient(180deg, #ff6b6b, #ef4444);
+        box-shadow: 0 0 8px rgba(239, 68, 68, 0.12);
+        border: 1px solid rgba(239, 68, 68, 0.12);
+      }
+      .success-card {
+        background: linear-gradient(
+          180deg,
+          rgba(11, 18, 14, 0.7),
+          rgba(4, 8, 6, 0.85)
+        );
+        border-radius: 12px;
+        padding: 18px;
+        border: 1px solid rgba(34, 197, 94, 0.08);
+        box-shadow: 0 18px 50px rgba(6, 12, 10, 0.6);
+        color: var(--text);
+      }
+      .gif-wrapper {
+        display: block;
+        margin: 14px auto;
+        width: 320px;
+        max-width: calc(100% - 40px);
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        background: linear-gradient(180deg, #061219, #041018);
+        box-shadow: 0 8px 30px rgba(34, 197, 94, 0.06),
+          inset 0 -4px 12px rgba(0, 0, 0, 0.4);
+        padding: 6px;
+      }
+      .gif-wrapper img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+      }
+      .quote-block {
+        margin-top: 10px;
+        padding: 12px;
+        border-radius: 10px;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.02),
+          rgba(255, 255, 255, 0.01)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.02);
+        color: var(--text);
+      }
+      .quote-text {
+        font-size: 15px;
+        font-weight: 600;
+        color: #e9f8ee;
+        margin-bottom: 8px;
+      }
+      .quote-author {
+        font-size: 13px;
+        color: var(--muted);
+        text-align: right;
+      }
+      .native-hidden {
+        position: absolute !important;
+        width: 1px !important;
+        height: 1px !important;
+        margin: -1px !important;
+        padding: 0 !important;
+        border: 0 !important;
+        overflow: hidden !important;
+        clip: rect(0 0 0 0) !important;
+        clip-path: inset(50%) !important;
+        white-space: nowrap !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+      }
+      .flatpickr-calendar {
+        position: absolute !important;
+        z-index: 99999 !important;
+        background: linear-gradient(180deg, #071219, #041017) !important;
+        color: var(--text) !important;
+        border: 1px solid rgba(255, 255, 255, 0.03) !important;
+        box-shadow: 0 12px 36px rgba(2, 6, 8, 0.65) !important;
+        border-radius: 10px !important;
+        will-change: transform, opacity;
+      }
+      .flatpickr-day {
+        color: var(--muted) !important;
+      }
+      .flatpickr-day.selected,
+      .flatpickr-day.today {
+        background: linear-gradient(
+          180deg,
+          var(--accent),
+          var(--accent-2)
+        ) !important;
+        color: #041510 !important;
+      }
+      .flatpickr-day:hover {
+        background: rgba(34, 197, 94, 0.12) !important;
+        color: var(--text) !important;
+      }
+      .modal-content {
+        background: linear-gradient(180deg, #071219, #041017) !important;
+        color: var(--text) !important;
+        border: 1px solid rgba(255, 255, 255, 0.03) !important;
+        box-shadow: 0 18px 60px rgba(0, 0, 0, 0.6) !important;
+      }
+      .btn-close-white {
+        filter: invert(1) !important;
+        opacity: 0.9;
+      }
+      @media (max-width: 420px) {
+        .gif-wrapper {
+          width: 260px;
+        }
+      }
     </style>
-</head>
-
-<body>
-    <header>
-        <div class="header-inner">
-            <div class="brand">
-                <div class="dot" aria-hidden="true"></div>
-                <div>
-                    <h1>After Effects Powerplay - Vol 2.0</h1>
-                    <div class="subtitle">45 Days Editing Challenge</div>
-                </div>
-            </div>
-
-            <div class="controls">
-                <label for="startDate" class="subtitle">Progress start date</label>
-                <div class="dp-wrap">
-                    <input id="startDate" class="input dp-input" type="text" inputmode="none" placeholder="YYYY-MM-DD"
-                        aria-label="Progress start date" readonly />
-                    <div id="dp" class="dp-panel" role="dialog" aria-modal="true" aria-label="Choose a date">
-                        <div class="dp-head">
-                            <button class="dp-link" data-delta="-12" type="button" title="Prev year">«</button>
-                            <div class="dp-nav">
-                                <button class="dp-prev" type="button" title="Prev month">‹</button>
-                                <div class="dp-title"></div>
-                                <button class="dp-next" type="button" title="Next month">›</button>
-                            </div>
-                            <button class="dp-link" data-delta="12" type="button" title="Next year">»</button>
-                        </div>
-                        <div class="dp-grid dp-dows"></div>
-                        <div class="dp-grid dp-days"></div>
-                        <div class="dp-foot">
-                            <button class="dp-link dp-clear" type="button">Clear</button>
-                            <button class="dp-link dp-today" type="button">Today</button>
-                        </div>
-                    </div>
-                </div>
-
-                <input id="search" class="input" type="search" placeholder="Search days or date" aria-label="Search" />
-                <button id="leaveBtn" class="chip-btn" type="button" aria-pressed="false"
-                    title="Mark today as leave">Take Leave (3 left)</button>
-
-                <!-- Account chip + links -->
-                <span class="account" id="accountChip" title="Signed in">
-                    <span class="avatar" id="accountAvatar" aria-hidden="true"></span>
-                    <span class="account-name" id="accountName">...</span>
-                </span>
-                <a href="./auth/profile.html" class="chip-btn">Profile</a>
-                <button id="logoutBtn" class="chip-btn" type="button" title="Log out">Log out</button>
-            </div>
+  </head>
+  <body>
+    <header id="section-header">
+      <div
+        class="container container-main d-flex justify-content-between align-items-center"
+      >
+        <div class="brand">
+          <span class="brand-dot" aria-hidden="true"></span>
+          <div>
+            <div class="brand-title">After Effects Powerplay — Vol 2.0</div>
+            <div class="subtitle">45 Days Editing Challenge</div>
+          </div>
         </div>
+
+        <div class="d-flex align-items-center gap-2 header-icons">
+          <button
+            id="dateBtn"
+            class="icon-btn"
+            title="Set start date"
+            aria-label="Set start date"
+          >
+            📅
+          </button>
+          <input id="startDate" type="date" class="native-hidden" />
+          <button
+            id="pickFolderBtn"
+            class="icon-btn"
+            title="Choose folder"
+            aria-label="Choose folder"
+          >
+            💾
+          </button>
+
+          <div
+            class="autosave-indicator small-muted"
+            title="Autosave status"
+            aria-hidden="true"
+            id="autosaveIndicator"
+            style="display: flex; align-items: center; gap: 8px"
+          >
+            <span
+              id="autosaveLight"
+              class="light red"
+              aria-hidden="true"
+            ></span>
+            <span
+              id="autosaveLabel"
+              style="font-size: 13px; color: var(--muted)"
+              >Not saved</span
+            >
+          </div>
+
+          <button
+            id="galleryBtn"
+            class="icon-btn"
+            title="Video Gallery"
+            aria-label="Video Gallery"
+            disabled
+          >
+            🎞️
+          </button>
+
+          <button
+            id="leaveBtn"
+            class="icon-btn leave"
+            title="Take Leave"
+            aria-label="Take leave"
+            type="button"
+          >
+            <span class="leave-count">3</span>
+          </button>
+        </div>
+      </div>
     </header>
 
-    <div class="wrap">
-        <div class="titlebar">
-            <h2>Daily Forms</h2>
-            <span id="countBadge" class="badge">0 visible</span>
+    <main class="container-main">
+      <div id="section-progress">
+        <div class="title-row">
+          <div id="rangePill" class="range-pill">SHOWING 1 TO 9 OF 45</div>
         </div>
 
+        <div class="progress-card" id="progress-card">
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              gap: 12px;
+            "
+          >
+            <div class="small-muted">
+              Only today's card is writable. Past and future cards stay locked.
+              You can take up to 3 leave days without affecting progress.
+            </div>
+            <div style="display: flex; gap: 8px; align-items: center">
+              <div
+                class="badge bg-transparent text-muted"
+                id="progressBadge"
+                style="
+                  border: 1px solid rgba(255, 255, 255, 0.03);
+                  padding: 0.35rem 0.6rem;
+                  border-radius: 8px;
+                "
+              >
+                0 of 45
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 12px">
+            <div class="progress" style="height: 10px">
+              <div
+                id="progressFill"
+                class="progress-bar"
+                style="
+                  width: 0%;
+                  background: linear-gradient(
+                    90deg,
+                    var(--accent),
+                    var(--accent-2)
+                  );
+                "
+              ></div>
+            </div>
+          </div>
+
+          <div class="mt-2 small-muted" id="progressText">0% complete</div>
+          <div
+            style="
+              margin-top: 10px;
+              display: flex;
+              gap: 8px;
+              align-items: center;
+            "
+          >
+            <div id="lastAutoSave" class="small-muted">
+              Last saved: <span id="lastAutoSaveTime">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="section-grid">
         <div id="grid" class="grid" aria-live="polite"></div>
-        <div id="pager" class="pager"></div>
+        <div
+          id="pager"
+          class="pager mt-4 d-flex justify-content-center gap-2"
+        ></div>
+      </div>
+    </main>
 
-        <div id="toast" class="toast" role="status" aria-live="polite">Saved</div>
-
-        <footer>
-            <div class="progress-card" aria-label="Challenge progress">
-                <div class="progress-head">
-                    <div class="subtitle">Only today's card is writable. Past and future cards stay dimmed and locked.
-                        You can take up to 3 leave days without affecting progress.</div>
-                    <span id="progressBadge" class="progress-badge">0 of 45</span>
-                </div>
-                <div class="progress-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
-                    aria-label="Overall progress">
-                    <div id="progressFill" class="progress-fill"></div>
-                </div>
-                <div class="progress-meta">
-                    <span id="progressText">0% complete</span>
-                    <span id="progressDates" class="meta"></span>
-                </div>
+    <template id="day-card-raw">
+      <article class="day-card">
+        <div class="card-head">
+          <div class="card-head-left">
+            <div class="cal" aria-hidden="true">📅</div>
+            <div class="day-meta">
+              <div class="day-title">Day X</div>
+              <div class="date-text">Set start date</div>
             </div>
-        </footer>
-    </div>
+          </div>
+          <div><div class="status-chip" style="display: none"></div></div>
+        </div>
 
-    <template id="day-card">
-        <section class="card">
-            <div class="card-head">
-                <div class="day">
-                    <span class="cal" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M7 2v3M17 2v3M4 9h16M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"
-                                stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
-                                opacity=".9" />
-                        </svg>
-                    </span>
-                    <span class="day-text"></span>
-                </div>
-                <div class="meta date-text"></div>
-            </div>
-            <form class="form" novalidate>
-                <div class="field"><label>Video URL</label><input name="video" type="text"
-                        placeholder="https://youtube.com/... or youtu.be/..." /></div>
-                <div class="field"><label>Project File URL</label><input name="project" type="text"
-                        placeholder="https://drive.google.com/... or docs.google.com/..." /></div>
-                <div class="field"><label>Something you learned new!</label><textarea name="note"
-                        placeholder="Share what you learned today..."></textarea></div>
-                <button class="submit-btn" type="submit">Submit</button>
-            </form>
-        </section>
+        <form class="form d-flex flex-column mt-2" novalidate>
+          <label class="form-label small">Video URL</label>
+          <input
+            name="video"
+            class="form-control mb-2"
+            placeholder="YouTube link"
+            type="text"
+          />
+          <label class="form-label small">Project File URL</label>
+          <input
+            name="project"
+            class="form-control mb-2"
+            placeholder="Drive link"
+            type="text"
+          />
+          <label class="form-label small">Something you learned new!</label>
+          <textarea
+            name="note"
+            class="form-control mb-3"
+            placeholder="Share what you learned today..."
+            rows="4"
+          ></textarea>
+
+          <div style="margin-top: auto">
+            <button class="submit-btn w-100" type="submit">Submit</button>
+          </div>
+        </form>
+
+        <div class="card-footer-note small-muted"></div>
+      </article>
     </template>
 
-    <!-- Confirm modal -->
-    <div id="confirmModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
-        <div class="modal">
-            <div class="modal-head">
-                <span class="cal" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M7 2v3M17 2v3M4 9h16M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"
-                            stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
-                            opacity=".9" />
-                    </svg>
-                </span>
-                <h3 id="confirmTitle" class="modal-title">Confirm start date</h3>
-            </div>
-            <div class="modal-body">Is this your challenge start date: <span id="confirmDateText"
-                    class="modal-date"></span>? Once confirmed, you cannot change it.</div>
-            <div class="modal-actions">
-                <button id="cancelConfirm" class="btn" type="button" aria-label="Cancel">Cancel</button>
-                <button id="okConfirm" class="btn ok" type="button">OK, lock it</button>
-            </div>
+    <!-- Confirm Start -->
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header border-0">
+            <h5 class="modal-title">Confirm start date</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body text-muted">
+            Is this your challenge start date:
+            <span id="confirmDateText" class="fw-bold text-white"></span>? Once
+            confirmed, you cannot change it.
+          </div>
+          <div class="modal-footer border-0">
+            <button
+              id="cancelConfirm"
+              type="button"
+              class="btn btn-outline-light btn-sm"
+              data-bs-dismiss="modal"
+            >
+              Cancel</button
+            ><button
+              id="okConfirm"
+              type="button"
+              class="btn btn-success btn-sm"
+            >
+              OK, lock it
+            </button>
+          </div>
         </div>
+      </div>
     </div>
 
-    <!-- Leave modal -->
-    <div id="leaveModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="leaveTitle">
-        <div class="modal">
-            <div class="modal-head">
-                <span class="cal" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M7 2v3M17 2v3M4 9h16M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"
-                            stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
-                            opacity=".9" />
-                    </svg>
-                </span>
-                <h3 id="leaveTitle" class="modal-title">Take leave today</h3>
-            </div>
-            <div class="modal-body">Mark <span id="leaveDayText" class="modal-date"></span> as a leave day? You can take
-                up to 3 leave days without affecting progress.</div>
-            <div class="modal-actions">
-                <button id="cancelLeave" class="btn" type="button">Cancel</button>
-                <button id="okLeave" class="btn warn" type="button">Yes, take leave</button>
-            </div>
+    <!-- Leave confirm -->
+    <div class="modal fade" id="leaveModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header border-0">
+            <h5 class="modal-title text-success">Take leave today</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body text-muted">
+            Mark <span id="leaveDayText" class="fw-bold text-white"></span> as a
+            leave day? You can take up to 3 leave days without affecting
+            progress.
+          </div>
+          <div class="modal-footer border-0">
+            <button
+              id="cancelLeave"
+              type="button"
+              class="btn btn-outline-light btn-sm"
+              data-bs-dismiss="modal"
+            >
+              Cancel</button
+            ><button id="okLeave" type="button" class="btn btn-warning btn-sm">
+              Yes, take leave
+            </button>
+          </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Leave success -->
+    <div
+      class="modal fade"
+      id="leaveSuccessModal"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center">
+          <div class="modal-header border-0 justify-content-center">
+            <h5 class="modal-title">Take a breath — you got this</h5>
+          </div>
+          <div class="modal-body text-muted">
+            <img
+              id="leaveGif"
+              src=""
+              alt="Motivation"
+              style="max-width: 100%; border-radius: 0.6rem"
+            />
+            <p id="leaveMsg" class="mt-3 small-muted">
+              Keep going — small steps win challenges.
+            </p>
+          </div>
+          <div class="modal-footer border-0 justify-content-center">
+            <button
+              id="leaveOk"
+              type="button"
+              class="btn btn-success btn-sm"
+              data-bs-dismiss="modal"
+            >
+              Back to cards
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Success modal -->
-    <div id="successModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="successTitle">
-        <div class="modal">
-            <div class="modal-head">
-                <span class="cal" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" fill="none" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M7 2v3M17 2v3M4 9h16M5 5h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"
-                            stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
-                            opacity=".9" />
-                    </svg>
-                </span>
-                <h3 id="successTitle" class="modal-title">Nice work!</h3>
+    <div
+      class="modal fade success-modal"
+      id="successModal"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content success-card text-center">
+          <div class="success-header">
+            <div class="success-badge" aria-hidden="true">Nice work!</div>
+          </div>
+          <div class="success-title" id="successTitle">
+            You submitted today's entry
+          </div>
+          <div class="gif-wrapper">
+            <img id="successGif" src="" alt="celebration GIF" />
+          </div>
+          <div class="quote-block" aria-live="polite">
+            <div class="quote-text" id="successQuote">
+              Small steps make big progress.
             </div>
-            <div class="modal-body" style="text-align:center">
-                <img id="successGif" src="" alt="Celebration" style="max-width:100%;border-radius:12px" />
-                <p class="meta" style="margin-top:10px">Entry saved for today.</p>
-            </div>
-            <div class="modal-actions" style="justify-content:center">
-                <button id="successOk" class="btn ok" type="button">Back to cards</button>
-            </div>
+            <div class="quote-author" id="successAuthor">— Keep going</div>
+          </div>
+          <div class="success-sub" id="successSub">Entry saved for today.</div>
+          <div
+            class="modal-footer border-0 justify-content-center"
+            style="margin-top: 10px"
+          >
+            <button
+              id="successOk"
+              type="button"
+              class="btn btn-success btn-sm"
+              data-bs-dismiss="modal"
+            >
+              Back to cards
+            </button>
+          </div>
         </div>
+      </div>
     </div>
 
-    <!-- Auth helper -->
-    <script src="auth/auth.js"></script>
+    <!-- Gallery modal -->
+    <div class="modal fade" id="galleryModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header border-0">
+            <h5 class="modal-title">Video Gallery</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body text-muted">
+            <div id="galleryEmpty" class="small-muted" style="display: none">
+              No videos were found.
+            </div>
+            <div id="galleryGrid" class="gallery-grid"></div>
+          </div>
+          <div class="modal-footer border-0">
+            <button
+              id="closeGallery"
+              type="button"
+              class="btn btn-outline-light btn-sm"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Player modal -->
+    <div class="modal fade" id="playerModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header border-0">
+            <h5 class="modal-title" id="playerTitle">Play video</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body text-muted" style="min-height: 240px">
+            <div style="position: relative; padding-top: 56.25%">
+              <iframe
+                id="playerIframe"
+                src=""
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                style="
+                  position: absolute;
+                  left: 0;
+                  top: 0;
+                  width: 100%;
+                  height: 100%;
+                  border-radius: 0.5rem;
+                "
+              ></iframe>
+            </div>
+          </div>
+          <div class="modal-footer border-0">
+            <button
+              id="closePlayer"
+              type="button"
+              class="btn btn-outline-light btn-sm"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="toast"
+      role="status"
+      aria-live="polite"
+      style="
+        position: fixed;
+        right: 1rem;
+        bottom: 1rem;
+        background: rgba(8, 10, 12, 0.85);
+        padding: 0.6rem 0.9rem;
+        border-radius: 0.5rem;
+        display: none;
+        color: var(--text);
+        border: 1px solid rgba(255, 255, 255, 0.04);
+        z-index: 2000;
+      "
+    >
+      Saved
+    </div>
+
+    <footer
+      class="site-footer"
+      style="
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        z-index: 80;
+        padding: 8px 0;
+        color: var(--muted);
+        text-align: center;
+        font-size: 13px;
+        border-top: 1px solid rgba(255, 255, 255, 0.03);
+        background: linear-gradient(
+          180deg,
+          rgba(4, 6, 6, 0.35),
+          rgba(4, 6, 6, 0.18)
+        );
+        backdrop-filter: blur(6px) saturate(120%);
+      "
+    >
+      After Effects Powerplay —
+      <span class="small-muted">Built for 45 day editing challenges</span>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <script>
-        // Guard page
-        AEPP_AUTH.ensureAuth();
-
-        // Account chip init using currentUser
-        (function accountInit() {
-            const u = AEPP_AUTH.currentUser();
-            const email = u?.email || "";
-            const baseName = (u?.name && u.name.trim()) || (email ? email.split('@')[0] : 'User');
-
-            const nameEl = document.getElementById('accountName');
-            const avatarEl = document.getElementById('accountAvatar');
-
-            nameEl.textContent = email ? `${baseName} · ${email}` : baseName;
-
-            if (u?.avatar) {
-                avatarEl.style.backgroundImage = `url("${u.avatar}")`;
-                avatarEl.classList.add('has-image');
-                avatarEl.textContent = "";
-            } else {
-                const init = baseName.trim().split(/\s+/).slice(0, 2).map(s => s[0]?.toUpperCase() || '').join('');
-                avatarEl.textContent = init || 'U';
-                avatarEl.classList.remove('has-image');
-                avatarEl.style.backgroundImage = '';
-            }
-
-            document.getElementById('logoutBtn').addEventListener('click', AEPP_AUTH.signOut);
-        })();
-    </script>
-
-    <!-- App logic -->
-    <script>
+      (() => {
         const TOTAL_DAYS = 45;
-        const STORAGE_KEY = 'aepp-entries-v4';
-        const START_KEY = 'aepp-start-date-v1';
-        const LEAVE_KEY = 'aepp-leaves-v1';
+        const STORAGE_KEY = "aepp-entries-v4";
+        const START_KEY = "aepp-start-date-v1";
+        const LEAVE_KEY = "aepp-leaves-v1";
+        const LAST_AUTOSAVE_KEY = "aepp-last-autosave-ts";
+        const HANDLE_DB_KEY = "aepp-save-dir-handle";
+        const AUTO_FILE_NAME = "aepp-data.json";
         const LEAVE_CAP = 3;
+        const pageSize = 9;
 
-        (function () {
-            const qs = new URLSearchParams(location.search);
-            if (qs.get('reset') === '1') {
-                try {
-                    localStorage.removeItem(START_KEY);
-                    localStorage.removeItem(STORAGE_KEY);
-                    localStorage.removeItem(LEAVE_KEY);
-                } finally {
-                    location.replace(location.pathname + location.search.replace(/\?reset=1/, '') + location.hash);
-                }
-            }
-        })();
-
-        let entries = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-        let startDateStr = localStorage.getItem(START_KEY) || '';
-        let leaves = JSON.parse(localStorage.getItem(LEAVE_KEY) || '[]');
+        let entries = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+        let startDateStr = localStorage.getItem(START_KEY) || "";
+        let leaves = JSON.parse(localStorage.getItem(LEAVE_KEY) || "[]");
+        leaves = Array.from(new Set(leaves));
         let currentPage = 1;
 
-        const grid = document.getElementById('grid');
-        const pager = document.getElementById('pager');
-        const tpl = document.getElementById('day-card');
-        const badge = document.getElementById('countBadge');
-        const search = document.getElementById('search');
-        const toast = document.getElementById('toast');
+        const grid = document.getElementById("grid");
+        const tplRaw = document.getElementById("day-card-raw");
+        const rangePill = document.getElementById("rangePill");
+        const pager = document.getElementById("pager");
+        const startDateInput = document.getElementById("startDate");
+        const leaveBtn = document.getElementById("leaveBtn");
+        const toast = document.getElementById("toast");
 
-        const startDateInput = document.getElementById('startDate');
-        const dp = document.getElementById('dp');
-        const dpTitle = dp.querySelector('.dp-title');
-        const dpPrev = dp.querySelector('.dp-prev');
-        const dpNext = dp.querySelector('.dp-next');
-        const dpDows = dp.querySelector('.dp-dows');
-        const dpDays = dp.querySelector('.dp-days');
-        const dpToday = dp.querySelector('.dp-today');
-        const dpClear = dp.querySelector('.dp-clear');
+        const progressFill = document.getElementById("progressFill");
+        const progressText = document.getElementById("progressText");
+        const progressBadge = document.getElementById("progressBadge");
 
-        const progressFill = document.getElementById('progressFill');
-        const progressText = document.getElementById('progressText');
-        const progressBadge = document.getElementById('progressBadge');
-        const progressDates = document.getElementById('progressDates');
+        const galleryBtn = document.getElementById("galleryBtn");
 
-        const leaveBtn = document.getElementById('leaveBtn');
-        const leaveModal = document.getElementById('leaveModal');
-        const leaveDayText = document.getElementById('leaveDayText');
-        const okLeave = document.getElementById('okLeave');
-        const cancelLeave = document.getElementById('cancelLeave');
+        const playerModalEl = document.getElementById("playerModal");
+        const playerModal = new bootstrap.Modal(playerModalEl);
+        const playerIframe = document.getElementById("playerIframe");
+        const playerTitle = document.getElementById("playerTitle");
 
-        const successModal = document.getElementById('successModal');
-        const successOk = document.getElementById('successOk');
-        const successGifEl = document.getElementById('successGif');
+        const confirmModalEl = document.getElementById("confirmModal");
+        const confirmModal = new bootstrap.Modal(confirmModalEl);
+        const okConfirm = document.getElementById("okConfirm");
+        const cancelConfirm = document.getElementById("cancelConfirm");
+        const confirmDateText = document.getElementById("confirmDateText");
+
+        const leaveModalEl = document.getElementById("leaveModal");
+        const leaveModal = new bootstrap.Modal(leaveModalEl);
+        const okLeave = document.getElementById("okLeave");
+        const cancelLeave = document.getElementById("cancelLeave");
+        const leaveDayText = document.getElementById("leaveDayText");
+
+        const leaveSuccessModalEl =
+          document.getElementById("leaveSuccessModal");
+        const leaveSuccessModal = new bootstrap.Modal(leaveSuccessModalEl);
+        const leaveGif = document.getElementById("leaveGif");
+        const leaveMsg = document.getElementById("leaveMsg");
+        const leaveOk = document.getElementById("leaveOk");
+
+        const successModalEl = document.getElementById("successModal");
+        const successModal = new bootstrap.Modal(successModalEl);
+        const successGif = document.getElementById("successGif");
+        const successQuoteEl = document.getElementById("successQuote");
+        const successAuthorEl = document.getElementById("successAuthor");
+        const successTitle = document.getElementById("successTitle");
+        const successSub = document.getElementById("successSub");
+
+        const autosaveLight = document.getElementById("autosaveLight");
+        const autosaveLabel = document.getElementById("autosaveLabel");
+        const pickFolderBtn = document.getElementById("pickFolderBtn");
 
         const GIFS = [
-            "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Nxbm1jdTA5OWRlZDhiMWl4NTF3aXE5bng4bGFza3dwbXd4NG5jZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/YRuFixSNWFVcXaxpmX/giphy.gif",
-            "https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3MDZuY2w2aWhtY3NjODRtaXZxMGM1OTJkb3dubnRzYmx1MzZycjJvMCZlcD12MV9naWZzX3JlbGF0ZWQmY3Q9Zw/vcKEsYOdjoCeJRpn95/giphy.gif",
+          "https://media.giphy.com/media/YRuFixSNWFVcXaxpmX/giphy.gif",
+          "https://media.giphy.com/media/vcKEsYOdjoCeJRpn95/giphy.gif",
+          "https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif",
         ];
-        let lastGifIndex = -1;
-        function pickGif() { if (GIFS.length === 1) return GIFS[0]; let i; do { i = Math.floor(Math.random() * GIFS.length); } while (i === lastGifIndex); lastGifIndex = i; return GIFS[i]; }
-        function openSuccessModal() {
-            successGifEl.src = pickGif();
-            function cleanup() { successOk.removeEventListener('click', close); successModal.removeEventListener('click', backdrop); document.removeEventListener('keydown', esc); }
-            function close() { cleanup(); successModal.classList.remove('show'); }
-            function backdrop(e) { if (e.target === successModal) close(); }
-            function esc(e) { if (e.key === 'Escape') close(); }
-            successOk.addEventListener('click', close);
-            successModal.addEventListener('click', backdrop);
-            document.addEventListener('keydown', esc);
-            successModal.classList.add('show');
-            setTimeout(() => successOk.focus(), 0);
+        const LEAVE_GIFS = [
+          {
+            url: "https://media.giphy.com/media/3o6Zt6ML6BklcajjsA/giphy.gif",
+            msg: "Don't give up — you're closer than you think!",
+          },
+          {
+            url: "https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif",
+            msg: "Take a breath — small steps still count.",
+          },
+        ];
+        const QUOTES = [
+          {
+            q: "Don’t watch the clock; do what it does — keep going.",
+            a: "Sam Levenson",
+          },
+          {
+            q: "Small progress each day adds up to big results.",
+            a: "Unknown",
+          },
+          {
+            q: "What you do today can improve all your tomorrows.",
+            a: "Ralph Marston",
+          },
+          {
+            q: "Consistency is what transforms average into excellence.",
+            a: "Unknown",
+          },
+          { q: "Focus on progress, not perfection.", a: "Unknown" },
+        ];
+
+        let lastGif = -1;
+        function pickGif() {
+          if (GIFS.length === 1) return GIFS[0];
+          let i;
+          do {
+            i = Math.floor(Math.random() * GIFS.length);
+          } while (i === lastGif && GIFS.length > 1);
+          lastGif = i;
+          return GIFS[i];
+        }
+        function pickLeaveMotivation() {
+          return LEAVE_GIFS[Math.floor(Math.random() * LEAVE_GIFS.length)];
+        }
+        function pickQuote() {
+          return QUOTES[Math.floor(Math.random() * QUOTES.length)];
         }
 
-        if (startDateStr) { startDateInput.value = startDateStr; startDateInput.toggleAttribute('disabled', true); }
+        const fmt = (d) =>
+          new Intl.DateTimeFormat(undefined, {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+          }).format(d);
+        function toISODate(d) {
+          const y = d.getFullYear(),
+            m = String(d.getMonth() + 1).padStart(2, "0"),
+            da = String(d.getDate()).padStart(2, "0");
+          return `${y}-${m}-${da}`;
+        }
+        function parseStart() {
+          return startDateStr ? new Date(startDateStr + "T00:00:00") : null;
+        }
+        function dayToDate(day) {
+          const s = parseStart();
+          if (!s) return "";
+          const d = new Date(s);
+          d.setDate(s.getDate() + (day - 1));
+          return fmt(d);
+        }
+        function todayIndex() {
+          const s = parseStart();
+          if (!s) return null;
+          const now = new Date();
+          const midnight = new Date(
+            now.getFullYear(),
+            now.getMonth(),
+            now.getDate()
+          );
+          const diff = Math.floor((midnight - s) / 86400000);
+          return diff + 1;
+        }
 
-        const fmt = d => new Intl.DateTimeFormat(undefined, { day: '2-digit', month: 'short', year: 'numeric' }).format(d);
-        function toISODate(d) { const y = d.getFullYear(); const m = String(d.getMonth() + 1).padStart(2, '0'); const da = String(d.getDate()).padStart(2, '0'); return `${y}-${m}-${da}`; }
-        function parseStart() { return startDateStr ? new Date(startDateStr + 'T00:00:00') : null; }
-        function dayToDate(day) { const s = parseStart(); if (!s) return ''; const d = new Date(s); d.setDate(s.getDate() + (day - 1)); return fmt(d); }
-        function todayIndex() { const s = parseStart(); if (!s) return null; const now = new Date(); const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate()); const diff = Math.floor((midnight - s) / 86400000); return diff + 1; }
+        function showToast(msg) {
+          toast.textContent = msg;
+          toast.classList.add("show");
+          toast.style.display = "block";
+          setTimeout(() => {
+            toast.classList.remove("show");
+            toast.style.display = "none";
+          }, 1400);
+        }
 
-        function showToast(msg) { toast.textContent = msg; toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 1400); }
-        function saveLeaves() { localStorage.setItem(LEAVE_KEY, JSON.stringify(leaves)); }
-        function leavesUsed() { return Math.min(leaves.length, LEAVE_CAP); }
-        function leavesLeft() { return Math.max(0, LEAVE_CAP - leavesUsed()); }
-        function updateLeaveBtn() { leaveBtn.textContent = `Take Leave (${leavesLeft()} left)`; leaveBtn.setAttribute('aria-pressed', 'false'); }
+        function normalizeUrl(u) {
+          if (!u) return null;
+          let s = u.trim();
+          if (!/^https?:\/\//i.test(s)) s = "https://" + s;
+          try {
+            return new URL(s).href;
+          } catch {
+            return null;
+          }
+        }
+        function isYouTubeUrl(u) {
+          const n = normalizeUrl(u);
+          if (!n) return false;
+          try {
+            const host = new URL(n).hostname.toLowerCase();
+            return host === "youtu.be" || host.endsWith("youtube.com");
+          } catch {
+            return false;
+          }
+        }
+        function isGoogleDriveUrl(u) {
+          const n = normalizeUrl(u);
+          if (!n) return false;
+          try {
+            const url = new URL(n);
+            const h = url.hostname.toLowerCase();
+            if (h !== "drive.google.com" && h !== "docs.google.com")
+              return false;
+            const p = url.pathname.toLowerCase();
+            return (
+              p.startsWith("/drive/folders") ||
+              p.startsWith("/file") ||
+              p.startsWith("/document") ||
+              p.startsWith("/spreadsheets") ||
+              p.startsWith("/presentation") ||
+              (p === "/open" && url.searchParams.has("id"))
+            );
+          } catch {
+            return false;
+          }
+        }
+
+        function saveEntries() {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+        }
+        function saveStart() {
+          if (startDateStr) localStorage.setItem(START_KEY, startDateStr);
+          else localStorage.removeItem(START_KEY);
+        }
+        function saveLeaves() {
+          leaves = Array.from(new Set(leaves));
+          localStorage.setItem(LEAVE_KEY, JSON.stringify(leaves));
+        }
+
+        function leavesUsed() {
+          return Math.min(leaves.length, LEAVE_CAP);
+        }
+        function leavesLeft() {
+          return Math.max(0, LEAVE_CAP - leavesUsed());
+        }
+
+        function updateLeaveBtn() {
+          const left = leavesLeft();
+          leaveBtn.innerHTML = `<span class="leave-count">${left}</span>`;
+          leaveBtn.title = `Take Leave (${left} left)`;
+          const isDisabled = left <= 0;
+          leaveBtn.disabled = isDisabled;
+          leaveBtn.setAttribute("aria-disabled", isDisabled ? "true" : "false");
+          if (isDisabled) leaveBtn.classList.add("disabled");
+          else leaveBtn.classList.remove("disabled");
+        }
 
         function updateProgress() {
-            const completedWork = Object.keys(entries).length;
-            const creditedLeaves = leavesUsed();
-            const pct = Math.min(100, Math.round(((completedWork + creditedLeaves) / TOTAL_DAYS) * 100));
-            progressFill.style.width = pct + '%';
-            progressText.textContent = pct + '% complete';
-            progressBadge.textContent = (completedWork + creditedLeaves) + ' of ' + TOTAL_DAYS;
-            const s = parseStart();
-            if (s) {
-                const start = fmt(s); const end = dayToDate(TOTAL_DAYS);
-                progressDates.textContent = 'Start: ' + start + '  |  End: ' + end + '  |  Leaves used: ' + creditedLeaves + '/' + LEAVE_CAP;
-            } else {
-                progressDates.textContent = 'Set a start date to track your calendar window';
-            }
-            document.querySelector('.progress-wrap').setAttribute('aria-valuenow', String(pct));
-            updateLeaveBtn();
+          const completed = Object.keys(entries).length;
+          const credited = leavesUsed();
+          const pct = Math.min(
+            100,
+            Math.round(((completed + credited) / TOTAL_DAYS) * 100)
+          );
+          progressFill.style.width = pct + "%";
+          progressText.textContent = pct + "% complete";
+          progressBadge.textContent = `${
+            completed + credited
+          } of ${TOTAL_DAYS}`;
+          updateGalleryBtn(pct);
         }
 
-        function render() {
-            const term = (search.value || '').toLowerCase();
-            const filtered = Array.from({ length: TOTAL_DAYS }, (_, i) => i + 1).filter(day => {
-                const e = entries[day] || {}; const isLeave = leaves.includes(day);
-                const prettyDate = (dayToDate(day) || '').toLowerCase();
-                const isoDate = (function () { const s = parseStart(); if (!s) return ''; const d = new Date(s); d.setDate(s.getDate() + (day - 1)); return toISODate(d); })().toLowerCase();
-                const text = [e.note || '', e.video || '', e.project || '', isLeave ? 'leave' : '', `day ${day}`, prettyDate, isoDate].join(' ').toLowerCase();
-                return term ? text.includes(term) : true;
+        function updateGalleryBtn(progressPct) {
+          const ready =
+            typeof progressPct === "number"
+              ? progressPct
+              : Math.round(
+                  ((Object.keys(entries).length + leavesUsed()) / TOTAL_DAYS) *
+                    100
+                );
+          if (ready >= 100 && hasAnyVideo()) {
+            galleryBtn.disabled = false;
+            galleryBtn.removeAttribute("aria-disabled");
+            galleryBtn.title = "Open Video Gallery";
+          } else {
+            galleryBtn.disabled = true;
+            galleryBtn.setAttribute("aria-disabled", "true");
+            if (!hasAnyVideo()) galleryBtn.title = "No videos available yet";
+            else galleryBtn.title = "Gallery unlocks after completion";
+          }
+        }
+
+        function fsAvailable() {
+          return "showDirectoryPicker" in window;
+        }
+        function openHandleDB() {
+          return new Promise((resolve, reject) => {
+            const req = indexedDB.open("aepp-file-handles", 1);
+            req.onupgradeneeded = () => {
+              const db = req.result;
+              if (!db.objectStoreNames.contains("handles"))
+                db.createObjectStore("handles");
+            };
+            req.onsuccess = () => resolve(req.result);
+            req.onerror = () => reject(req.error);
+          });
+        }
+        async function putHandle(key, handle) {
+          const db = await openHandleDB();
+          return new Promise((resolve, reject) => {
+            const tx = db.transaction("handles", "readwrite");
+            const store = tx.objectStore("handles");
+            const r = store.put(handle, key);
+            r.onsuccess = () => {
+              resolve(true);
+              db.close();
+            };
+            r.onerror = () => {
+              reject(r.error);
+              db.close();
+            };
+          });
+        }
+        async function getHandle(key) {
+          const db = await openHandleDB();
+          return new Promise((resolve, reject) => {
+            const tx = db.transaction("handles", "readonly");
+            const store = tx.objectStore("handles");
+            const r = store.get(key);
+            r.onsuccess = () => {
+              resolve(r.result);
+              db.close();
+            };
+            r.onerror = () => {
+              reject(r.error);
+              db.close();
+            };
+          });
+        }
+        async function removeHandle(key) {
+          const db = await openHandleDB();
+          return new Promise((resolve, reject) => {
+            const tx = db.transaction("handles", "readwrite");
+            const store = tx.objectStore("handles");
+            const r = store.delete(key);
+            r.onsuccess = () => {
+              resolve(true);
+              db.close();
+            };
+            r.onerror = () => {
+              reject(r.error);
+              db.close();
+            };
+          });
+        }
+        async function verifyPermission(handle, mode = "readwrite") {
+          if (!handle) return false;
+          if (handle.queryPermission) {
+            const q = await handle.queryPermission({ mode });
+            if (q === "granted") return true;
+            if (q === "prompt") {
+              const r = await handle.requestPermission({ mode });
+              return r === "granted";
+            }
+            return false;
+          }
+          return true;
+        }
+        async function getStoredDirHandle() {
+          if (!fsAvailable()) return null;
+          const h = await getHandle(HANDLE_DB_KEY).catch(() => null);
+          if (!h) return null;
+          const ok = await verifyPermission(h, "readwrite");
+          if (!ok) {
+            await removeHandle(HANDLE_DB_KEY).catch(() => null);
+            return null;
+          }
+          return h;
+        }
+        async function writeJsonToDir(dirHandle, filename, jsonText) {
+          if (!dirHandle) throw new Error("No dir handle");
+          const fh = await dirHandle.getFileHandle(filename, { create: true });
+          const writable = await fh.createWritable();
+          await writable.write(jsonText);
+          await writable.close();
+          return true;
+        }
+        async function readJsonFromDir(dirHandle, filename) {
+          if (!dirHandle) throw new Error("No dir handle");
+          try {
+            const fh = await dirHandle.getFileHandle(filename, {
+              create: false,
             });
-
-            const pageSize = 9; const total = filtered.length; const totalPages = Math.max(1, Math.ceil(total / pageSize));
-            if (currentPage > totalPages) currentPage = totalPages; if (currentPage < 1) currentPage = 1;
-            const start = (currentPage - 1) * pageSize; const page = filtered.slice(start, start + pageSize);
-
-            grid.innerHTML = ''; page.forEach(day => grid.appendChild(buildCard(day)));
-            const from = total ? start + 1 : 0; const to = start + page.length;
-            badge.textContent = `Showing ${from} to ${to} of ${total}`;
-            renderPager(totalPages);
-            updateProgress();
+            const file = await fh.getFile();
+            const txt = await file.text();
+            return JSON.parse(txt);
+          } catch (err) {
+            throw err;
+          }
         }
 
-        function renderPager(totalPages) {
-            pager.innerHTML = '';
-            const prev = btn('Prev', () => { currentPage--; render(); }, currentPage <= 1);
-            const next = btn('Next', () => { currentPage++; render(); }, currentPage >= totalPages);
-            const meta = document.createElement('span'); meta.className = 'meta'; meta.textContent = `Page ${currentPage} of ${totalPages}`;
-            pager.append(prev, meta, next);
+        function setAutosaveLight(status, label) {
+          autosaveLight.classList.remove("green", "red");
+          if (status === "ok") {
+            autosaveLight.classList.add("green");
+            autosaveLabel.textContent = label || "Saved";
+          } else if (status === "no") {
+            autosaveLight.classList.add("red");
+            autosaveLabel.textContent = label || "Not saved";
+          } else {
+            autosaveLight.classList.add("red");
+            autosaveLabel.textContent = label || "Unsupported";
+          }
         }
-        function btn(text, onClick, disabled) { const b = document.createElement('button'); b.textContent = text; b.disabled = !!disabled; b.addEventListener('click', onClick); return b; }
 
-        function normalizeUrl(input) {
-            if (!input) return null; let u = input.trim(); if (!u) return null; if (!/^https?:\/\//i.test(u)) u = 'https://' + u;
-            try { const url = new URL(u); if (!url.hostname || !/\.\w{2,}$/.test(url.hostname)) return null; return url.href; } catch { return null; }
-        }
-        function isYouTubeUrl(input) {
-            const u = normalizeUrl(input); if (!u) return false;
-            try { const url = new URL(u); const host = url.hostname.toLowerCase(); return host === 'youtu.be' || host.endsWith('youtube.com'); } catch { return false; }
-        }
-        function isGoogleDriveUrl(input) {
-            const u = normalizeUrl(input); if (!u) return false;
+        function updateLastSavedDisplay() {
+          const ts = localStorage.getItem(LAST_AUTOSAVE_KEY);
+          if (ts) {
             try {
-                const url = new URL(u); const host = url.hostname.toLowerCase();
-                if (host !== 'drive.google.com' && host !== 'docs.google.com') return false;
-                const p = url.pathname.toLowerCase();
-                const looksLikeFolder = p.startsWith('/drive/folders/') || /\/folders\/[a-z0-9_-]+$/i.test(p);
-                const looksLikeOpenId = p === '/open' && url.searchParams.has('id');
-                const looksLikeFileOrEditor = p.startsWith('/file/') || p.startsWith('/uc') || p.startsWith('/document/') || p.startsWith('/spreadsheets/') || p.startsWith('/presentation/');
-                return looksLikeFolder || looksLikeOpenId || looksLikeFileOrEditor;
-            } catch { return false; }
-        }
-
-        function iconSvg(name) {
-            if (name === 'video') return `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 10.5V7a2 2 0 0 0-2-2H6A2 2 0 0 0 4 7v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2v-3.5l4 3V7.5l-4 3Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-            if (name === 'file') return `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7l-5-5Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2v5h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-            if (name === 'check') return `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-            if (name === 'pause') return `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 4h2v16h-2zM16 4h2v16h-2z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-            return '';
-        }
-
-        function makeLinkButton(label, url, icon) {
-            const a = document.createElement('a');
-            a.className = 'link-btn'; a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer';
-            a.setAttribute('role', 'button'); a.setAttribute('aria-label', label);
-            a.innerHTML = iconSvg(icon) + `<span>${label}</span>`;
-            return a;
-        }
-
-        function applyCompletionUI(node, saved) {
-            node.classList.add('completed');
-            const head = node.querySelector('.card-head');
-            if (!head.querySelector('.status-chip')) {
-                const chip = document.createElement('span'); chip.className = 'status-chip'; chip.innerHTML = iconSvg('check') + '<span>Completed</span>'; head.appendChild(chip);
+              const d = new Date(Number(ts));
+              document.getElementById("lastAutoSaveTime").textContent =
+                d.toLocaleString();
+            } catch (e) {
+              document.getElementById("lastAutoSaveTime").textContent = "—";
             }
-            const form = node.querySelector('.form'); form.innerHTML = '';
-            const actions = document.createElement('div'); actions.className = 'action-row';
-            const v = saved.video ? normalizeUrl(saved.video) : null;
-            const p = saved.project ? normalizeUrl(saved.project) : null;
-            if (v) actions.appendChild(makeLinkButton('View Video', v, 'video'));
-            if (p) actions.appendChild(makeLinkButton('View Project', p, 'file'));
-            if (actions.children.length) form.append(actions);
-            if (saved.note) {
-                const wrap = document.createElement('div'); wrap.className = 'note-block';
-                const t = document.createElement('div'); t.className = 'note-title'; t.textContent = 'Something you learned new!';
-                const n = document.createElement('p'); n.className = 'note-text'; n.textContent = saved.note;
-                wrap.append(t, n);
-                form.append(wrap);
-            }
-            const when = saved.savedAt ? new Date(saved.savedAt) : null;
-            const footer = document.createElement('div'); footer.className = 'footer-bar'; footer.textContent = when ? 'Submitted on ' + fmt(when) : 'Submitted';
-            form.append(footer);
+          } else document.getElementById("lastAutoSaveTime").textContent = "—";
         }
 
-        function applyLeaveUI(node) {
-            node.classList.add('leave');
-            const head = node.querySelector('.card-head');
-            if (!head.querySelector('.status-chip.leave')) {
-                const chip = document.createElement('span'); chip.className = 'status-chip leave'; chip.innerHTML = iconSvg('pause') + '<span>Leave</span>';
-                head.appendChild(chip);
+        async function pickAndLoadFolder() {
+          if (!fsAvailable()) {
+            showToast("Folder access not supported in this browser");
+            setAutosaveLight("unsupported", "Unsupported");
+            return null;
+          }
+          try {
+            const dir = await window.showDirectoryPicker();
+            const ok = await verifyPermission(dir, "readwrite");
+            if (!ok) {
+              showToast("Permission required to use folder");
+              setAutosaveLight("no", "Permission denied");
+              return null;
             }
-            const form = node.querySelector('.form'); form.innerHTML = '';
-            const info = document.createElement('div'); info.className = 'leave-message'; info.textContent = 'Leave taken for this day.';
-            form.append(info);
+            await putHandle(HANDLE_DB_KEY, dir);
+            try {
+              const parsed = await readJsonFromDir(dir, AUTO_FILE_NAME);
+              if (parsed) {
+                const newEntries = {};
+                for (const k of Object.keys(parsed.entries || {})) {
+                  newEntries[Number(k)] = parsed.entries[k];
+                }
+                entries = newEntries;
+                leaves = Array.from(new Set((parsed.leaves || []).map(Number)));
+                startDateStr = parsed.startDateStr || startDateStr || "";
+                saveEntries();
+                saveLeaves();
+                saveStart();
+                showToast("Folder loaded — data restored");
+                localStorage.setItem(LAST_AUTOSAVE_KEY, String(Date.now()));
+                setAutosaveLight("ok", "Loaded");
+                updateLastSavedDisplay();
+                render();
+                return dir;
+              }
+            } catch (readErr) {
+              try {
+                const payload = {
+                  entries,
+                  leaves: Array.from(new Set(leaves)),
+                  startDateStr,
+                };
+                await writeJsonToDir(
+                  dir,
+                  AUTO_FILE_NAME,
+                  JSON.stringify(payload, null, 2)
+                );
+                localStorage.setItem(LAST_AUTOSAVE_KEY, String(Date.now()));
+                setAutosaveLight("ok", "Saved");
+                updateLastSavedDisplay();
+                showToast("Folder selected — initial file created");
+                return dir;
+              } catch (werr) {
+                console.warn("write error after pick", werr);
+                setAutosaveLight("no", "Write failed");
+                showToast("Could not create file in folder");
+                return null;
+              }
+            }
+          } catch (err) {
+            console.warn("pick cancelled or error", err);
+            return null;
+          }
         }
+
+        async function autoSaveToFolder() {
+          try {
+            if (!fsAvailable()) {
+              setAutosaveLight("unsupported", "Unsupported");
+              return false;
+            }
+            const dir = await getStoredDirHandle();
+            if (!dir) {
+              setAutosaveLight("no", "No folder");
+              return false;
+            }
+            const payload = {
+              entries,
+              leaves: Array.from(new Set(leaves)),
+              startDateStr,
+            };
+            await writeJsonToDir(
+              dir,
+              AUTO_FILE_NAME,
+              JSON.stringify(payload, null, 2)
+            );
+            const ts = Date.now();
+            localStorage.setItem(LAST_AUTOSAVE_KEY, String(ts));
+            setAutosaveLight("ok", "Saved");
+            updateLastSavedDisplay();
+            return true;
+          } catch (err) {
+            console.warn("autosave failed", err);
+            setAutosaveLight("no", "Save failed");
+            return false;
+          }
+        }
+
+        function exportData() {
+          const payload = {
+            meta: {
+              exportedAt: Date.now(),
+              totalDays: TOTAL_DAYS,
+              version: "aepp-v4",
+            },
+            entries,
+            startDateStr,
+            leaves: Array.from(new Set(leaves)),
+          };
+          const json = JSON.stringify(payload, null, 2);
+          const blob = new Blob([json], { type: "application/json" });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          const name = `aepp-export-${new Date()
+            .toISOString()
+            .slice(0, 10)}.json`;
+          a.href = url;
+          a.download = name;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          URL.revokeObjectURL(url);
+          showToast("Export started");
+        }
+
+        function validateImportedShape(obj) {
+          if (!obj || typeof obj !== "object") return "Invalid JSON root";
+          if (!("entries" in obj) || !("leaves" in obj))
+            return "Missing required keys (entries, leaves)";
+          if (obj.entries && typeof obj.entries !== "object")
+            return "entries must be an object";
+          if (!Array.isArray(obj.leaves)) return "leaves must be an array";
+          for (const k of Object.keys(obj.entries)) {
+            const n = Number(k);
+            if (!Number.isInteger(n) || n < 1 || n > TOTAL_DAYS)
+              return `Invalid entry day key: ${k}`;
+          }
+          for (const v of obj.leaves) {
+            const n = Number(v);
+            if (!Number.isInteger(n) || n < 1 || n > TOTAL_DAYS)
+              return `Invalid leave day: ${v}`;
+          }
+          if ("startDateStr" in obj && obj.startDateStr) {
+            const s = obj.startDateStr;
+            if (!/^\d{4}-\d{2}-\d{2}$/.test(s))
+              return "startDateStr must be YYYY-MM-DD";
+          }
+          return null;
+        }
+
+        function applyImportedData(obj, mode) {
+          if (mode === "replace") {
+            entries = {};
+            for (const k of Object.keys(obj.entries)) {
+              const n = Number(k);
+              entries[n] = obj.entries[k];
+            }
+            leaves = Array.from(new Set(obj.leaves.map(Number)));
+            startDateStr = obj.startDateStr || "";
+          } else {
+            for (const k of Object.keys(obj.entries)) {
+              const n = Number(k);
+              entries[n] = obj.entries[k];
+            }
+            leaves = Array.from(
+              new Set([...leaves.map(Number), ...obj.leaves.map(Number)])
+            );
+            if (!startDateStr && obj.startDateStr)
+              startDateStr = obj.startDateStr;
+          }
+          saveEntries();
+          saveLeaves();
+          saveStart();
+          render();
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+          if (startDateStr) {
+            startDateInput.value = startDateStr;
+            startDateInput.disabled = true;
+          } else startDateInput.disabled = false;
+
+          const fpInput = document.createElement("input");
+          fpInput.type = "text";
+          fpInput.style.position = "absolute";
+          fpInput.style.left = "-9999px";
+          document.body.appendChild(fpInput);
+
+          const dateBtnEl = document.getElementById("dateBtn");
+          const fp = flatpickr(fpInput, {
+            dateFormat: "Y-m-d",
+            appendTo: document.body,
+            allowInput: false,
+            onReady: function () {
+              const cal = this.calendarContainer;
+              if (!cal) return;
+              cal.style.display = "block";
+              cal.style.opacity = "0";
+              cal.style.transition = "";
+            },
+            onOpen: function (selectedDates, dateStr, instance) {
+              const cal = instance.calendarContainer;
+              if (!cal) return;
+              cal.style.display = "block";
+              cal.style.zIndex = "99999";
+              cal.style.opacity = "0";
+              cal.style.transition = "opacity 120ms ease";
+              requestAnimationFrame(() => {
+                void cal.offsetHeight;
+                try {
+                  const rect = dateBtnEl.getBoundingClientRect();
+                  const left = Math.min(
+                    Math.max(8, rect.left + window.scrollX),
+                    document.documentElement.clientWidth - cal.offsetWidth - 8
+                  );
+                  const preferBelow =
+                    window.innerHeight - rect.bottom > cal.offsetHeight + 12;
+                  const top = preferBelow
+                    ? window.scrollY + rect.bottom + 8
+                    : window.scrollY + rect.top - cal.offsetHeight - 8;
+                  cal.style.left = left + "px";
+                  cal.style.top = top + "px";
+                } catch (e) {}
+                cal.style.opacity = "1";
+              });
+            },
+            onChange: function (selectedDates, dateStr) {
+              if (!dateStr) return;
+              confirmDateText.textContent = dateStr;
+              confirmModal.show();
+              okConfirm.onclick = () => {
+                startDateStr = dateStr;
+                startDateInput.value = dateStr;
+                startDateInput.disabled = true;
+                saveStart();
+                confirmModal.hide();
+                showToast("Start date set");
+                render();
+              };
+              cancelConfirm.onclick = () => {
+                confirmModal.hide();
+                fp.clear();
+              };
+            },
+          });
+
+          dateBtnEl.addEventListener("click", (e) => {
+            e.preventDefault();
+            if (startDateStr || startDateInput.disabled) {
+              showToast("Start date locked");
+              return;
+            }
+            fp.open();
+            requestAnimationFrame(() => {
+              const cal = fp.calendarContainer;
+              if (cal) {
+                void cal.offsetHeight;
+                cal.style.opacity = "1";
+                cal.style.display = "block";
+              }
+            });
+          });
+        });
+
+        startDateInput.addEventListener("change", () => {
+          if (!startDateInput.value) return;
+          confirmDateText.textContent = startDateInput.value;
+          confirmModal.show();
+          okConfirm.onclick = () => {
+            startDateStr = startDateInput.value;
+            saveStart();
+            startDateInput.disabled = true;
+            confirmModal.hide();
+            showToast("Start date set");
+            render();
+          };
+          cancelConfirm.onclick = () => {
+            startDateInput.value = startDateStr || "";
+            confirmModal.hide();
+          };
+        });
+
+        function extractYouTubeId(url) {
+          if (!url) return null;
+          try {
+            const u = new URL(normalizeUrl(url));
+            const host = u.hostname.toLowerCase();
+            if (host === "youtu.be") {
+              const id = u.pathname.slice(1).split(/[/?#]/)[0];
+              return id || null;
+            }
+            if (host.endsWith("youtube.com")) {
+              if (u.searchParams.get("v")) return u.searchParams.get("v");
+              const parts = u.pathname.split("/");
+              const embedIdx = parts.indexOf("embed");
+              if (embedIdx !== -1 && parts[embedIdx + 1])
+                return parts[embedIdx + 1];
+              const vIdx = parts.indexOf("v");
+              if (vIdx !== -1 && parts[vIdx + 1]) return parts[vIdx + 1];
+            }
+            return null;
+          } catch (e) {
+            return null;
+          }
+        }
+        function ytThumbnailUrl(id) {
+          if (!id) return "";
+          return `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+        }
+        function hasAnyVideo() {
+          return Object.values(entries).some(
+            (e) => e && e.video && extractYouTubeId(e.video)
+          );
+        }
+
+        function buildGallery() {
+          const galleryGrid = document.getElementById("galleryGrid");
+          const galleryEmpty = document.getElementById("galleryEmpty");
+          galleryGrid.innerHTML = "";
+          const items = [];
+          for (const dayKey of Object.keys(entries).sort(
+            (a, b) => Number(a) - Number(b)
+          )) {
+            const day = Number(dayKey);
+            const e = entries[day];
+            if (!e || !e.video) continue;
+            const id = extractYouTubeId(e.video);
+            if (!id) continue;
+            items.push({ day, id, url: e.video, savedAt: e.savedAt || null });
+          }
+          if (items.length === 0) {
+            galleryEmpty.style.display = "block";
+            return;
+          }
+          galleryEmpty.style.display = "none";
+          items.forEach((it) => {
+            const thumb = document.createElement("div");
+            thumb.className = "gallery-thumb";
+            thumb.tabIndex = 0;
+            thumb.setAttribute("role", "button");
+            thumb.setAttribute("aria-label", `Play Day ${it.day} video`);
+            thumb.innerHTML = `
+        <img loading="lazy" alt="Day ${it.day} thumbnail" src="${ytThumbnailUrl(
+              it.id
+            )}" />
+        <div class="gallery-meta"><div>Day ${
+          it.day
+        }</div><div class="small-muted">${
+              it.savedAt ? fmt(new Date(it.savedAt)) : ""
+            }</div></div>
+      `;
+            thumb.addEventListener("click", () => openPlayer(it));
+            thumb.addEventListener("keydown", (ev) => {
+              if (ev.key === "Enter" || ev.key === " ") {
+                ev.preventDefault();
+                openPlayer(it);
+              }
+            });
+            galleryGrid.appendChild(thumb);
+          });
+        }
+
+        function openPlayer(item) {
+          if (!item || !item.id) return;
+          const src = `https://www.youtube.com/embed/${encodeURIComponent(
+            item.id
+          )}?rel=0&modestbranding=1&autoplay=1`;
+          playerIframe.src = src;
+          playerTitle.textContent = `Day ${item.day} — Video`;
+          playerModal.show();
+        }
+        playerModalEl.addEventListener("hidden.bs.modal", () => {
+          playerIframe.src = "";
+          playerTitle.textContent = "Play video";
+        });
+
+        document.getElementById("galleryBtn").addEventListener("click", (e) => {
+          e.preventDefault();
+          if (document.getElementById("galleryBtn").disabled) {
+            showToast("Gallery is not available yet");
+            return;
+          }
+          buildGallery();
+          new bootstrap.Modal(document.getElementById("galleryModal")).show();
+        });
 
         function buildCard(day) {
-            const node = tpl.content.firstElementChild.cloneNode(true);
-            node.querySelector('.day-text').textContent = `Day ${day}`;
-            node.querySelector('.date-text').textContent = dayToDate(day) || 'Set start date';
+          const saved = entries[day] || {};
+          const tIdx = todayIndex();
+          const isToday = tIdx === day;
+          const alreadySaved = !!entries[day];
+          const isLeave = leaves.includes(day);
+          const canWrite = startDateStr && isToday && !alreadySaved && !isLeave;
 
-            const form = node.querySelector('.form');
-            const saved = entries[day] || {};
-            form.video.value = saved.video || '';
-            form.project.value = saved.project || '';
-            form.note.value = saved.note || '';
+          const wrap = document.createElement("article");
+          wrap.className = "day-card";
+          if (isLeave) wrap.classList.add("leave");
+          if (isToday && !alreadySaved && !isLeave) wrap.classList.add("today");
 
-            const todayIdx = todayIndex();
-            const isToday = todayIdx === day;
-            const alreadySaved = !!entries[day];
-            const isLeave = leaves.includes(day);
-            const canWrite = startDateStr && isToday && !alreadySaved && !isLeave;
+          const head = document.createElement("div");
+          head.className = "card-head";
+          const left = document.createElement("div");
+          left.className = "card-head-left";
+          const cal = document.createElement("div");
+          cal.className = "cal";
+          cal.textContent = "📅";
+          const meta = document.createElement("div");
+          meta.className = "day-meta";
+          const title = document.createElement("div");
+          title.className = "day-title";
+          title.textContent = `Day ${day}`;
+          const dateEl = document.createElement("div");
+          dateEl.className = "date-text";
+          dateEl.textContent = dayToDate(day) || "Set start date";
+          meta.appendChild(title);
+          meta.appendChild(dateEl);
+          left.appendChild(cal);
+          left.appendChild(meta);
+          head.appendChild(left);
 
-            if (isLeave) { applyLeaveUI(node); return node; }
-            if (alreadySaved) { applyCompletionUI(node, saved); return node; }
+          const right = document.createElement("div");
+          if (isLeave) {
+            const lb = document.createElement("div");
+            lb.className = "leave-badge";
+            lb.textContent = "LEAVE";
+            right.appendChild(lb);
+          } else if (alreadySaved) {
+            const b = document.createElement("div");
+            b.className = "badge-completed";
+            b.textContent = "Completed";
+            right.appendChild(b);
+          } else {
+            const ph = document.createElement("div");
+            ph.style.width = "80px";
+            right.appendChild(ph);
+          }
+          head.appendChild(right);
+          wrap.appendChild(head);
+
+          const content = document.createElement("div");
+          content.className = "card-content";
+          if (alreadySaved) {
+            const learnTitle = document.createElement("div");
+            learnTitle.className = "learn-title";
+            learnTitle.textContent = "Something you learned";
+            const note = document.createElement("div");
+            note.className = "learn-note";
+            note.textContent = saved.note || "";
+            content.appendChild(learnTitle);
+            content.appendChild(note);
+
+            const actions = document.createElement("div");
+            actions.className = "card-actions";
+            if (saved.video) {
+              const a = document.createElement("a");
+              a.className = "btn-outline-card";
+              a.href = saved.video;
+              a.target = "_blank";
+              a.rel = "noopener noreferrer";
+              a.innerHTML = "<span>▶</span><span> View Video</span>";
+              actions.appendChild(a);
+            }
+            if (saved.project) {
+              const b = document.createElement("a");
+              b.className = "btn-outline-card";
+              b.href = saved.project;
+              b.target = "_blank";
+              b.rel = "noopener noreferrer";
+              b.innerHTML = "<span>🗂️</span><span> View Project</span>";
+              actions.appendChild(b);
+            }
+            content.appendChild(actions);
+
+            const footer = document.createElement("div");
+            footer.className = "card-footer";
+            footer.innerHTML = `<div class="small-muted">${
+              saved.savedAt
+                ? "Submitted on " + fmt(new Date(saved.savedAt))
+                : "Submitted"
+            }</div>`;
+            content.appendChild(footer);
+          } else if (isLeave) {
+            const row = document.createElement("div");
+            row.style.display = "flex";
+            row.style.gap = "12px";
+            row.style.alignItems = "center";
+            const ill = document.createElement("div");
+            ill.className = "leave-illustration";
+            ill.innerHTML = "⏸️";
+            const msgWrap = document.createElement("div");
+            msgWrap.style.flex = "1";
+            const t = document.createElement("div");
+            t.style.fontWeight = "800";
+            t.style.color = "#ffdede";
+            t.textContent = "Leave recorded";
+            const p = document.createElement("div");
+            p.className = "small-muted";
+            p.textContent =
+              "You took a leave for this day. This will be credited up to allowed leaves.";
+            msgWrap.appendChild(t);
+            msgWrap.appendChild(p);
+            row.appendChild(ill);
+            row.appendChild(msgWrap);
+            content.appendChild(row);
+
+            const footer = document.createElement("div");
+            footer.className = "card-footer";
+            footer.innerHTML = `<div class="small-muted">Leave recorded</div>`;
+            content.appendChild(footer);
+          } else {
+            const form = document.createElement("form");
+            form.className = "form d-flex flex-column mt-2";
+            form.noValidate = true;
+            const labelVideo = document.createElement("label");
+            labelVideo.className = "form-label small";
+            labelVideo.textContent = "Video URL";
+            const inputVideo = document.createElement("input");
+            inputVideo.name = "video";
+            inputVideo.className = "form-control mb-2";
+            inputVideo.placeholder = "YouTube link";
+            const labelProject = document.createElement("label");
+            labelProject.className = "form-label small";
+            labelProject.textContent = "Project File URL";
+            const inputProject = document.createElement("input");
+            inputProject.name = "project";
+            inputProject.className = "form-control mb-2";
+            inputProject.placeholder = "Drive link";
+            const labelNote = document.createElement("label");
+            labelNote.className = "form-label small";
+            labelNote.textContent = "Something you learned new!";
+            const textarea = document.createElement("textarea");
+            textarea.name = "note";
+            textarea.className = "form-control mb-3";
+            textarea.placeholder = "Share what you learned today...";
+            textarea.rows = 4;
+            const submitWrap = document.createElement("div");
+            submitWrap.style.marginTop = "auto";
+            const submitBtn = document.createElement("button");
+            submitBtn.className = "submit-btn w-100";
+            submitBtn.type = "submit";
+            submitBtn.textContent = "Submit";
+            submitWrap.appendChild(submitBtn);
+
+            form.appendChild(labelVideo);
+            form.appendChild(inputVideo);
+            form.appendChild(labelProject);
+            form.appendChild(inputProject);
+            form.appendChild(labelNote);
+            form.appendChild(textarea);
+            form.appendChild(submitWrap);
 
             if (!canWrite) {
-                node.classList.add('locked');
-                Array.from(form.elements).forEach(el => el.disabled = true);
-            }
-
-            form.addEventListener('submit', e => {
+              Array.from([inputVideo, inputProject, textarea]).forEach(
+                (el) => (el.disabled = true)
+              );
+              const locked = document.createElement("div");
+              locked.className = "small-muted";
+              locked.textContent = canWrite
+                ? ""
+                : "This day is locked — only the active day is writable.";
+              content.appendChild(locked);
+            } else {
+              form.addEventListener("submit", async (e) => {
                 e.preventDefault();
                 if (!canWrite) return;
+                const rawVideo = inputVideo.value.trim();
+                const rawProject = inputProject.value.trim();
+                const note = textarea.value.trim();
 
-                const rawVideo = form.video.value.trim();
-                const rawProject = form.project.value.trim();
-                const note = form.note.value.trim();
-
-                if (rawVideo && !isYouTubeUrl(rawVideo)) { showToast('Video must be a valid YouTube link'); return; }
-                if (rawProject && !isGoogleDriveUrl(rawProject)) { showToast('Project must be a valid Google Drive file or folder link'); return; }
+                if (rawVideo && !isYouTubeUrl(rawVideo)) {
+                  showToast("Video must be a valid YouTube link");
+                  return;
+                }
+                if (rawProject && !isGoogleDriveUrl(rawProject)) {
+                  showToast("Project must be a valid Google Drive link");
+                  return;
+                }
 
                 const video = rawVideo ? normalizeUrl(rawVideo) : null;
                 const project = rawProject ? normalizeUrl(rawProject) : null;
 
-                if ((video && !project) || (!video && project)) { showToast('Provide both YouTube and Google Drive links or write a note'); return; }
-                if (!video && !project && !note) { showToast('Add both links or a note before submitting'); return; }
+                if ((video && !project) || (!video && project)) {
+                  if (!note) {
+                    showToast("Provide both YouTube + Drive links or a note");
+                    return;
+                  }
+                }
+                if (!video && !project && !note) {
+                  showToast("Add a note or links before submitting");
+                  return;
+                }
 
                 const payload = { savedAt: Date.now() };
                 if (video) payload.video = video;
@@ -1255,139 +2019,284 @@
                 if (note) payload.note = note;
 
                 entries[day] = payload;
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+                saveEntries();
 
-                openSuccessModal();
+                successGif.src = pickGif();
+                const q = pickQuote();
+                successQuoteEl.textContent = q.q;
+                successAuthorEl.textContent = `— ${q.a}`;
+                successTitle.textContent = "Nice work!";
+                successSub.textContent =
+                  "Entry saved for today. Keep the momentum going.";
+
+                autoSaveToFolder().then(() => {});
+                successModal.show();
                 render();
-            });
+              });
+            }
+            content.appendChild(form);
+          }
 
-            return node;
+          wrap.appendChild(content);
+          return wrap;
         }
 
-        const DOWS = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
-        DOWS.forEach(d => { const el = document.createElement('div'); el.className = 'dp-cell dp-dow'; el.textContent = d; dpDows.appendChild(el); });
-        let view = (function () { const today = new Date(); return { y: today.getFullYear(), m: today.getMonth() }; })();
-
-        function buildMonth(y, m, selectedISO) {
-            dpTitle.textContent = new Date(y, m, 1).toLocaleString(undefined, { month: 'long', year: 'numeric' });
-            dpDays.innerHTML = '';
-            const first = new Date(y, m, 1);
-            const startDay = first.getDay();
-            const daysInMonth = new Date(y, m + 1, 0).getDate();
-            const prevDays = new Date(y, m, 0).getDate();
-            for (let i = 0; i < startDay; i++) { const d = prevDays - startDay + 1 + i; dpDays.appendChild(dayCell(new Date(y, m - 1, d), true, selectedISO)); }
-            for (let d = 1; d <= daysInMonth; d++) { dpDays.appendChild(dayCell(new Date(y, m, d), false, selectedISO)); }
-            const totalCells = dpDays.children.length;
-            for (let i = 1; totalCells + i <= 42; i++) { dpDays.appendChild(dayCell(new Date(y, m + 1, i), true, selectedISO)); }
-        }
-        function dayCell(date, isOut, selectedISO) {
-            const el = document.createElement('div');
-            el.className = 'dp-cell dp-day' + (isOut ? ' out' : '');
-            el.textContent = date.getDate();
-            const iso = toISODate(date);
-            const todayIso = toISODate(new Date());
-            if (iso === todayIso) el.classList.add('today');
-            if (iso === selectedISO) el.classList.add('selected');
-            el.addEventListener('click', () => { selectDate(date); });
-            return el;
+        function btn(text, onClick, disabled) {
+          const b = document.createElement("button");
+          b.textContent = text;
+          b.className = "btn btn-sm btn-outline-light";
+          b.disabled = !!disabled;
+          b.addEventListener("click", onClick);
+          return b;
         }
 
-        function openPicker() {
-            if (startDateInput.disabled) return;
-            dp.classList.add('show'); dp.style.left = '0'; dp.style.top = '110%';
-            const selectedISO = startDateInput.value || '';
-            buildMonth(view.y, view.m, selectedISO);
-            document.addEventListener('click', outsideHandler);
-            document.addEventListener('keydown', escClose);
-        }
-        function closePicker() { dp.classList.remove('show'); document.removeEventListener('click', outsideHandler); document.removeEventListener('keydown', escClose); }
-        function outsideHandler(e) { if (!dp.contains(e.target) && e.target !== startDateInput) { closePicker(); } }
-        function escClose(e) { if (e.key === 'Escape') { closePicker(); } }
-
-        function openConfirmModal(selectedISO, onConfirm, onCancel) {
-            const modal = document.getElementById('confirmModal');
-            const okBtn = document.getElementById('okConfirm');
-            const cancelBtn = document.getElementById('cancelConfirm');
-            const dateEl = document.getElementById('confirmDateText');
-            dateEl.textContent = selectedISO;
-            function cleanup() { okBtn.removeEventListener('click', okHandler); cancelBtn.removeEventListener('click', cancelHandler); modal.removeEventListener('click', backdropHandler); document.removeEventListener('keydown', escHandler); }
-            function okHandler() { cleanup(); modal.classList.remove('show'); onConfirm && onConfirm(); }
-            function cancelHandler() { cleanup(); modal.classList.remove('show'); onCancel && onCancel(); }
-            function backdropHandler(e) { if (e.target === modal) cancelHandler(); }
-            function escHandler(e) { if (e.key === 'Escape') cancelHandler(); }
-            okBtn.addEventListener('click', okHandler);
-            cancelBtn.addEventListener('click', cancelHandler);
-            modal.addEventListener('click', backdropHandler);
-            document.addEventListener('keydown', escHandler);
-            modal.classList.add('show');
-            setTimeout(() => okBtn.focus(), 0);
+        function renderPager(totalPages) {
+          pager.innerHTML = "";
+          const prev = btn(
+            "Prev",
+            () => {
+              currentPage--;
+              render();
+            },
+            currentPage <= 1
+          );
+          const next = btn(
+            "Next",
+            () => {
+              currentPage++;
+              render();
+            },
+            currentPage >= totalPages
+          );
+          const meta = document.createElement("span");
+          meta.className = "badge bg-transparent text-muted";
+          meta.textContent = `Page ${currentPage} of ${totalPages}`;
+          pager.append(prev, meta, next);
         }
 
-        function selectDate(date) {
-            const iso = toISODate(date);
-            startDateInput.value = iso;
-            closePicker();
-            openConfirmModal(
-                iso,
-                () => { startDateStr = iso; localStorage.setItem(START_KEY, startDateStr); startDateInput.disabled = true; showToast('Start date set'); render(); },
-                () => { startDateInput.value = startDateStr || ''; }
-            );
+        function render() {
+          if (!grid) return;
+          const allDays = Array.from({ length: TOTAL_DAYS }, (_, i) => i + 1);
+          const total = allDays.length;
+          const totalPages = Math.max(1, Math.ceil(total / pageSize));
+          if (currentPage > totalPages) currentPage = totalPages;
+          if (currentPage < 1) currentPage = 1;
+          const start = (currentPage - 1) * pageSize;
+          const page = allDays.slice(start, start + pageSize);
+
+          grid.innerHTML = "";
+          page.forEach((day) => {
+            const node = buildCard(day);
+            grid.appendChild(node);
+          });
+
+          const from = total ? start + 1 : 0;
+          const to = start + page.length;
+          rangePill.textContent = `SHOWING ${from} TO ${to} OF ${total}`;
+          renderPager(totalPages);
+          updateProgress();
+          updateLeaveBtn();
+          updateLastSavedDisplay();
         }
 
-        dpPrev.addEventListener('click', () => { const d = new Date(view.y, view.m - 1, 1); view.y = d.getFullYear(); view.m = d.getMonth(); buildMonth(view.y, view.m, startDateInput.value || ''); });
-        dpNext.addEventListener('click', () => { const d = new Date(view.y, view.m + 1, 1); view.y = d.getFullYear(); view.m = d.getMonth(); buildMonth(view.y, view.m, startDateInput.value || ''); });
-        dp.querySelectorAll('.dp-link[data-delta]').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const delta = parseInt(btn.getAttribute('data-delta'), 10);
-                const d = new Date(view.y, view.m + delta, 1);
-                view = { y: d.getFullYear(), m: d.getMonth() };
-                buildMonth(view.y, view.m, startDateInput.value || '');
-            });
+        leaveBtn.addEventListener("click", () => {
+          if (!startDateStr) {
+            showToast("Set start date first");
+            return;
+          }
+          const day = todayIndex();
+          if (day == null || day < 1 || day > TOTAL_DAYS) {
+            showToast("Out of challenge window");
+            return;
+          }
+          if (leaves.length >= LEAVE_CAP) {
+            showToast("Leave limit reached");
+            return;
+          }
+          if (entries[day]) {
+            showToast("Already submitted today");
+            return;
+          }
+          if (leaves.includes(day)) {
+            showToast("Leave already recorded for today");
+            return;
+          }
+          leaveDayText.textContent = dayToDate(day) || `Day ${day}`;
+          leaveModal.show();
         });
-        dpToday.addEventListener('click', () => { const now = new Date(); view = { y: now.getFullYear(), m: now.getMonth() }; buildMonth(view.y, view.m, startDateInput.value || ''); });
-        dpClear.addEventListener('click', () => { if (startDateInput.disabled) return; startDateInput.value = ''; buildMonth(view.y, view.m, ''); });
-        startDateInput.addEventListener('click', openPicker);
-        startDateInput.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openPicker(); } });
 
-        function openLeaveModal(day) {
-            const modal = leaveModal;
-            leaveDayText.textContent = dayToDate(day) || `Day ${day}`;
-            function cleanup() { okLeave.removeEventListener('click', okHandler); cancelLeave.removeEventListener('click', cancelHandler); modal.removeEventListener('click', backdrop); document.removeEventListener('keydown', escHandler); }
-            function okHandler() { cleanup(); modal.classList.remove('show'); performLeave(day); }
-            function cancelHandler() { cleanup(); modal.classList.remove('show'); }
-            function backdrop(e) { if (e.target === modal) cancelHandler(); }
-            function escHandler(e) { if (e.key === 'Escape') cancelHandler(); }
-            okLeave.addEventListener('click', okHandler);
-            cancelLeave.addEventListener('click', cancelHandler);
-            modal.addEventListener('click', backdrop);
-            document.addEventListener('keydown', escHandler);
-            modal.classList.add('show');
-            setTimeout(() => okLeave.focus(), 0);
-        }
+        okLeave.addEventListener("click", () => {
+          okLeave.disabled = true;
+          setTimeout(() => {
+            okLeave.disabled = false;
+          }, 800);
 
-        function performLeave(day) {
-            if (leaves.includes(day)) { showToast('Today is already marked as leave'); return; }
-            if (Object.prototype.hasOwnProperty.call(entries, day)) { showToast('Already submitted today'); return; }
-            if (leaves.length >= LEAVE_CAP) { showToast('Leave limit reached'); return; }
-            leaves.push(day);
-            saveLeaves();
-            showToast('Leave taken');
+          const day = todayIndex();
+          if (day == null) {
+            leaveModal.hide();
+            return;
+          }
+
+          if (leaves.includes(day)) {
+            showToast("Leave already recorded");
+            leaveModal.hide();
+            return;
+          }
+
+          leaves.push(day);
+          saveLeaves();
+
+          // hide confirm modal, then show success modal
+          leaveModal.hide();
+
+          const pick = pickLeaveMotivation();
+          leaveGif.src = pick.url;
+          leaveMsg.textContent = pick.msg;
+          leaveSuccessModal.show();
+
+          // autosave
+          autoSaveToFolder().then(() => {});
+          render();
+        });
+
+        cancelLeave.addEventListener("click", () => {
+          leaveModal.hide();
+        });
+        leaveOk.addEventListener("click", () => {
+          leaveSuccessModal.hide();
+          render();
+        });
+
+        document.getElementById("successOk").addEventListener("click", () => {
+          successModal.hide();
+        });
+
+        pickFolderBtn.addEventListener("click", async (e) => {
+          e.preventDefault();
+          if (!fsAvailable()) {
+            showToast("Folder access not supported in this browser");
+            setAutosaveLight("unsupported", "Unsupported");
+            return;
+          }
+          try {
+            const dir = await window.showDirectoryPicker();
+            const ok = await verifyPermission(dir, "readwrite");
+            if (!ok) {
+              showToast("Permission required to use folder");
+              setAutosaveLight("no", "Permission denied");
+              return;
+            }
+            await putHandle(HANDLE_DB_KEY, dir);
+            try {
+              const parsed = await readJsonFromDir(dir, AUTO_FILE_NAME);
+              if (parsed) {
+                const newEntries = {};
+                for (const k of Object.keys(parsed.entries || {})) {
+                  newEntries[Number(k)] = parsed.entries[k];
+                }
+                entries = newEntries;
+                leaves = Array.from(new Set((parsed.leaves || []).map(Number)));
+                startDateStr = parsed.startDateStr || startDateStr || "";
+                saveEntries();
+                saveLeaves();
+                saveStart();
+                showToast("Folder loaded — data restored");
+                localStorage.setItem(LAST_AUTOSAVE_KEY, String(Date.now()));
+                setAutosaveLight("ok", "Loaded");
+                updateLastSavedDisplay();
+                render();
+                return;
+              }
+            } catch (e) {
+              const payload = {
+                entries,
+                leaves: Array.from(new Set(leaves)),
+                startDateStr,
+              };
+              await writeJsonToDir(
+                dir,
+                AUTO_FILE_NAME,
+                JSON.stringify(payload, null, 2)
+              );
+              localStorage.setItem(LAST_AUTOSAVE_KEY, String(Date.now()));
+              setAutosaveLight("ok", "Saved");
+              updateLastSavedDisplay();
+              showToast("Folder selected — initial file created");
+              render();
+              return;
+            }
+          } catch (err) {
+            console.warn("pick folder error", err);
+            return;
+          }
+        });
+
+        (async function init() {
+          render();
+          updateLeaveBtn();
+          updateGalleryBtn();
+          if (!fsAvailable()) {
+            setAutosaveLight("unsupported", "Unsupported");
+            updateLastSavedDisplay();
+            return;
+          }
+          const dir = await getStoredDirHandle().catch(() => null);
+          if (dir) {
+            setAutosaveLight("ok", "Ready");
+            updateLastSavedDisplay();
+          } else {
+            setAutosaveLight("no", "No folder");
+          }
+        })();
+
+        window.ui = {
+          refreshGrid: () => render(),
+          refreshProgress: () => {
+            updateProgress();
+            updateLeaveBtn();
+          },
+          getState: () => ({
+            entries: JSON.parse(JSON.stringify(entries)),
+            startDateStr,
+            leaves: [...leaves],
+          }),
+          setStartDate: (isoDate) => {
+            if (!isoDate) return false;
+            startDateStr = isoDate;
+            startDateInput.value = isoDate;
+            startDateInput.disabled = true;
+            saveStart();
             render();
-        }
-
-        leaveBtn.addEventListener('click', () => {
-            if (!startDateStr) { showToast('Set start date first'); return; }
-            const day = todayIndex();
-            if (day == null || day < 1 || day > TOTAL_DAYS) { showToast('Out of challenge window'); return; }
-            if (leaves.length >= LEAVE_CAP) { showToast('You have used all leave days'); return; }
-            openLeaveModal(day);
-        });
-
-        function updateLeaveBtnAndProgress() { updateLeaveBtn(); updateProgress(); }
-
-        search.addEventListener('input', render);
-        (function init() { render(); })();
+            return true;
+          },
+          resetAll: (confirm) => {
+            if (!confirm) return false;
+            entries = {};
+            leaves = [];
+            startDateStr = "";
+            localStorage.removeItem(STORAGE_KEY);
+            localStorage.removeItem(START_KEY);
+            localStorage.removeItem(LEAVE_KEY);
+            startDateInput.value = "";
+            startDateInput.disabled = false;
+            render();
+            return true;
+          },
+          openGallery: () => {
+            if (document.getElementById("galleryBtn").disabled) return false;
+            buildGallery();
+            new bootstrap.Modal(document.getElementById("galleryModal")).show();
+            return true;
+          },
+          clearSavedFolder: async () => {
+            await removeHandle(HANDLE_DB_KEY).catch(() => null);
+            localStorage.removeItem(LAST_AUTOSAVE_KEY);
+            setAutosaveLight("no", "No folder");
+            updateLastSavedDisplay();
+            showToast("Saved folder removed");
+          },
+        };
+      })();
     </script>
-</body>
-
+  </body>
 </html>
